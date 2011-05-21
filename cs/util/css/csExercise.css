@@ -1,0 +1,127 @@
+			* {font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+			h1 { margin-top:20px;color:#666}
+			h2 { margin-top: 5px; color: #1C72BA}
+			a img {border: none;}
+			td,th {font-size: 9pt; padding:0px}
+			ul,li{margin: 0px; padding: 0px;}
+			form{display:inline;margin:0px;padding:0px;}
+			
+			html, body {margin: 0px; padding: 0px;}
+			
+			body{
+				background-color: #ddd;
+				font-size: 9pt;
+			}
+					
+			#status{
+			  margin: 0px auto;
+			  padding: 10px;
+			  -moz-border-radius: 0pt 0pt 8pt 8pt;
+			  background-color: #999;
+			  width: 600px;
+			  overflow: auto;
+			  color: #eee;
+			}
+			
+			#container {
+			  margin: 0px 20px;
+			}
+			
+			#entercode {
+			
+			}
+			
+			#codeinput, #loadcode {
+			  font-size: 7pt;
+			  
+			}
+			#loadcode {
+			  padding: 2px;		  
+			  border: 2px solid #666;
+			  -moz-border-radius: 3pt 3pt;
+			  background-color: #ccc;
+			  color: #333;
+			  font-familiy:font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+			  font-weight: bold;
+			}
+			
+			#codeinput {
+			  width: 40px;
+			}
+			
+			#entercode input{
+			  border: 1px solid #333;
+			}
+			
+			#exercise, #solution, #tip {
+			   border: 1px solid #999;  
+			   -moz-border-radius: 5pt 5pt;
+			   margin: 10px 0px;
+			   padding: 10px;
+			   background-color: white;
+			}
+			
+			#solution {
+			
+			}
+			
+			#exercise {
+			
+			}
+			
+			.showimage{
+			  text-align: center;
+			}
+			
+			#tip{
+			  background-color: #
+			}
+			
+			#level {
+			  font-weight: bold;
+			}
+			
+			#levelcode {
+			  font-weight: bold;
+			  font-family: "Courier New", "Courier", "monospace";
+			  color: #1C72BA;
+			  background-color: #acd;
+			  border: 2px solid #1C72BA;
+			   -moz-border-radius: 3pt 3pt;
+			  padding: 2px 5px;
+			  letter-spacing:2px;
+			}
+			
+			#levelselector {
+			  color:#666;
+			  font-size: 7pt;
+			  border: none;
+			  background-color: #ddd;
+			}
+			
+			.left{
+			  float: left;
+			  width: 300px;
+			}
+			.right{
+			  float: right;
+			  width: 200px;
+			  text-align: right;
+			  font-size: 7pt;
+			}
+			.clear{
+			  clear:both;
+			}
+			
+			#actions {
+			  text-align: center;
+			}
+			
+			#intro {
+			   border: 1px solid #999;  
+			   -moz-border-radius: 5pt 5pt;
+			   width: 400px;
+			   margin: 50px auto;
+			   padding: 20px;
+			   background-color: #eee;
+			}

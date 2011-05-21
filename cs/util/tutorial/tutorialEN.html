@@ -1,0 +1,338 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>ClickScript - Tutorial</title>
+		<link rel="SHORTCUT ICON" href="../images/logo32x32.gif"/>
+		<link href="../css/csTutorial.css" media="screen" rel="stylesheet"/>
+    </head>
+    <body>
+    	<div id="container">
+	    	<a name="top"/>
+			
+			<h2><a name="index"></a>Index <a href="#top">.:top:.</a></h2>
+			<div id="index">
+				<div class="text">
+					<ol>
+						<li><a href="#ide">Overview</a></li>
+						<li><a href="#firstScript">First Script</a></li>
+						<li>
+							<a href="#programming">Programming</a>
+							<ol>
+								<li><a href="#pBasics">Basics</a></li>
+								<li><a href="#pComponents">Components</a></li>
+								<li><a href="#pTypes">Types</a></li>
+								<li><a href="#pWireing">Wiring Rules</a></li>
+							</ol>
+						</li>
+						<li><a href="#run">Run a clickscript</a></li>
+						<li><a href="#examples">Examples</a></li>
+					</ol>
+				</div>
+			</div>
+			
+			
+			<h2><a name="ide"></a>Overview <a href="#top">.:top:.</a></h2>
+	
+			<div class="image">
+				<img src="img/ide.png"/>
+			</div>
+	
+			<div class="text">
+				The IDE (Integrated Development Environment) of ClickScript consists of the following parts:
+				<ul style="margin: 10px 30px">
+					<li><strong>A : Menu Bar</strong> - Allows to show and hide parts of the IDE (e.g. Execution View, options and console).</li>
+					<li><strong>B : Libraries</strong> - All loaded libraries with its components</li>
+					<li><strong>C : Execution View</strong> - View for the execution</li>
+					<li><strong>D : Actions and Status</strong> - Actions to run a clickscript as well as a runtime status</li>
+					<li><strong>E : Programming View</strong> - Panel to click scripts together</li>
+					<li><strong>F : Console</strong> - Console</li>
+				</ul>
+				Follow the tutorial to get more informations about this different parts.	 
+			</div>
+			
+			<h2>First Script, Step by Step<a name="firstScript"></a> <a href="#top">.:top:.</a></h2>
+			Follow the instructions to get your first <strong>clickscript</strong>. To get more advanced explications, have a look at the other sections.
+			
+			<h3>1) Add Components</h3>
+			<div class="text">
+				Click on the icon 'POPUP' in the library part [<a href="#ide">B</a>]. The new component is automatically added to the Programming View [<a href="#ide">E</a>].
+				Also click on the green rectagle 'string' to add a simple text component. You can move the components by drag and drop.
+			</div>
+			<div class="image">
+				<img src="img/stepByStep/componentsOnly.png"/>
+			</div>
+			<div class="text">
+				To remove a component you can move the pointer onto the component then two buttons appear. Clicking on the red button will remove the component.
+				Clicking on the blue button shows a detailed description of the component. Try to get the description of the popup component. You can also get the 
+				description by right clicking the icons in the library part [<a href="#ide">B</a>].
+			</div>
+			
+			<h3>2) Connect Components</h3>
+			<div class="text">
+				To connect two components by a wire you have to click onto the first socket and afterwards onto the second socket. Try to connect the two components.
+			</div>
+			<div class="text">
+				By clicking onto the the string component a text cursor appears. Therefore, you can enter the text 'hello'. Press Enter or click again to the field
+				to save the value to the component.
+			</div>
+			<div class="image">
+				<img src="img/stepByStep/componentsConnected.png"/>
+			</div>
+			
+			<h3>3) Run the Script</h3>
+			<div class="text">
+				To run a script you can click on the <strong>run</strong> button in the Actions and Status part [<a href="#ide">D</a>]. After pressing the button 
+				will popup the following alert box.
+			</div>
+			<div class="image">
+				<img src="img/stepByStep/alertHello.png"/>
+			</div>	
+			
+			<h3>4) More Advanced Script</h3>
+			<div class="text">
+				Now you will create a more advanced clickscript. Remove the wire by double-clicking it. And remove also the two components by clicking on the red remove
+				button apearing if you move the pointer onto the component.
+			</div>		
+			<div class="text">
+				Another possibility to clear the script is to press the <strong>clean up</strong> button in the Actions and Status part [<a href="#ide">D</a>].
+			</div>
+			<div class="text">
+				Click the following script together:
+			</div>
+			<div class="image">
+				<img src="img/stepByStep/textfieldDisplay.png"/>
+			</div>		
+			
+			<h3>5) Using the Execution View</h3>
+			<div class="text">
+				The Execution View [<a href="#ide">E</a>] can be used as a user interface. Each component in the Programming View [<a href="#ide">E</a>] may have a view in the 
+				Exection View. This views can be moved by drag and drop. Place the view items like in the picture.
+			</div>
+			<div class="text">
+				Move the pointer over the component in the Programming View [<a href="#ide">E</a>]. The corresonding view in the Execution View [<a href="#ide">E</a>] gets marked
+				with a red border. 
+			</div>
+			<div class="text">
+				By double-clicking the view allows you to enter a label to the view. Add the two labels 'text' and 'display' like shown in the next picture.
+			</div>
+			<div class="image">
+				<img src="img/stepByStep/execview.png"/>
+			</div>
+			
+			<h3>6) Running the Script</h3>
+			<div class="text">
+				Write a 'hello world' to the textfield 'text' and press afterwards the <strong>run</strong> button. The text appears in the display.
+			</div>
+			<div class="text">
+				Press now the <strong>repeated run</strong> button. Now, the script starts again after the run has finished. Therefore, you can now change the value in 
+				the textfield 'text' and the display gets updated immediatlely.
+			</div>
+			<div class="text">
+				Press the <strong>stop</strong> button to stop the script's execution.
+			</div>
+			
+			<h3>7) Your Name</h3>
+			<div class="text">
+				Create a new script as follows:
+			</div>		
+			<div class="image">
+				<img src="img/stepByStep/johnDoe.png"/>
+			</div>	
+			<div class="text">
+				Executing this script will concatenate your prename and name and will display it.
+			</div>
+			<div class="text">
+				Have a look at the section <a href="#examples">Examples</a> to get more ideas...
+			</div>
+			
+			<h3>7) Another Type of Components</h3>
+			<div class="text">
+				The following script shows a message depending whether both lights are turned on by the switches. Also have a look at the different loop statements.
+			</div>		
+			<div class="image">
+				<img src="img/stepByStep/statement.png"/>
+			</div>	
+			
+			
+			
+			
+			<h2>Programming<a name="programming"></a> <a href="#top">.:top:.</a></h2>
+			
+				<h3><a name="pBasics"></a>Basics</h3>
+				<div class="text">
+					ClickScript is a simple to use visual programming language in the browser. A clickscript is a block diagram.
+					The script consits of components and wires which connect the components. Each component has its colored input sockets on the left
+					and its colored output sockets on the right side. On execution of a clickscript, a component gets executed as soon as all its inputs are ready.
+					The different functionalities of a component are symbolized by the picture on it.
+				</div>
+				
+				
+				<h3><a name="pComponents"></a>Components</h3>
+				<div class="text">
+					Like already described, the components are the building blocks of ClickScript. You can add a component to the Programming View (E)
+					by clicking on a component's icon in the library part (B). By moving the mouse pointer over a component in the Programming View, you get two icons: 
+					An information button (blue) and a remove button (red). To get a detailed description of a component, click onto the information button.
+				</div>
+				<div class="image">
+					<img src="img/component.png"/>
+				</div>
+				<div class="text">
+					There exists three different types of components:
+				</div>
+				<div class="image">
+					<img src="img/componentType.png"/>
+				</div>
+				
+				<h4>Primitives</h4>
+				<div class="text">
+					Primitives are basic components to add values to the script.
+					It is important to press ENTER or click again on the textfield after writing that the cursor disappears.
+				</div>
+				
+				<h4>Modules</h4>
+				<div class="text">
+					Modules are components which may consist of input and output sockets as well as fields.
+				</div>
+				
+				<h4>Statements</h4>
+				<div class="text">
+					Statements can have blocks like BODY in the upper example. These blocks can be resized by the buttons + and -.
+					Components may be added to a block by simply moving the component onto/into the block.
+				</div>
+				
+				<h3>Types<a name="pTypes"></a></h3>
+				<div class="image">
+					<img src="img/types.png"/>
+				</div>		
+				<table>
+					<tr><td style='text-align:right'><strong>TEXT: </strong></td><td style='text-align:left'>any text</td></tr>
+					<tr><td style='text-align:right'><strong>NUMBER: </strong></td><td style='text-align:left'>floating point number</td></tr>
+					<tr><td style='text-align:right'><strong>LOGICAL VALUE: </strong></td><td style='text-align:left'>"true" / "false" or "1" / "0"</td></tr>
+					<tr><td style='text-align:right'><strong>MINI-BROWSER: </strong></td><td style='text-align:left'>small browser window</td></tr>
+				</table>
+		
+				
+				
+				
+				<h3>Wiring Rules<a name="pWireing"></a></h3> 
+				<div class="text">
+					<strong>Black dashed wires</strong> symbolize an invalid wiring. To <strong>remove a wire</strong> just double-click the wire.
+				</div>
+				
+				<h4>Rule 1 - Same Types</h4>
+				<div class="text">
+					Only connect sockets of the same color. The picture shows a violation of this rule.
+				</div>	
+				<div class="image">
+					<img src="img/errorTypes.png"/>
+				</div>			
+			
+				<h4>Rule 2 - Input to Output</h4>
+				<div class="text">
+					Always connect an output socket (a socket on the right side of a component) with an input socket (a socket on the left side of a component).
+					The picture shows violation of this rule. 
+				</div>	
+				<div class="image">
+					<img src="img/errorInputOutput.png"/>
+				</div>	
+				
+				<h4>Rule 3 - One Wire per Input</h4>
+				<div class="text">
+					Each input socket has exactly one wire connected. It is not allowed to have an unconnected input socket and it is not allowed to connect more than
+					one wire to an input socket. There exists an exeption of this rule. If one wire is an outcoming wire of a TRUE block and the second connected
+					wire to the input socket an outcoming wire of the FALSE block (of an IF/ELSE compnent), it is allowed to have two connected wires to the same input socket. The picture (a) shows such an 
+					exception of the rule.
+				</div>	
+				<div class="image">
+					<img src="img/errorTwoInputs.png"/>
+				</div>	
+				
+				<h4>Rule 4 - No Cyclic Graph</h4>
+				<div class="text">
+					It is not allowed to build cyclic graphs. Examples like the ones given in the pictures are not allowed.
+				</div>	
+				<div class="image">
+					<img src="img/errorCycle.png"/>
+				</div>	
+				
+				
+				
+				
+			
+			<h2>Run a ClickScript<a name="run"></a> <a href="#top">.:top:.</a></h2>
+			<div class="text">
+				There exists two execution modes:
+				<table>
+					<tr><td style="text-align:right;font-weight: bold;width: 100px">run</td><td style="text-align:left;font-weight: normal;">Run the script once</td></tr>
+					<tr><td style="text-align:right;font-weight: bold;width: 100px">repeated run</td><td style="text-align:left;font-weight: normal;">Run the script again until pressing the stop button</td></tr>
+				</table>
+			</div>
+			
+			
+			<h2>Examples<a name="examples"></a> <a href="#top">.:top:.</a></h2>
+			<div class="text">
+				Few examples to play with ClickScript.
+			</div>
+			
+			<h3>Traffic Light Example</h3>
+			<div class="text">
+				This clickscript can be executed in repeated run. By switching on the switch in the Execution View the green light turns on and the car starts driving. By switching off the switch the car stops and the red light turns on. 
+			</div>
+			<div class="image">
+					<img src="img/examples/goOnGreen.png"/>
+					<div class="caption">Switch on/off to stop and drive the car</div>
+			</div>
+			
+			<h3>Google Search</h3>
+			<div class="text">
+
+			</div>
+			<div class="image">
+					<img src="img/examples/BspWebGoogle.png"/>
+					<div class="caption">Go to google and look for a keyword</div>
+			</div>	
+			
+					
+			<h3>Combined Wikipedia and Google Search</h3>
+			<div class="text">
+				his scripts looks for the search word in the `search' textfield. First it tries to find the word in Wikipedia, if unsuccessful it enters the search word on the Google page. Anyway the page found gets printed. To check whether the word was found on Wikipedia or not, we check the source code for the string `no results' which appears on a Wikipedia page if the word is not in the database.
+			</div>
+			<div class="image">
+					<img src="img/examples/exampleWiki.png"/>
+					<div class="caption">Look for a keyword in Wikipedia or Google</div>
+			</div>
+			
+			
+			<h3>Heating Example</h3>
+			<div class="text">
+				Running this script in repeated run, the user can control the room temperature by switch on and off heating and coolers. The green light will turn on if the temperature is between 25 and 30 degrees.
+			</div>
+			<div class="image">
+					<img src="img/examples/roomTempBetweenTwoNumbers.png"/>
+					<div class="caption">Test temperature facilities</div>
+			</div>
+			
+			<h3>Collection in Action</h3>
+			<div class="text">
+				This script first generates a collection {1,2,3,4}. The blue light turns on because 2 is in this collection. The yellow light will not turn on, because of the REMOVE component which removed 2 from the collection before.
+			</div>
+			<div class="image">
+					<img src="img/examples/exampleCollection.png"/>
+					<div class="caption">Example to see how collection work</div>
+			</div>
+			
+			<h3>For-Each</h3>
+			<div class="text">
+					Executing this clickscript, a collection with the elements `3',`4' and `5' is created. Afterwards each element is shown in a popup.
+			</div>
+			<div class="image">
+					<img src="img/examples/exampleForEach.png"/>
+					<div class="caption">Test for each functionality</div>
+			</div>
+			
+			<div class="text">Also have a look at other interesting components like: DIAGRAM, RANDOM, SOUND, ...</div>
+			<br/><br/>
+
+		</div>
+	</body>
+</html>
