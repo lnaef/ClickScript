@@ -36,7 +36,7 @@
  			window.cs.config = null;
  			
  			cs.config = {
- 					rootPath : ((djConfig && djConfig.modulePaths && djConfig.modulePaths.cs && djConfig.baseUrl) ? djConfig.baseUrl + djConfig.modulePaths.cs : "./lib/dojo/cs/" )
+ 					rootPath : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" )
  			};
  			
 			// prepare surface
