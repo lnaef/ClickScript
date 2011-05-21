@@ -157,6 +157,7 @@
 
 		
 	});
+
 dojo.extend(dojox.gfx.Group,{
 		getBoundingBox : function(){
 			if (this.children[0]) {
