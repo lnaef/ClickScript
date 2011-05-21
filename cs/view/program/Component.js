@@ -316,16 +316,16 @@
 					height:48,
 					width:48,
 					defaultPath : "default.gif",
-					root : ((djConfig && djConfig.modulePaths && djConfig.modulePaths.cs && djConfig.baseUrl) ? djConfig.baseUrl + djConfig.modulePaths.cs : "./lib/dojo/cs/" ) + "lib/",
+					root : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ) + "lib/",
 					info : "info.png"
 				},
 				tooltip : { // icon
-					path : ((djConfig && djConfig.modulePaths && djConfig.modulePaths.cs && djConfig.baseUrl) ? djConfig.baseUrl + djConfig.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/info.png",
+					path : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/info.png",
 					width: 16,
 					height: 16
 				},
 				remove : { // icon
-					path : ((djConfig && djConfig.modulePaths && djConfig.modulePaths.cs && djConfig.baseUrl) ? djConfig.baseUrl + djConfig.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/delete.png",
+					path : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/delete.png",
 					width: 16,
 					height: 16
 				}

@@ -136,7 +136,7 @@
 			this.blockShape.setStroke(cs.view.program.Block.dim.stroke);
 			*/
 			
-			// übernehmen für scale down!
+			// ï¿½bernehmen fï¿½r scale down!
 			this._scale += 0.3;	
 	        var shape = this.blockShape.getShape(); // get the shape
 	        shape.width = Math.round(this._getDim().defaultWidth*this._scale); // just add 1 to see it move
@@ -188,12 +188,12 @@
 						y : 4				
 					},
 					plus : { // icon
-						path : ((djConfig && djConfig.modulePaths && djConfig.modulePaths.cs && djConfig.baseUrl) ? djConfig.baseUrl + djConfig.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/plus.png",
+						path : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/plus.png",
 						width: 16,
 						height: 16
 					},
 					minus: { // icon
-						path : ((djConfig && djConfig.modulePaths && djConfig.modulePaths.cs && djConfig.baseUrl) ? djConfig.baseUrl + djConfig.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/minus.png",
+						path : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/minus.png",
 						width: 16,
 						height: 16
 					}
