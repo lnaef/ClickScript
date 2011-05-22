@@ -36,13 +36,13 @@
 		 * @param {cs.model.program.Component} a_component   parent component
 		 */
 		constructor : function(a_metaSocket, a_component){
-			this._id = cs.model.program.Socket.idGen.getId();
+			this._uid = cs.serializer.getUid();
 			this._wires = new cs.util.Container();
 			this._metadata = a_metaSocket;
 			this._component = a_component;
 		},
 		
-		_id : null,
+		_uid : null,
 		
 		/**
 		 * Returns true if a_wire successfully added to socket
@@ -96,7 +96,7 @@
 		},
 		
 		serialize : function(){
-			return cs.serializer.createElement('<socket id="'+this.getId()+'" />');
+			return cs.serializer.serialize('socket',{'uid':this.getUid()});
 		},
 		
 		/**
@@ -107,7 +107,7 @@
 		getMode : function(){ return this._metadata._mode;},
 		getName : function(){ return this._metadata._name;},
 		getMetaData : function(){ return this._metadata;},
-		getId : function(){ return this._id;},
+		getUid : function(){ return this._uid;},
 		getComponent : function(){ return this._component;}
 
 		/**
@@ -149,10 +149,3 @@
 	cs.model.meta.MetaSocket.MODE_OUTPUT = 2;
 	cs.model.meta.MetaSocket.MODE_INPUT_FIELD = 3;
 	
-	cs.model.program.Socket.idGen = {
-		id : 0,
-		getId : function(){
-			this.id++;
-			return this.id;
-		}
-	};

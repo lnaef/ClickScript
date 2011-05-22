@@ -39,7 +39,7 @@
 		 * @param {String} a_text
 		 */
 		write : function(a_text){
-			this._text += a_text.replace(/  /g, "&nbsp;&nbsp;")+"<br/>";
+			this._text += a_text.replace(/  /g, "&nbsp;&nbsp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")+"<br/>";
 			this._node.innerHTML = this._text;
 		},
 		

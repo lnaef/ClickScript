@@ -166,7 +166,7 @@
 						(cs.config.ide.optionalParts.exercise ? "<li><a href='#' id='csExerciseSwitch'>Exercise</a></li>":"") +// EXERCISE
 					 	"<li class='last'>&nbsp;</li>" +
 					  "</ul>"+
-					  '<h1 id="logo"><img src="'+cs.config.rootPath+'/util/images/logo32x32.png" alt="logo"/>&nbsp;&nbsp;ClickScript - IDE (v'+cs.config.version+'rev'+cs.config.revision+')</h1>' +
+					  '<h1 id="logo"><img src="'+cs.config.rootPath+'/util/images/logo32x32.png" alt="logo"/>&nbsp;&nbsp;ClickScript - IDE (v'+cs.config.version+')</h1>' +
 					  "<p class='clear'></p>";
 				dojo.place(out,dojo.byId("csViewSwitches"));
 				
@@ -192,7 +192,7 @@
 			out += "	<input onclick='cs.executionController.run();' type=\"button\" value=\"Run\"/>";
 			out += "	<input onclick='cs.executionController.repeatedRun();' type=\"button\" value=\"Repeated Run\"/>";
 			out += "	<input onclick='cs.executionController.stop();' type=\"button\" value=\"Stop\"/>";
-			out += "	<span class='actionLabel'> runs: </span>"+
+			out += "	<input onclick='cs.console.write(cs.modelController.serializeScript());' type=\"button\" value=\"Serialize\"/>"+
 					"	<span id='runCounter'>0</span>"+
 					"	<span class='actionLabel'> status: </span>"+
 					"	<span id='csState'>" +

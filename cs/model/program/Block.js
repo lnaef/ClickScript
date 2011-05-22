@@ -134,11 +134,12 @@
 		},
 		
 		serialize : function(){
-			var output = "";
+			var components = "";
+			
 			this.getComponentContainer().forEach(function(item){
-				output = output + item.serialize();
+				components += item.serialize();
 			});
-			return cs.serializer.createElement("<block>",output,"</block>");
+			return cs.serializer.serialize("block",null,components);
 		},
 		
 		/**

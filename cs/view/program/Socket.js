@@ -97,7 +97,7 @@
 		},
 		
 		onMove : function(){
-			//console.log(" I am moving!"+this.getModel().getId());
+			//console.log(" I am moving!"+this.getModel().getUid());
 		},
 		
 		onMoveToFront : function(){

@@ -43,7 +43,7 @@
 		/**
 		 * Needed for serialization
 		 */
-		_id : null,
+		_uid : null,
 		
 		
 		/**
@@ -52,7 +52,7 @@
 		 */
 		constructor : function(a_metadata){
 			this._metadata = a_metadata;
-			this.setId(cs.model.program.Component.idGen.getId());
+			this.setId(cs.serializer.getUid());
 			this._positionProg = {x:0,y:0},
 			this._positionExec = {x:0,y:0},
 			
@@ -77,7 +77,7 @@
 		
 		/**
 		 * True if component is a primitive module
-		 * A component is a primitive it if consists only of outputs and fields (no outputs)
+		 * A component is a primitive it if consists only of outputs and fields (no inputs)
 		 */
 		isPrimitive : function(){
 			return this._metadata.isPrimitive();
@@ -109,37 +109,61 @@
 		},
 		
 		setId : function(a_int){
-			this._id = a_int;
+			this._uid = a_int;
 		},
 		
-		serialize : function(a_additional_value){
-
+		
+		/**
+		 * Serialisation of: inputs, outputs, fields, wires and blocks (if statement) 
+		 * All outgoing wires got serialized
+		 * 
+		 * @param {string} a_additionalData : used for example for Statement on superclass-call
+		 */
+		serialize : function(a_additionalData){
+			
+			var additionalData = a_additionalData || "";
 			var componentType = this.getMetaData().getType();
 			
 			var input = "";
 			this.getInputSockets().forEach(function(item){
 				input += item.serialize();
 			});
-			input = cs.serializer.createElement("<input>",input,"</input>");
+			input = cs.serializer.serialize("inputs",null,input);
 			
 			var output = "";
 			this.getOutputSockets().forEach(function(item){
 				output += item.serialize();
 			});
-			output = cs.serializer.createElement("<output>",output,"</output>");
+			output = cs.serializer.serialize("outputs",null,output);
 			
-			var priv = "";
+			var field = "";
 			this.getFieldSockets().forEach(function(item){
-				priv += item.serialize();
+				field += item.serialize();
 			});
-			priv = cs.serializer.createElement("<field>",priv,"</field>");
+			field = cs.serializer.serialize("fields",null,field);
 			
-			var result = cs.serializer.createElement("<sockets>",input+output+priv,"</sockets>");
+			var wires = "";
+			this.getOutputSockets().forEach(function(socket){
+				socket.forEachWire(function(wire){
+					wires += wire.serialize();
+				});				
+			});
 			
-			result += a_additional_value ? a_additional_value : "";
+			var attributes = {
+				'uid':this.getUid(),
+				'component-type':componentType,
+				'type':this.getMetaData().getName(),
+				'coord-prog-x':this.getPositionProg().x,
+				'coord-prog-y':this.getPositionProg().y		
+			}
 			
-			result = cs.serializer.createElement('<'+componentType+' id="'+this.getId()+'" type="'+this.getMetaData().getName()+'">', result,'</' + componentType + '>');
-			return result;
+			if (this.getMetaData().hasView()){
+				attibutes['coord-exec-x'] = this.getPositionExec().x,
+				attibutes['coord-exec-y'] = this.getPositionExec().y		
+			}
+			
+			
+			return cs.serializer.serialize("component",attributes,input + output + field + additionalData + wires);
 		},
 		
 		destroy : function(){
@@ -190,18 +214,10 @@
 		getParentBlock : function(){return this._parentBlock;},
 		getPositionProg : function(){return this._positionProg;},
 		getPositionExec : function(){return this._positionExec;},
-		getId : function(){return this._id;},
+		getUid : function(){return this._uid;},
 		
 		
 		getDescriptionAsHTML : function(){
 			return this.getMetaData().toHTML();
 		}
 	});
-	
-	cs.model.program.Component.idGen = {
-		id : 0,
-		getId : function(){
-			this.id++;
-			return this.id;
-		}
-	};

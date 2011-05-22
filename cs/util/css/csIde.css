@@ -85,6 +85,10 @@
 				margin-left: 20px;
 				margin-top: 20px;
 				-moz-border-radius: 8pt;
+				white-space: pre;
+			}
+			
+			#csEasyConsole pre * {
 			}
 			
 			#csTutorial, #csExercise, #csConsole{

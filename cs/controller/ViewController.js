@@ -298,7 +298,7 @@
 			this._components.add(component);
 
 			
-			this.writeDebug("New component '"+a_component.getMetaData().getName()+"' added id: "+ a_component.getId());
+			this.writeDebug("New component '"+a_component.getMetaData().getName()+"' added id: "+ a_component.getUid());
 		},
 		
 		onConnectSockets : function(a_wire,a_socket1, a_socket2){

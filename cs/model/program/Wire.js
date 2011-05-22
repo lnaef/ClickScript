@@ -112,6 +112,10 @@
 			} else {
 				throw Error("NO PROPER WIREING");
 			}
+		},
+		
+		serialize : function(){
+			return cs.serializer.serialize('wire',{'from':this.getFROM().getUid(), 'to':this.getTO().getUid()});
 		}
 	
 	});

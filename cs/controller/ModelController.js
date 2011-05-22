@@ -133,7 +133,7 @@
 			//whats this? field?
 		},
 		
-		serializeProgram : function(){
+		serializeScript : function(){
 			var serializedComponents = this._rootStatement.serialize();
 			return serializedComponents;
 		},

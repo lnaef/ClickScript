@@ -78,7 +78,7 @@
 			if(this._image){
 				this._image.moveToFront();
 			}
-			console.log("moved to front"+ this.getModel().getId());
+			cs.console.writeDebug("Moved Component "+ this.getModel().getUid() + " to the front");
 		},
 		
 		/**

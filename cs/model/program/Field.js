@@ -32,7 +32,7 @@
 		},
 		
 		serialize : function(){
-			return cs.serializer.createElement('<socket id="'+this.getId()+'" value="'+(this.getValue()?this.getValue():"")+'" />');
+			return cs.serializer.serialize('field',{'uid':this.getUid(),'value':this.getValue()});
 		}
 		
 	});

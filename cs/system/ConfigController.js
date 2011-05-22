@@ -20,9 +20,6 @@
 		// Version
 		version : "0.5",
 		
-		// Revision
-		revision: "$Rev$",
-		
 		// Path for the ClickScript class folder
 		rootPath : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ),
  		
@@ -32,6 +29,8 @@
  		// Debug-Mode for dojo overwrite (Loading of Dojo is set by the loading-options of Dojo)
  		isDojoDebug : true,
  		
+ 		// Get the custom modules and classes to firebug!
+ 		isDojoDebugAtAllCosts : true,
  		
  		/**
  		 * IDE configuration
@@ -96,8 +95,9 @@
 	 * set dojo debug mode
 	 */
 	dojo.config.isDebug = cs.config.isDojoDebug;
-
+	dojo.config.debugAtAllCosts = cs.config.isDebugAtAllCosts;
 	
+
 	
  	dojo.declare("cs.system.ConfigController", null, {
  		

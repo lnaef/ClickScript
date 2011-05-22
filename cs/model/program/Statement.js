@@ -53,15 +53,15 @@
 		},
 		
 		serialize : function(){
-			var serializedBlock = "";
+			var blocks = "";
 			
 			this.getBlocks().forEach(function(item){
-				serializedBlock += item.serialize();
+				blocks += item.serialize();
 			});
-			serializedBlock = cs.serializer.createElement("<blocks>",serializedBlock,"</blocks>");
+			blocks = cs.serializer.serialize("blocks",null,blocks);
 			
 			// call serialize on superclass
-			return this.constructor.superclass.serialize.call(this,serializedBlock); 
+			return this.constructor.superclass.serialize.call(this,blocks); 
 			
 		}
 		
