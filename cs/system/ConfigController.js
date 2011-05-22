@@ -17,18 +17,52 @@
 	 */ 
 	cs.config = {
 		
+		// Version
+		version : "0.5",
+		
+		// Revision
+		revision: "$Rev$",
+		
 		// Path for the ClickScript class folder
 		rootPath : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ),
- 		
- 		// Playground Dimensions
- 		playgroundWidth : 1000,	
- 		playgroundHeight : 500,
  		
  		// Debug-Mode in ClickScript console?
  		isDebug : true,
  		
  		// Debug-Mode for dojo overwrite (Loading of Dojo is set by the loading-options of Dojo)
  		isDojoDebug : true,
+ 		
+ 		
+ 		/**
+ 		 * IDE configuration
+ 		 */
+ 		ide : {
+ 			// Are the following parts visible in the IDE?
+ 			optionalParts : { 
+ 				option: true,
+ 				todo: true,
+ 				tutorial: true,
+ 				exercise: true
+ 			}
+ 		},
+ 		
+ 		
+ 		/**
+ 		 * PLAYGROUND configuration
+ 		 */ 
+ 		playground : {
+ 			width : 1000, // Dimensions	
+ 			height : 500
+ 		},
+ 		
+ 		
+ 		/**
+ 		 * LIBRARY configuration
+ 		 */
+ 		library : {
+ 			defaultStyle : 3 // 1 (small icons), 2, 3 (big icons, name)
+ 		}
+ 		
 	};		
 	
 	/**
@@ -61,7 +95,7 @@
 	/*
 	 * set dojo debug mode
 	 */
-	//dojo.config.isDebug = cs.config.isDojoDebug;
+	dojo.config.isDebug = cs.config.isDojoDebug;
 
 	
 	

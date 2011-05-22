@@ -6,6 +6,7 @@
 			
 			body{
 				background-color: #ddd;
+				margin:0px; padding:0px;
 			}
 			
 			h1 * {
@@ -27,11 +28,10 @@
 					
 			
 			#csMenu{
-				margin: 0 20px;
-				background-color: #999;
-			 	-moz-border-radius: 8pt 8pt;
+				background-color: #eee;
 			 	font-size: 8pt;
 			 	color: #444;
+			 	padding-top:10px;
 			 	/*border: 2px solid #666;*/
 			}
 			
@@ -56,7 +56,7 @@
 			}
 			
 			#csExecutionView {
-				background-color: #999;
+				background-color: #eee;
 				padding-top: 20px;
 			}
 			#csExecutionViewContainer {
@@ -100,64 +100,41 @@
 			  font-size: 9pt;
 			  margin: 20px;
 			}
+/* logo */
+#logo {float:right;margin:0px;font-size:9pt; width: 270px;}
 			
-			#csViewSwitches ul {
-			  margin: 0px;
-			  padding: 0px;
-			}
+/* IDE Toggle-Switches */
+#csViewSwitches 		{ min-width: 1101px }
+#csViewSwitches ul      { margin: 5px 0px; padding: 0px; float:left; width:830px; }
+#csViewSwitches li      { display: inline; list-style-type: none; margin:0px; background: url('../images/menu-background.png') no-repeat right center; padding: 10px 15px;}
+#csViewSwitches li.first { background: url('../images/menu-background-corner.png') no-repeat left center; padding: 10px 6px; }
+#csViewSwitches li.last { background: url('../images/menu-background-corner.png') no-repeat right center; padding: 10px 25px; }
+#csViewSwitches a       { color: #eee; padding: 0px 20px 0px 0px; font-size: 9pt;
+						  font-weight: bold; text-decoration: none; 
+						  background: url('../images/menuClose.png') no-repeat right center; }
+#csViewSwitches a:hover { color: #444; background: url('../images/menuCloseHover.png') no-repeat right center; text-decoration: underline}
+
+#csViewSwitches a.active 		{ color: #1c72ba; background: url('../images/menuOpen.png') no-repeat right center;}
+#csViewSwitches a.active:hover	{ color: #444; background: url('../images/menuOpenHover.png') no-repeat right center; }
 			
-			#csViewSwitches li {
-			  display: inline;
-			  list-style-type: none;
-			  margin-left: 0px;
-			}
-			
-			#csViewSwitches a{
-			  color: #444;
-			  padding: 0px 10px;
-			  font-size: 9pt;
-			}
-			
-			#csViewSwitches a.active{
-			  color: #1c72ba;
-			}
-			
-			#csViewSwitches a:hover{
-			  color: #1c72ba;
-			}
-			
-			#csViewSwitches a.active:hover{
-			  color: #444;
-			}
-			
-			#csViewSwitches a strong{
-			  padding-bottom:2px;
-			}
-			
-			#csViewSwitches a img{
-			  color: #444;;
-			  padding-left: 5px;
-			}
-			
-			#csActionMenu *, #csViewSwitches *{
-				vertical-align: middle;
-			}
-			
-			#csActionMenu input {
-			  border: 1px solid #444;
-			  -moz-border-radius: 3pt 3pt;
-			  background-color: #ccc;
-			  margin-left: 3px;
-			  color: #444;
-			  font-familiy:font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-			  font-size: 8pt;
-			  font-weight: bold;
-			}
-			
-			#csActionMenu .actionLabel {
-			  font-weight: bold;
-			  padding-left: 5px;
-			}
+#csActionMenu *, #csViewSwitches *{	vertical-align: middle; }
+#csActionMenu input {
+					  border: 1px solid #444;
+					  -moz-border-radius: 3pt 3pt;
+					  background-color: #ccc;
+					  margin-left: 3px;
+					  color: #444;
+					  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+					  font-size: 8pt;
+					  font-weight: bold;
+}		
+#csActionMenu .actionLabel 		{ font-weight: bold; padding-left: 5px; }
+#csActionMenu #csStateRUN		{background: url('../images/run.png') no-repeat right center;}
+#csActionMenu #csStateWAIT		{background: url('../images/wait.png') no-repeat right center;}
+#csActionMenu #csStateSTOP		{background: url('../images/stop.png') no-repeat right center;}
+#csActionMenu #csStateFINISH	{background: url('../images/finish.png') no-repeat right center;}
+#csActionMenu .csStateIcon		{padding: 0px 10px 0px 14px;}
+
 			/**
 			 * EXECUTION VIEW
 			 **/

@@ -84,7 +84,7 @@
 	});
 	
 	cs.view.util.EasyConsole.style = {
-		fontFamily : "Courier",
+		fontFamily : "Monospace",
 		overflowY : "scroll",
 		overflowX : "hidden",
 		backgroundColor : "#000",

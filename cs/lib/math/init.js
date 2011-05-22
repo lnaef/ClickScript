@@ -5,7 +5,7 @@
 dojo.provide("cs.lib.math.init");
 
 
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.add",
 		description : "This module adds the two two numbers NUMBER1 and NUMBER2",
 		inputs : 
@@ -31,7 +31,7 @@ dojo.provide("cs.lib.math.init");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.subtract",
 		description : "This module subtracts NUMBER2 from NUMBER1",
 		inputs : 
@@ -56,7 +56,7 @@ dojo.provide("cs.lib.math.init");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.multiply",
 		description : "This module multiplies NUMBER1 with NUMBER2",
 		inputs : 
@@ -81,7 +81,7 @@ dojo.provide("cs.lib.math.init");
 		}
 	});
 
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.divide",
 		description : "This module divides NUMBER1 by NUMBER2",
 		inputs : 
@@ -106,7 +106,7 @@ dojo.provide("cs.lib.math.init");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.random",
 		description : "This module generates a random number between LOWEST and HIGHEST ",
 		inputs : 
@@ -136,7 +136,7 @@ dojo.provide("cs.lib.math.init");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.diagram",
 		description : "This module plots incoming VALUEs, MAXROW is a optional field to set the maximum of rows shown",
 		inputs : 
@@ -213,7 +213,7 @@ dojo.provide("cs.lib.math.init");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.is_smaller",
 		description : "RESULT is True if NUMBER1 is smaller than NUMBER2",
 		inputs : 
@@ -238,7 +238,7 @@ dojo.provide("cs.lib.math.init");
 		}
 	});
 
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.is_greater",
 		description : "RESULT is True if NUMBER1 is greater than NUMBER2",
 		inputs : 
@@ -264,7 +264,7 @@ dojo.provide("cs.lib.math.init");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.math.is_equal",
 		description : "RESULT is True if NUMBER1 and NUMBER2 are the same",
 		inputs : 

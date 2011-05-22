@@ -1,54 +1,57 @@
 /**
  * @author elcc
  * 
+ * CLASS cs.controller.IdeController 
+ * 
+ * @description: This Class is needed to build a IDE to develop clickscripts.
  * 
  */
 	
 	dojo.provide("cs.controller.IdeController");
-	
-	
+
 	dojo.require("dojox.fx.scroll");
-	
 	dojo.require("dojox.gfx");
 	dojo.require("cs.controller.LibraryController");	
 	dojo.require("cs.controller.ViewController");		
 	dojo.require("cs.controller.ModelController");	
 	dojo.require("cs.controller.ExecutionController");
 	dojo.require("cs.controller.ExecutionViewController");
-	
 	dojo.require("cs.view.util.EasyConsole");
 	dojo.require("cs.view.util.Toggler");
 	
-
-	
-	
  	dojo.declare("cs.controller.IdeController", null, {
 		
- 		playgroundWidth : 1000,
- 		playgroundHeight : 500,
+
  		
- 		
+
 		constructor : function(){
  			
- 		    // init global variables
- 		    window.cs.modelController = null;
- 			window.cs.viewController = null;	
- 			window.cs.config = null;
+ 			// setup basic html for ClickSciript into the HTML-Tag with id="clickscript"
+ 			dojo.place(
+			'    	'+
+			'    	<div id="csMenu">	'+
+			'			<div id="csViewSwitches"></div>'+
+			'			<div id="csLib"></div>'+
+			'           <div id="csOptions"></div>'+
+			'			<div id="csTodo"></div><div id="csExecutionView"></div>'+
+			'			<div id="csActions"></div>'+
+			'		</div>'+
+			'		<div id="csPlayground"></div>'+
+			'		<div id="csConsole"></div>'+
+			'		<div id="csTutorial"></div>'+
+			'		<div id="csExercise"></div>'+			
+			'		<div id="footer">'+
+			'			&copy; 2011 powered by lukas naef - contact\'at\'clickscript.ch - <a href="http://clickscript.ch">www.clickscript.ch</a>'+
+			'		</div>'
+			,dojo.byId("clickscript"));
  			
- 			cs.config = {
- 					rootPath : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" )
- 			};
- 			
-			// prepare surface
+			/**
+			 * SURFACE: Prepare the surface with the ClickScript playground
+			 */
 			var nodePlayground = dojo.byId("csPlayground");
-			
-			
-			// set html width / height on playground : required!
-
-			
-			var width = this.playgroundWidth;
-			var height = this.playgroundHeight;
-			
+					
+			var width = cs.config.playground.width; // set html width / height on playground : required!
+			var height = cs.config.playground.height;
 			
 			var currentWidth = dojo.style(dojo.byId('csPlayground'),"width");
 			if(currentWidth > width){width = currentWidth;}
@@ -58,36 +61,50 @@
 			dojo.style(nodePlayground,"height",height+"px");
 			
 			
-			// prepare console
+			/**
+			 * CONSOLE
+			 */
 			var source = "<div id='csConsoleTitle'>console</div><div id='csEasyConsole'></div>";
 			dojo.place(source,dojo.byId("csConsole"));
 			
-			
 			cs.console = new cs.view.util.EasyConsole("csEasyConsole");
-			cs.console.setIsDebug(false);
+			cs.console.setIsDebug(cs.config.isDebug);
 			dojo.style(cs.console.getNode(),"width","auto");
-			//dojo.style(cs.console.getNode(),"width",(width+20)+"px");
-
-			// get preloaded components if there are any
-			if(window.csComponentContainer){
+			
+			/**
+			 * LIBRARIES: Load libraries if there are any
+			 */
+			if(cs.componentContainer){
+				cs.library.addMetaComponents(cs.componentContainer);
+			}
+			
+			// DEPRICATED componentContainer (v0.5)
+			if(window.csComponentContainer && window.csComponentContainer.length > 0){
+				console.warn("DEPRICATED: csComponentContainer -- Use cs.componentContainer instead!");
 				cs.library.addMetaComponents(csComponentContainer);
 			}
 			
-			// model controller
-			cs.modelController = new cs.controller.ModelController();
-			cs.viewController = new cs.controller.ViewController(playground,cs.modelController);
-			cs.executionController = new cs.controller.ExecutionController(cs.modelController);
-			cs.executionViewController = new cs.controller.ExecutionViewController();
-			//cs.executionViewController.setWidth(this.playgroundWidth-10); //-10 because of the padding
+			/**
+			 * Setup ClickScript model and controllers
+			 */
 			
-			// register observers to the model
+			// Model for the Script
+			cs.modelController = new cs.controller.ModelController();
+			
+			// Playground where you can perform actions like wireing two components
+			cs.viewController = new cs.controller.ViewController(playground,cs.modelController);
+			
+			// Model of the Execution View
+			cs.executionController = new cs.controller.ExecutionController(cs.modelController);
+			
+			// View of the Execution View
+			cs.executionViewController = new cs.controller.ExecutionViewController();
+			
+			// Register observers to the model
 			cs.modelController.registerObserver(cs.viewController);
 			cs.modelController.registerObserver(cs.executionController);
 			
-
-			
 			cs.console.write("ClickScript IDE loaded.");
-
  		},
  	
  		/**
@@ -109,31 +126,25 @@
 			    	var toggler = new cs.view.util.Toggler(id_to_toggle);
 			    	var toggleSwitch = dojo.byId(id_of_switch ? id_of_switch : id_to_toggle+"Switch");
 				    if(toggleSwitch){
-				    	var srcClose = cs.config.rootPath + "util/images/menuClose.png";
-				    	var srcOpen  = cs.config.rootPath + "util/images/menuOpen.png";
 				    	if(on){
 				    		toggler.show();
 				    		dojo.addClass(toggleSwitch,"active");
-				    		dojo.query("img",toggleSwitch)[0].src = srcOpen;
 				    	} else {
 				    		toggler.hide();
 				    		dojo.removeClass(toggleSwitch,"active");
-				    		dojo.query("img",toggleSwitch)[0].src = srcClose;
 				    	}
 				    	dojo.connect(toggleSwitch,"onclick",this,function(){
 				    		toggler.toggle();
 				    		if(toggler.isActive()){
 				    			dojo.addClass(toggleSwitch,"active");
-				    			dojo.query("img",toggleSwitch)[0].src = srcOpen;
 				    			if(scroll){
-						        var node = dojo.byId(id_to_toggle);
-						        var anm = dojox.fx.smoothScroll({ node: node,
+						        	var node = dojo.byId(id_to_toggle);
+						        	var anm = dojox.fx.smoothScroll({ node: node,
 									        win:window,
 									        duration:800}).play();
 				    			}
 				    		} else {
 				    			dojo.removeClass(toggleSwitch,"active");
-				    			dojo.query("img",toggleSwitch)[0].src = srcClose;
 				    		}
 				    	});	
 			    	}
@@ -144,20 +155,27 @@
 		     * Place visibility switches
 		     */
 			if(dojo.byId("csViewSwitches")){
-				out = "<ul><li><a href='#' id='csExecViewSwitch' style='text-decoration:none;'><strong>Execution View</strong><img src='"+cs.config.rootPath+"util/images/menuClose.png' id='csExecViewSwitchImg'/></a></li>" +
-				"<li><a href='#' id='csConsoleSwitch' style='text-decoration:none;'><strong>Console</strong><img src='"+cs.config.rootPath+"util/images/menuClose.png' id='csConsoleSwitchImg'/></a></li>" +
-				(dojo.byId("csOptions") ? "<li><a href='#' id='csOptionSwitch' style='text-decoration:none;'><strong>Options</strong><img src='"+cs.config.rootPath+"util/images/menuClose.png' id='csOptionSwitchImg'/></a></li>" : "") +
-				"<li><a href='#' id='csLibSwitch' style='text-decoration:none;'><strong>Library</strong><img src='"+cs.config.rootPath+"util/images/menuOpen.png' id='csLibSwitchImg'/></a></li>" +
-				(dojo.byId("csTodo") ? "<li><a href='#' id='csTodoSwitch' style='text-decoration:none;'><strong>Todo</strong><img src='"+cs.config.rootPath+"util/images/menuOpen.png' id='csTodoSwitchImg'/></a></li>":"") +
-				(dojo.byId("csTutorial") ? "<li><a href='#' id='csTutorialSwitch' style='text-decoration:none;'><strong>Tutorial</strong><img src='"+cs.config.rootPath+"util/images/menuClose.png' id='csTutorialSwitchImg'/></a></li>":"") +
-				(dojo.byId("csExercise") ? "<li><a href='#' id='csExerciseSwitch' style='text-decoration:none;'><strong>Exercise</strong><img src='"+cs.config.rootPath+"util/images/menuClose.png' id='csExerciseSwitchImg'/></a></li>":"") +
-
-				"</ul>";
+				out = "<ul>"+
+						"<li class='first'>&nbsp;</li>" +
+					  	"<li><a href='#' id='csLibSwitch' >Library</a></li>" +													// LIBRARY
+						"<li><a href='#' id='csExecViewSwitch'>Execution View</a></li>" +										// EXECUTION VIEW
+					  	"<li><a href='#' id='csConsoleSwitch'>Console</a></li>" +												// CONSOLE
+						(cs.config.ide.optionalParts.option ? "<li><a href='#' id='csOptionSwitch'>Options</a></li>" : "") +	// OPTIONS
+						(cs.config.ide.optionalParts.todo ? "<li><a href='#' id='csTodoSwitch'>Todo</a></li>":"") +				// TODO
+						(cs.config.ide.optionalParts.tutorial ? "<li><a href='#' id='csTutorialSwitch'>Tutorial</a></li>":"") +// TUTORIAL
+						(cs.config.ide.optionalParts.exercise ? "<li><a href='#' id='csExerciseSwitch'>Exercise</a></li>":"") +// EXERCISE
+					 	"<li class='last'>&nbsp;</li>" +
+					  "</ul>"+
+					  '<h1 id="logo"><img src="'+cs.config.rootPath+'/util/images/logo32x32.png" alt="logo"/>&nbsp;&nbsp;ClickScript - IDE (v'+cs.config.version+'rev'+cs.config.revision+')</h1>' +
+					  "<p class='clear'></p>";
 				dojo.place(out,dojo.byId("csViewSwitches"));
 				
+				/*
+				 * Set toggle functionality, state and activate scrollto-option
+				 */
 				toggleSwitch("csLib","csLibSwitch",true);
-			    toggleSwitch("csOptions","csOptionSwitch",false);
-				//toggleSwitch("csTodo","csTodoSwitch",false);
+			    toggleSwitch("csOptions","csOptionSwitch",false, true);
+				toggleSwitch("csTodo","csTodoSwitch",false, true);
 				toggleSwitch("csTutorial","csTutorialSwitch",false,true);
 			    toggleSwitch("csExecutionView","csExecViewSwitch",true);			
 				toggleSwitch("csConsole","csConsoleSwitch",false,true);
@@ -165,22 +183,24 @@
 			}
  			
  			
- 			// get all loaded libraries by category
-			var loadedComponents = cs.library.getMetaComponentsByCategory();
+			/**
+			 * ACTION-BAR
+			 */
 			var out = "";
-			// ActionMenu
-			out += "<div id='csActionMenu'><strong>Actions:&nbsp;&nbsp;</strong>";					
-			//out += "<input onclick='cs.test.newPage( cs.modelController.serializeProgram());' type=\"button\" value=\"serialize\"/>";
-			out += "<input onclick='location.reload(true);' type=\"button\" value=\"Clean Up\"/>";
-			out += "<input onclick='cs.executionController.run();' type=\"button\" value=\"Run\"/>";
-			out += "<input onclick='cs.executionController.repeatedRun();' type=\"button\" value=\"Repeated Run\"/>";
-			out += "<input onclick='cs.executionController.stop();' type=\"button\" value=\"Stop\"/>";
-			out += "<span class='actionLabel'> runs: </span><span id='runCounter'>0</span><span class='actionLabel'> status: </span><span id='csState'>" +
-						"<img title='RUN...' id='csStateRUN' style='display:none' class='csStateIcon' src='"+cs.config.rootPath+"util/images/run.png'/>" +
-						"<img title='STOP...' id='csStateSTOP'  style='display:none' class='csStateIcon' src='"+cs.config.rootPath+"util/images/stop.png'/>" +
-						"<img title='WAIT...' id='csStateWAIT'  style='display:none' class='csStateIcon' src='"+cs.config.rootPath+"util/images/wait.png'/>" +
-						"<img title='FINISH...' id='csStateFINISH' class='csStateIcon' src='"+cs.config.rootPath+"util/images/finish.png'/>" +
-					"</span>";
+			out += "<div id='csActionMenu'>Actions:";					
+			out += "	<input onclick='location.reload(true);' type=\"button\" value=\"Clean Up\"/>";
+			out += "	<input onclick='cs.executionController.run();' type=\"button\" value=\"Run\"/>";
+			out += "	<input onclick='cs.executionController.repeatedRun();' type=\"button\" value=\"Repeated Run\"/>";
+			out += "	<input onclick='cs.executionController.stop();' type=\"button\" value=\"Stop\"/>";
+			out += "	<span class='actionLabel'> runs: </span>"+
+					"	<span id='runCounter'>0</span>"+
+					"	<span class='actionLabel'> status: </span>"+
+					"	<span id='csState'>" +
+					"		<span title='RUN...' id='csStateRUN' style='display:none' class='csStateIcon' ></span>" +
+					"		<span title='STOP...' id='csStateSTOP'  style='display:none' class='csStateIcon'></span>" +
+					"		<span title='WAIT...' id='csStateWAIT'  style='display:none' class='csStateIcon'></span>" +
+					"		<span title='FINISH...' id='csStateFINISH' class='csStateIcon'></span>" +
+					"	</span>";
 			out += "</div>";
 			dojo.place(out,dojo.byId("csActions"));
 
@@ -188,13 +208,18 @@
 			/**
 			 * LOAD LIBRARIES
 			 */
+			
+			// Get all loaded libraries
+			var loadedComponents = cs.library.getMetaComponentsByCategory();
+			
+			// Prepare visibility switches for option box
 			var visibilitySwitches = "<table>";
 			loadedComponents.forEach(function(item,key){
 				cs.library.showToolbar(key);
 				visibilitySwitches += "<tr><td>"+key+"</td><td><input id='csToolbarSwitch"+ key.replace(/\./,"")+"' class='csToolbarSwitch' title='"+key+"' onchange='' type='checkbox' checked='checked'/></td></tr>";
 			});
 			visibilitySwitches += "</table>";
-			cs.library.setLibStyle(cs.library._libStyle);
+			cs.library.setLibStyle(cs.config.library.defaultStyle);
 			
 			
 
@@ -203,15 +228,16 @@
 			/**
 			 * LOAD CS OPTIONS
 			 */
-			if(dojo.byId("csOptions")){
+			if(cs.config.ide.optionalParts.option){
 				out = "<ul id='csOptionList'>" +
 					"<li><fieldset><legend>Toolbar</legend>" +
 					"		<div id='csOptionToolbarVisibility'></div>" +
 					"</fieldset></li>" +
 					"<li><fieldset><legend>Debug</legend>" +
 					"		<ul>" +
-					"			<li><label for='csOptionDebugExecOnOff'>Show Worklist ON/OFF:</label><input type='checkbox' id='csOptionDebugExecOnOff'/></li>" +
-					"			<li><label for='csOptionDebugOnOff'>Debug Mode ON/OFF:</label><input type='checkbox' id='csOptionDebugOnOff'/></li>" +
+					"			<li><label for='csOptionDebugExecOnOff'>Debug Execution Mode (Worklist):</label><input type='checkbox' id='csOptionDebugExecOnOff'/></li>" +
+					"			<li><label for='csOptionDebugOnOff'>Debug ClickScript Mode:</label><input type='checkbox' id='csOptionDebugOnOff'/></li>" +
+					"			<li><label for='csOptionDebugDojoOnOff'>Debug DOJO Mode:</label><input type='checkbox' id='csOptionDebugDojoOnOff'/></li>" +
 					"		</ul>" +
 					"</fieldset></li>" +
 					"<li><fieldset><legend>Library</legend>" +
@@ -228,21 +254,32 @@
 				
 				dojo.place(out,dojo.byId("csOptions"));
 				
-				// load toolbars
-
+				// VISIBILITY SWITCHES for toolbars
 				dojo.place(visibilitySwitches,dojo.byId('csOptionToolbarVisibility'));
 				
-				// to switch debug messages on / off
+				// DEBUG MESSAGES CLICKSCRIPT (on/off)
 				dojo.byId("csOptionDebugOnOff").checked = cs.console.isDebug();
 				dojo.connect(dojo.byId("csOptionDebugOnOff"),"onchange",this,function(){
 					cs.console.setIsDebug(dojo.byId("csOptionDebugOnOff").checked);
 					if(cs.console.isDebug()){
-						cs.console.write("DEBUG MODE ON");
+						cs.console.write("CLICKSCRIPT DEBUG MODE ON");
 					} else {
-						cs.console.write("DEBUG MODE OFF");
+						cs.console.write("CLICKSCRIPT DEBUG MODE OFF");
 					}
 				});
 				
+				// DEBUG MESSAGES DOJO (on/off)
+				dojo.byId("csOptionDebugDojoOnOff").checked = dojo.config.isDebug;
+				dojo.connect(dojo.byId("csOptionDebugOnOff"),"onchange",this,function(){
+					dojo.config.isDebug = dojo.byId("csOptionDebugDojoOnOff").checked;
+					if(cs.console.isDebug()){
+						cs.console.write("DOJO DEBUG MODE ON");
+					} else {
+						cs.console.write("DOJO DEBUG MODE OFF");
+					}
+				});
+				
+				// EXECUTION DEBUG MODE (on/off)
 				dojo.byId("csOptionDebugExecOnOff").checked = cs.executionController.getWorklist().isDebug();
 				dojo.connect(dojo.byId("csOptionDebugExecOnOff"),"onchange",this,function(){
 					cs.executionController.getWorklist().setIsDebug(dojo.byId("csOptionDebugExecOnOff").checked);
@@ -253,10 +290,10 @@
 					}
 				});
 				
+				// LIBRARYSTYLE 
 				dojo.connect(dojo.byId("libraryOp"),"onchange",this,function(){
 					cs.library.setLibStyle(dojo.byId("libraryOp").value);
 				});
-				
 
 			}
 			
@@ -274,7 +311,7 @@
 			 * LOAD TUTORIALs
 			 */
 			
-			if(dojo.byId("csTutorial")){
+			if(cs.config.ide.optionalParts.tutorial){
 				var url = dojo.byId("csTutorial").innerHTML;
 				url = (url) ? url : cs.config.rootPath+"util/tutorial/tutorialEN.html";
 				var tutorial = "<div id='csTutorialTitle'>tutorial</div><iframe src='"+url+"'/>";
@@ -286,14 +323,16 @@
 			 * LOAD EXERCISEs
 			 */
 			
-			if(dojo.byId("csExercise")){
+			if(cs.config.ide.optionalParts.exercise){
 				var url = dojo.byId("csExercise").innerHTML;
 				url = (url) ? url : cs.config.rootPath+"util/exercise/index.html";
 				var tutorial = "<div id='csExerciseTitle'>exercises</div><iframe src='"+url+"'/>";
 				dojo.place(tutorial,dojo.byId("csExercise"));
 			}
 			
-			
+			/**
+			 * TOOLBAR actions (hide toolbar)
+			 */
 			var toolbarSwitches = dojo.query(".csToolbarSwitch");
 			toolbarSwitches.forEach(function(tbSwitch){
 				dojo.connect(tbSwitch,"onchange",null,function(html){
@@ -322,22 +361,7 @@
 			
 			dojo.connect(cs.library,"onShowToolbar",null,function(){updateOptionSwitches();});
 			dojo.connect(cs.library,"onHideToolbar",null,function(){updateOptionSwitches();});
-			
-			
-
-			
-		   
-		    
-
-			
-			
-
-
-			
-			
-			
-			
-			
+	
  		}
 			
 	});

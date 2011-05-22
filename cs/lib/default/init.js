@@ -20,7 +20,7 @@ dojo.provide("cs.lib.default.init");
 	/*
 	 * ADD DEFAULT METACOMPONENTS
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.statement.program",
 			description: "This represents a clickscript program.",
 			blocks: [
@@ -33,7 +33,7 @@ dojo.provide("cs.lib.default.init");
 
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.default.primitive.string",
 			description: "This modul represents a single string.",
 			inputs: [],
@@ -53,7 +53,7 @@ dojo.provide("cs.lib.default.init");
 		});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.default.primitive.number",
 			description: "This modul represents a single number.",
 			inputs: [],
@@ -73,7 +73,7 @@ dojo.provide("cs.lib.default.init");
 		});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.default.primitive.boolean",
 			description: "This modul represents a single boolean.",
 			inputs: [],
@@ -98,7 +98,7 @@ dojo.provide("cs.lib.default.init");
 		});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.default.ide.popup",
 			description: "This modul outputs a text to an alert-box",
 			inputs: [{
@@ -118,7 +118,7 @@ dojo.provide("cs.lib.default.init");
 	/**
 	 * Open a page in an iframe
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.default.ide.timer",
 		description : "This modules waits for N seconds",
 		inputs : [{
@@ -141,7 +141,7 @@ dojo.provide("cs.lib.default.init");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.default.ide.textfield",
 			description: "This module allows userinput through a textfield",
 			inputs: [],
@@ -169,7 +169,7 @@ dojo.provide("cs.lib.default.init");
 	
 		
 		
-	csComponentContainer.push({
+	cs.componentContainer.push({
 				name: "cs.default.ide.display",
 				description: "Shows a text in a display.",
 				inputs: [{

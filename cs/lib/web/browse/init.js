@@ -29,7 +29,7 @@ dojo.require("cs.lib.web.browse.Util");
 	/**
 	 * Open a page in an iframe
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.browse.open",
 		description : "This module opens a page in a iframe",
 		inputs : 
@@ -87,7 +87,7 @@ dojo.require("cs.lib.web.browse.Util");
 	/**
 	 * Get source code of an iframe
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.browse.source-code",
 		description : "This module returns the code of a frame",
 		inputs : 
@@ -120,7 +120,7 @@ dojo.require("cs.lib.web.browse.Util");
 	/**
 	 * Set first input field of a page
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.browse.fill-form",
 		description : "This module enters a value on the Nth input field of a page",
 		inputs : 
@@ -166,7 +166,7 @@ dojo.require("cs.lib.web.browse.Util");
 	/**
 	 * Button clicked
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.browse.click-button",
 		description : "This module clicks on the Nth button",
 		inputs : 
@@ -243,7 +243,7 @@ dojo.require("cs.lib.web.browse.Util");
 	 * Open a page in a new Tab
 	 */
 	/* NOT YET READY
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.browse.InNewTab",
 		description : "This module opens a page in a new window",
 		inputs : 
@@ -266,7 +266,7 @@ dojo.require("cs.lib.web.browse.Util");
 	/**
 	 * Set first input field of a page
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.browse.print",
 		description : "This module prints it",
 		inputs : 

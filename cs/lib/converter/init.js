@@ -1,7 +1,7 @@
 dojo.provide("cs.lib.converter.init");
 
 // add test module
-csComponentContainer.push({
+cs.componentContainer.push({
 	name : "cs.converter.num2str",
 	description : "TEXT is the converted NUMBER to text",
 	inputs : [
@@ -21,7 +21,7 @@ csComponentContainer.push({
 });
 
 
-csComponentContainer.push({
+cs.componentContainer.push({
 	name : "cs.converter.str2num",
 	description : "This module converts the TEXT to a number NUMBER. If input is not a number, output will be -1",
 	inputs : [

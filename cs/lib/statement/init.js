@@ -5,7 +5,7 @@ dojo.provide("cs.lib.statement.init");
 
 
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.statement.if",
 			description: "If INPUT true it will execute the TRUE block, the FALSE block otherwise",
 			inputs: [{
@@ -39,7 +39,7 @@ dojo.provide("cs.lib.statement.init");
 		});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.statement.for-loop",
 			description: "Loops N times",
 			inputs: [{
@@ -79,7 +79,7 @@ dojo.provide("cs.lib.statement.init");
 			}
 		});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name: "cs.statement.for-each",
 		description: "Loop through COLLECTION and output each time a ELEMENT",
 		inputs: [{
@@ -122,7 +122,7 @@ dojo.provide("cs.lib.statement.init");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name: "cs.statement.util-button",
 		description: "Loops till button pressed",
 		inputs: [],
@@ -160,7 +160,7 @@ dojo.provide("cs.lib.statement.init");
 	
 
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 			name: "cs.statement.sequence",
 			description: "Loops N times",
 			inputs: [],

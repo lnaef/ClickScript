@@ -4,7 +4,7 @@
 
 dojo.provide("cs.lib.logic.init");
 
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.logic.random",
 		description : "This module generates a randoized true and false values ",
 		inputs : 
@@ -22,7 +22,7 @@ dojo.provide("cs.lib.logic.init");
 	});
 
 
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.logic.and",
 		description : "True if BOOLEAN1 and BOOLEAN2 both are true",
 		inputs : 
@@ -47,7 +47,7 @@ dojo.provide("cs.lib.logic.init");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.logic.or",
 		description : "True if BOOLEAN1 or BOOLEAN2 or both of them are true",
 		inputs : 
@@ -72,7 +72,7 @@ dojo.provide("cs.lib.logic.init");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.logic.xor",
 		description : "True if exact one of the two inputs are true",
 		inputs : 
@@ -97,7 +97,7 @@ dojo.provide("cs.lib.logic.init");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.logic.not",
 		description : "The opposit of BOOLEAN1",
 		inputs : 

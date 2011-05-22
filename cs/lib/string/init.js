@@ -1,7 +1,7 @@
 dojo.provide("cs.lib.string.init");
 
 // add test module
-csComponentContainer.push({
+cs.componentContainer.push({
 	name : "cs.string.concat",
 	description : "This module concatenates TEXT1 and TEXT2 to one FULL TEXT.",
 	inputs : [
@@ -26,7 +26,7 @@ csComponentContainer.push({
 });
 
 
-csComponentContainer.push({
+cs.componentContainer.push({
 	name : "cs.string.match",
 	description : "HAS SUBSTRING is true if SEARCH occures in TEXT",
 	inputs : [
@@ -51,7 +51,7 @@ csComponentContainer.push({
 	}
 });
 
-csComponentContainer.push({
+cs.componentContainer.push({
 	name : "cs.string.replace",
 	description : "NEW TEXT is TEXT in which all strings SEARCH have been replaced by REPLACE",
 	inputs : [
@@ -85,7 +85,7 @@ csComponentContainer.push({
 
 				
 				// add test module
-csComponentContainer.push({
+cs.componentContainer.push({
 	name : "cs.string.repeat",
 	description : "This module repeats the TEXT a FACTOR times.",
 	inputs : 

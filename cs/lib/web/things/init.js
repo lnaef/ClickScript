@@ -10,7 +10,7 @@ dojo.provide("cs.lib.web.things.init");
 	/**
 	 * Open a page in an iframe
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.things.switch",
 		description : "switch on or off",
 		inputs : 
@@ -59,7 +59,7 @@ dojo.provide("cs.lib.web.things.init");
 	/**
 	 * Open a page in an iframe
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.things.temperature",
 		description : "get the temperature",
 		inputs : 

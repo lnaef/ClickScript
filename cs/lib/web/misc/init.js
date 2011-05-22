@@ -10,7 +10,7 @@ dojo.provide("cs.lib.web.misc.init");
 	/**
 	 * Open a page in an iframe
 	 */
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.web.misc.download",
 		description : "This module downloads a file from the web",
 		inputs : 

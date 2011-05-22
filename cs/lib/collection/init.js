@@ -5,7 +5,7 @@ dojo.provide("cs.lib.collection.init");
 	
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name: "cs.collection.pipe",
 		description: "RESULT is collection of all incomming ELEMENTSs (at the moment only type numbers)",
 		inputs: [{
@@ -32,7 +32,7 @@ dojo.provide("cs.lib.collection.init");
 		}		
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name: "cs.collection.add",
 		description: "Adds ELEMENT to the COLLECTION",
 		inputs: [{
@@ -64,7 +64,7 @@ dojo.provide("cs.lib.collection.init");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name: "cs.collection.has",
 		description: "True if COLLECTION has ELEMENT",
 		inputs: [{
@@ -90,7 +90,7 @@ dojo.provide("cs.lib.collection.init");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name: "cs.collection.remove",
 		description: "Remove ELEMENT from COLLECTION",
 		inputs: [{

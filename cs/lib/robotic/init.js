@@ -9,7 +9,7 @@ dojo.require("cs.lib.robotic.Util");
 
 	window.roboticUtil = new cs.lib.robotic.Util();
 
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.red-light",
 		description : "Switches red light on if SWITCH is on",
 		inputs : 
@@ -52,7 +52,7 @@ dojo.require("cs.lib.robotic.Util");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.green-light",
 		description : "Switches green light on if SWITCH is on",
 		inputs : 
@@ -90,7 +90,7 @@ dojo.require("cs.lib.robotic.Util");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.blue-light",
 		description : "Switches blue light on if SWITCH is on",
 		inputs : 
@@ -128,7 +128,7 @@ dojo.require("cs.lib.robotic.Util");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.light",
 		description : "Switches light on if SWITCH is on",
 		inputs : 
@@ -167,7 +167,7 @@ dojo.require("cs.lib.robotic.Util");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.heizung",
 		description : "Diese Heizung heitzt den Raum auf die vorgegebene TEMPERATUR (&deg;C) falls der SCHALTER eingeschalten ist",
 		inputs : 
@@ -214,7 +214,7 @@ dojo.require("cs.lib.robotic.Util");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.luefter",
 		description : "Dieser L&uuml;fter k&uuml;hlt den Raum falls der SCHALTER eingeschalten ist",
 		inputs : 
@@ -261,9 +261,9 @@ dojo.require("cs.lib.robotic.Util");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.temperatur",
-		description : "Dieses Temperaturmessgerät gibt die Raum - TEMPERATUR an",
+		description : "Dieses Temperaturmessgerï¿½t gibt die Raum - TEMPERATUR an",
 		inputs : 
 			[],
 		outputs:  
@@ -297,7 +297,7 @@ dojo.require("cs.lib.robotic.Util");
 		}
 	});
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name: "cs.robotic.switch",
 		description: "switch with two states",
 		outputs: [{
@@ -321,9 +321,9 @@ dojo.require("cs.lib.robotic.Util");
 	});
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.auto",
-		description : "Fährt wenn GESCHWINDIGKEIT eingestellt ist. Hat 4 Geschwindigkeitstufen 0, 1, 2 und 3",
+		description : "Fï¿½hrt wenn GESCHWINDIGKEIT eingestellt ist. Hat 4 Geschwindigkeitstufen 0, 1, 2 und 3",
 		inputs : 
 			[{
 				name: "GESCHWINDIGKEIT",
@@ -373,7 +373,7 @@ dojo.require("cs.lib.robotic.Util");
 	
 	
 	
-	csComponentContainer.push({
+	cs.componentContainer.push({
 		name : "cs.robotic.sound",
 		description : "Switches red light on if SWITCH is on. SOUND-NR definds the sound played. 1: car horn, 2: ufo, 3: bandsaw, 4: machine",
 		inputs : 
