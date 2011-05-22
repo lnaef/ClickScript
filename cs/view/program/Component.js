@@ -20,7 +20,7 @@
 		_outputSockets : null,
 		_fieldSockets : null,
 		
-		// top left corner
+		// top left corner of the body of a component!
 		_position : null,
 		
 		_moveable : null,
