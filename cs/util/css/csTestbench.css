@@ -1,0 +1,12 @@
+* {font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
+h1 { margin:20px;}
+#testbench {margin: 20px;}
+
+#playground {
+	height: 1500px; /*same as surface constructor of playground*/
+	width: 600px;
+	border: 1px solid #aaa;
+	-moz-border-radius: 8pt 8pt;
+	
+	margin-left: 20px;
+}

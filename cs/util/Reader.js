@@ -230,7 +230,7 @@
 	});
 	
 	cs.util.defaultReader = {
-		cursorSrc : './lib/dojo/cs/view/util/img/cursor.gif',
+		cursorSrc : cs.config.rootPath + 'view/util/img/cursor.gif',
 		value : "",
 		prefix : ""
 	};

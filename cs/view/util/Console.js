@@ -91,4 +91,4 @@
 		margin: 0
 	};
 	
-	cs.view.util.Console.cursor = "<img src='./lib/dojo/cs/view/util/img/cursor.gif'/>";
+	cs.view.util.Console.cursor = "<img src='"+cs.config.rootPath+"/view/util/img/cursor.gif'/>";

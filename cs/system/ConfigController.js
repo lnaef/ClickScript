@@ -95,7 +95,7 @@
 	 * set dojo debug mode
 	 */
 	dojo.config.isDebug = cs.config.isDojoDebug;
-	dojo.config.debugAtAllCosts = cs.config.isDebugAtAllCosts;
+	dojo.config.debugAtAllCosts = cs.config.isDojoDebugAtAllCosts;
 	
 
 	

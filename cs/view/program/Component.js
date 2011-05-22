@@ -20,6 +20,7 @@
 		_outputSockets : null,
 		_fieldSockets : null,
 		
+		// top left corner
 		_position : null,
 		
 		_moveable : null,
@@ -33,13 +34,13 @@
 		/**
 		 * Creates new shape
 		 * @param {dojox.gfx.Shape|cs.view.utilGroup} a_rawNode
-		 * @param {{x,y}} a_centerPos
+		 * @param {{x,y}} a_position 
 		 * @param {cs.model.program.Component} moduleModel
 		 */
-		constructor : function(a_csViewGroup,a_centerPos,moduleModel){
+		constructor : function(a_csViewGroup,a_position,moduleModel){
 			this._moduleModel = moduleModel;
 			
-			this._position = a_centerPos;
+			this._position = a_position;
 			
 			this.draw();
 					
@@ -78,20 +79,24 @@
 			if(this._image){
 				this._image.moveToFront();
 			}
-			cs.console.writeDebug("Moved Component "+ this.getModel().getUid() + " to the front");
+			cs.console.writeDebug("Moved Element (UID:" + this.getModel().getUid() + ") to the front");
 		},
 		
 		/**
-		 * @todo make this function multi-usable problem that every time new sockets get generated
+		 * TODO: make this function multi-usable problem that every time new sockets get generated
 		 */
+		
 		draw : function(){
 			var dim = this._getDim();
-			
 			var height = this.getModel().isPrimitive() ? 6+cs.view.program.Field.dim.height*Math.max(this.getModel().getOutputSockets().size(),this.getModel().getFieldSockets().size()) : dim.height;
 			var width = this.getModel().isPrimitive() ? 13+cs.view.program.Field.dim.width  : dim.width-2*dim.paddingLeftRight;
+			
+			// correct X value if there is a input socket on the left
+			var correctX = 0;
+			
 			var body = {
-				x: this._position.x - Math.round(dim.width/2)-dim.paddingLeftRight,
-				y: this._position.y - Math.round(dim.height/2),
+				x: this._position.x + correctX,
+				y: this._position.y, 
 				width: width,
 				height: height,
 				r: this.getModel().isPrimitive() ? Math.floor(height/2): dim.roundCorner
@@ -270,8 +275,18 @@
 			
 			this._moveableEvents.push(dojo.connect(moveable,"onMove",this,"onMove"));
 			this._moveableEvents.push(dojo.connect(moveable,"onMoveStop",this,function(mover){
-				dojo.publish("/cs/dnd/ondrop",[this,mover]);
 				//Todo: REMOVE THIS ON DISCONNECT
+				dojo.publish("/cs/dnd/ondrop",[this,mover]);
+
+				// TODO: Problem that this are not the extact positions. Mayby we would have to add also width or something like that
+				var tbb = mover.shape.getTransformedBoundingBox();
+				
+				// coordinates of the group shape with correction of the socket width on the left if available
+				var x = tbb[0].x + cs.view.program.Component.dim.getCorrectX(this.getModel());
+				var y = tbb[0].y;
+
+				cs.console.writeDebug("Moved Element (UID:" + this.getModel().getUid() + ") to position x: " + x + ", y: " + y);
+				this._moduleModel.setPositionProg(x,y);
 			}));
 		},
 		
@@ -328,5 +343,8 @@
 					path : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/delete.png",
 					width: 16,
 					height: 16
+				},
+				getCorrectX : function(a_componentModel){
+					return (a_componentModel.getInputSockets().size() > 0 ? Math.round(cs.view.program.Socket.dim.width/2) + cs.view.program.Socket.dim.stroke.width : 0);
 				}
 				};

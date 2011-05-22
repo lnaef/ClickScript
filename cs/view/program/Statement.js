@@ -28,7 +28,8 @@
 
 			this.getModel().getBlocks().forEach(function(blockModel,index){
 				//@todo something not proper with x
-				var block = new cs.view.program.Block(this, {x:this._position.x + Math.round(dim.width/2) - 3*dim.paddingLeftRight, y: this._position.y -Math.round(dim.height/2) + index * cs.view.program.Block.dim.defaultHeight},blockModel);
+				//var block = new cs.view.program.Block(this, {x:this._position.x + Math.round(dim.width/2) - 3*dim.paddingLeftRight, y: this._position.y -Math.round(dim.height/2) + index * cs.view.program.Block.dim.defaultHeight},blockModel);
+				var block = new cs.view.program.Block(this, {x:this._position.x, y: this._position.y + index * cs.view.program.Block.dim.defaultHeight},blockModel);
 				
 				// add shape
 				this.add(block);

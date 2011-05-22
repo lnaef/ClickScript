@@ -69,9 +69,14 @@
 		draw: function(){
 			var dim = this._getDim();
 			
+			var statement = this._blockModel.getOwner();
+			
+			// width of component-box
+			var correctX = cs.view.program.Block.dim.getCorrectX(statement);
+			
 			// block rect
 			this.blockShape = this.createRect({
-				x : this._position.x,
+				x : this._position.x + correctX,
 				y : this._position.y,
 				width : dim.defaultWidth,
 				height : dim.defaultHeight,
@@ -80,7 +85,7 @@
 			
 			// block name
 			this.createText({					
-					x: this._position.x + dim.plus.width + dim.minus.width + 12,
+					x: this._position.x + dim.plus.width + dim.minus.width + 12 + correctX,
 					y: this._position.y + 17,
 					text: this.getModel().getMetaData().getName(),
 					align: "left"}).setFont(dim.font.style).setFill(dim.font.fill);
@@ -91,14 +96,14 @@
 				src:  dim.plus.path,
 				width: dim.plus.width,
 				height: dim.plus.height,
-				x : this._position.x + dim.scale.x,
+				x : this._position.x + dim.scale.x + correctX,
 				y : this._position.y + dim.scale.y
 			});
 			var scaleDown = this.getShape().createImage({
 				src:  dim.minus.path,
 				width: dim.minus.width,
 				height: dim.minus.height,
-				x: this._position.x + dim.scale.x + dim.plus.width + 2,
+				x: this._position.x + dim.scale.x + dim.plus.width + 2 + correctX,
 				y: this._position.y + dim.scale.y
 			});
 				
@@ -196,5 +201,8 @@
 						path : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/minus.png",
 						width: 16,
 						height: 16
+					},
+					getCorrectX : function(a_componentModel){
+						return a_componentModel.isPrimitive() ? 13+cs.view.program.Field.dim.width  : cs.view.program.Component.dim.width-2*cs.view.program.Component.dim.paddingLeftRight;
 					}
 				};

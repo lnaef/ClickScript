@@ -88,9 +88,6 @@
 				white-space: pre;
 			}
 			
-			#csEasyConsole pre * {
-			}
-			
 			#csTutorial, #csExercise, #csConsole{
 				background-color: #999;
 				/*border: 2px solid white;*/
