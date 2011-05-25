@@ -11,6 +11,9 @@
 		onDeleteWire : function(){},
 		onDeleteComponent : function(){},
 		onUpdateFieldSocket : function(){},
+		onUpdatePositionProg : function(){},
+		onUpdatePositionExec : function(){},
+		onUpdateBlockDimension : function(){},
 		onMoveComponentToBlock : function(){},
 		onFocusComponent : function(){},
 		onBlurComponent : function(){}	

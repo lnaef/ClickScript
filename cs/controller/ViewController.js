@@ -161,7 +161,7 @@
 						// because if a shape inside the group is larger than the group it won't take the
 						// border of the inner element >
 						//if(this.isBoundingBoxInside(block.getShape().getTransformedBoundingBox(),componentBB)){
-						if(this.isBoundingBoxInside(block.blockShape.getTransformedBoundingBox(),componentBB)){
+						if(this.isBoundingBoxInside(block.getBlockShape().getTransformedBoundingBox(),componentBB)){
 							// select the one which is the block on the top!
 							moveToBlock = block;
 						}
@@ -373,6 +373,11 @@
 		
 		onUpdatePositionExec : function(a_module, a_x, a_y){
 
+		},
+		
+		onUpdateBlockDimension : function(a_module){
+			console.log("dimension of UID"+a_module.getOwner().getUid());
+			this._getComponentShape(a_module.getOwner()).resizeBlocks();
 		},
 		
 		onUpdateData : function(a_module, a_data){

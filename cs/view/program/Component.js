@@ -92,7 +92,7 @@
 			var width = this.getModel().isPrimitive() ? 13+cs.view.program.Field.dim.width  : dim.width-2*dim.paddingLeftRight;
 			
 			// correct X value if there is a input socket on the left
-			var correctX = 0;
+			var correctX = cs.view.program.Component.dim.getCorrectX(this.getModel());
 			
 			var body = {
 				x: this._position.x + correctX,
@@ -282,11 +282,12 @@
 				var tbb = mover.shape.getTransformedBoundingBox();
 				
 				// coordinates of the group shape with correction of the socket width on the left if available
-				var x = tbb[0].x + cs.view.program.Component.dim.getCorrectX(this.getModel());
+				var x = tbb[0].x; //+ cs.view.program.Component.dim.getCorrectX(this.getModel());
 				var y = tbb[0].y;
 
 				cs.console.writeDebug("Moved Element (UID:" + this.getModel().getUid() + ") to position x: " + x + ", y: " + y);
-				this._moduleModel.setPositionProg(x,y);
+				//this._moduleModel.setPositionProg(x,y);
+				cs.modelController.updatePositionProg(this.getModel(),x,y);
 			}));
 		},
 		

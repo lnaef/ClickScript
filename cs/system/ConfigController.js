@@ -60,6 +60,18 @@
  		 */
  		library : {
  			defaultStyle : 3 // 1 (small icons), 2, 3 (big icons, name)
+ 		},
+ 		
+ 		util : {
+ 			doPoint : function(a_x,a_y){
+				cs.viewController.getSurface().createRect({
+					x : a_x-2,
+					y : a_y-2,
+					width : 4,
+					height : 4,
+					r : 1
+				}).setFill(cs.view.program.Block.dim.fill).setStroke(cs.view.program.Block.dim.stroke);
+			}
  		}
  		
 	};		

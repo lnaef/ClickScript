@@ -13,6 +13,7 @@
 	dojo.require("cs.util._base");
 	dojo.require("cs.util.Container");
 
+
 	dojo.declare("cs.model.program.Block", null, {
 		
 		/**
@@ -34,12 +35,20 @@
 		
 		_metadata : null,
 		
+		/**
+		 * Dimension of the block
+		 * {width, height}
+		 */
+		_dimension : null,
+		
 		constructor : function(a_metaBlock, a_ownerStatement){
 			this._metadata = a_metaBlock;
 			this._owner = a_ownerStatement;
 			
 			this._componentContainer = new cs.util.Container();
 			this._blockContainer = new cs.util.Container();	
+			
+			this.setDimension({width:cs.model.program.Block.dim.width , height:cs.model.program.Block.dim.height});
 		},
 		
 		
@@ -139,7 +148,7 @@
 			this.getComponentContainer().forEach(function(item){
 				components += item.serialize();
 			});
-			return cs.serializer.serialize("block",null,components);
+			return cs.serializer.serialize("block",{width:this.getDimension().width,height:this.getDimension().height},components);
 		},
 		
 		/**
@@ -148,5 +157,17 @@
 		getComponentContainer : function(){return this._componentContainer;},
 		getBlocks : function(){return this._blockContainer;},
 		getMetaData : function(){return this._metadata;},
-		getOwner : function(){return this._owner;}
+		getOwner : function(){return this._owner;},
+		getDimension : function(){return this._dimension;},
+		
+		/**
+		 * Setters
+		 */
+		setDimension : function(a_dimension){this._dimension = a_dimension;}
 	});
+	
+
+	cs.model.program.Block.dim ={
+		width: 100,
+		height: 100,
+	};

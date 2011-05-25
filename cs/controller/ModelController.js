@@ -115,11 +115,19 @@
 		
 		updatePositionProg : function(a_module, a_x, a_y){
 			a_module.setPositionProg(a_x,a_y);
+			this.onUpdatePositionProg(a_module);
 		},
 		
 		updatePositionExec : function(a_module, a_x, a_y){
 			a_module.setPositionExec(a_x,a_y);
+			this.onUpdatePositionExec(a_module);
 		},
+		
+		updateBlockDimension : function(a_block, a_dimension){
+			a_block.setDimension(a_dimension);
+			this.onUpdateBlockDimension(a_block);
+		},
+		
 		
 		focusComponent : function(a_model_component){
 			this.onFocusComponent(a_model_component);
@@ -134,8 +142,7 @@
 		},
 		
 		serializeScript : function(){
-			var serializedComponents = this._rootStatement.serialize();
-			return serializedComponents;
+			return cs.serializer.serialize('clickscript',{'version':cs.config.version},this._rootStatement.serialize());
 		},
 		
 		onAddComponent : function(a_model_module){
@@ -158,6 +165,14 @@
 			
 		},
 		
+		onUpdatePositionProg : function(a_model){
+			
+		},
+		
+		onUpdatePositionExec : function(a_model){
+			
+		},
+		
 		onMoveComponentToBlock : function(a_model_component, a_model_block){
 			
 		},
@@ -176,6 +191,9 @@
 			dojo.connect(this,"onDeleteWire",a_observer,"onDeleteWire");
 			dojo.connect(this,"onDeleteComponent",a_observer,"onDeleteComponent");
 			dojo.connect(this,"onUpdateFieldSocket",a_observer,"onUpdateFieldSocket");
+			dojo.connect(this,"onUpdatePositionProg",a_observer,"onUpdatePositionProg");
+			dojo.connect(this,"onUpdatePositionExec",a_observer,"onUpdatePositionExec");
+			dojo.connect(this,"onUpdateBlockDimension",a_observer,"onUpdateBlockDimension");
 			dojo.connect(this,"onMoveComponentToBlock",a_observer,"onMoveComponentToBlock");
 			dojo.connect(this,"onFocusComponent",a_observer,"onFocusComponent");
 			dojo.connect(this,"onBlurComponent",a_observer,"onBlurComponent");

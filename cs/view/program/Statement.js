@@ -23,13 +23,15 @@
 		 */
 		drawBlocks : function(){
 			var dim = this._getDim();
-			
+			var currentY = 0;
 			
 
 			this.getModel().getBlocks().forEach(function(blockModel,index){
-				//@todo something not proper with x
-				//var block = new cs.view.program.Block(this, {x:this._position.x + Math.round(dim.width/2) - 3*dim.paddingLeftRight, y: this._position.y -Math.round(dim.height/2) + index * cs.view.program.Block.dim.defaultHeight},blockModel);
-				var block = new cs.view.program.Block(this, {x:this._position.x, y: this._position.y + index * cs.view.program.Block.dim.defaultHeight},blockModel);
+				
+				var block = new cs.view.program.Block(this, {x:this._position.x+cs.view.program.Block.dim.getCorrectX(blockModel.getOwner()), y: this._position.y + currentY},blockModel);
+				
+				// Y of the next Block has to be placed one Block down
+				currentY += blockModel.getDimension().height;
 				
 				// add shape
 				this.add(block);
@@ -39,6 +41,22 @@
 				
 				// add socket to input container		
 				this._blocks.add(block);
+			},this);
+		},
+		
+		resizeBlocks : function(){
+			var currentY = 0;
+			debugger;
+			var correctX = cs.view.program.Block.dim.getCorrectX(this.getModel());
+			var posX = 0;
+			var poxY = 0;
+			this._blocks.forEach(function(blockView,index){
+				var dimension = blockView.getModel().getDimension();
+				posX = blockView.getModel().getOwner().getPositionProg().x + correctX;
+				posY = blockView.getModel().getOwner().getPositionProg().y + currentY;    
+				console.log("resizeBlocks x,y"+posX+":"+posY);
+				blockView.updateView(posX, posY , dimension.width, dimension.height);
+				currentY += dimension.height;
 			},this);
 		},
 		

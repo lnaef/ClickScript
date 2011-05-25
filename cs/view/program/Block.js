@@ -5,22 +5,42 @@
 	
 	dojo.declare("cs.view.program.Block", cs.view.util.Shape, {
 
+		/**
+		 * {{x,y}} Effective Coords of the block
+		 * 
+		 */
 		_position : null,
 		
+		/**
+		 * {cs.model.program.block} the model of this block
+		 */
 		_blockModel : null,
 		
-		_containedComponents : null,
-		
-		/* scale block with */
-		_scale : 1,
-		
 		/* shape of the rect */
-		blockShape : null,
+		_blockShape : null,
 		
+		/* shape of the right bottom corner to resize the block */
+		_resizeShape : null,
+		
+		/* mover of the right bottom corner to resize the block */
+		_resizeMoveable : null,
+		
+		/**
+		 * @param {???} a_csViewGroup : used for constructor 
+		 * @param {???} a_position    : position of this block
+		 * @param {???} a_blockModel  : model of the current block
+		 */
 		constructor : function(a_csViewGroup,a_position, a_blockModel){
+			
+			/**
+			 * Init Object
+			 */
 			this._position = a_position;
 			this._blockModel = a_blockModel;
-			this._containedComponents = new cs.util.Container();
+			
+			/**
+			 * Draw Block
+			 */
 			this.draw();
 			
 			/*
@@ -67,58 +87,72 @@
 		 * @todo make this function multi-usable problem that every time new sockets get generated
 		 */
 		draw: function(){
-			var dim = this._getDim();
-			
-			var statement = this._blockModel.getOwner();
-			
-			// width of component-box
-			var correctX = cs.view.program.Block.dim.getCorrectX(statement);
+			var dim = this._getDim();		
+			var ownerComponent = this._blockModel.getOwner();
 			
 			// block rect
-			this.blockShape = this.createRect({
-				x : this._position.x + correctX,
+			this._blockShape = this.getShape().createRect({
+				x : this._position.x ,
 				y : this._position.y,
-				width : dim.defaultWidth,
-				height : dim.defaultHeight,
+				width : this.getModel().getDimension().width,//dim.defaultWidth
+				height : this.getModel().getDimension().height,//dim.defaultHeight,
 				r : dim.roundCorner
 			}).setFill(dim.fill).setStroke(dim.stroke);
 			
 			// block name
-			this.createText({					
-					x: this._position.x + dim.plus.width + dim.minus.width + 12 + correctX,
+			this.getShape().createText({					
+					x: this._position.x + 12, //+ correctX, //+ dim.plus.width + dim.minus.width
 					y: this._position.y + 17,
 					text: this.getModel().getMetaData().getName(),
 					align: "left"}).setFont(dim.font.style).setFill(dim.font.fill);
 			
-			// scale up and down
-
-			var scaleUp = this.getShape().createImage({
-				src:  dim.plus.path,
-				width: dim.plus.width,
-				height: dim.plus.height,
-				x : this._position.x + dim.scale.x + correctX,
-				y : this._position.y + dim.scale.y
-			});
-			var scaleDown = this.getShape().createImage({
-				src:  dim.minus.path,
-				width: dim.minus.width,
-				height: dim.minus.height,
-				x: this._position.x + dim.scale.x + dim.plus.width + 2 + correctX,
-				y: this._position.y + dim.scale.y
-			});
-				
-				// hotfix : in svg (ff3.5) image is not displayed if attribute fill="none" in svg:image
-				// dojo in setRawNode sets it per default.
-				if (dojox.gfx.renderer == "svg") {
-					scaleUp.rawNode.removeAttribute("fill");
-					scaleDown.rawNode.removeAttribute("fill");
-				}
+			
+			// block resize
+			this._resizeShape = this.getShape().createImage({
+				src:  dim.resize.path,
+				width: dim.resize.width,
+				height: dim.resize.height,
+				x: this._position.x + this.getModel().getDimension().width  - dim.resize.width,// + correctX,
+				y: this._position.y + this.getModel().getDimension().height - dim.resize.width
+			});	
 			
 
-			scaleUp.connect("onclick",this,"scaleUp");
-			scaleDown.connect("onclick",this,"scaleDown");
+			/**
+			 * Initialize resisizer on the bottom right corner of the Block
+			 */
+			/**
+			 * TODO: Mover restrict to certain area
+			 */
+			this._resizeMoveable = new dojox.gfx.Moveable(this._resizeShape);
+			dojo.connect(this._resizeMoveable,"onMove",this,"onResize"); 		//TODO: this._moveableEvents.push(dojo.connect(moveable,"onMoveStop",this,function(mover){ to destroy?!?!
+			
+			dojo.connect(this._resizeMoveable,"onMoveStop",this,function(mover){
+				var dimension = this.onResize(this._resizeMoveable);
+				// TODO: Do call by event!
+		        cs.modelController.updateBlockDimension(this.getModel(),{width:dimension.width, height:dimension.height});
+			});
+
 		},
 		
+
+		
+		onResize : function(mover){
+					
+			/**
+			 * Bounding box of the mover icon
+			 */
+			var moverTbb = mover.shape.getTransformedBoundingBox();
+			
+			/**
+			 * Reset the bounding Box
+			 */
+			var blockShape = this.getBlockShape();
+	        var blockShapeTbb = blockShape.getTransformedBoundingBox();
+	        blockShape.width =  moverTbb[2].x - blockShapeTbb[0].x; // just add 1 to see it move
+	        blockShape.height = moverTbb[2].y - blockShapeTbb[0].y;
+	        this.getBlockShape().setShape(blockShape);	
+	        return {width: blockShape.width, height: blockShape.height};		
+		},
 		getModel : function(){
 			return this._blockModel;
 		},
@@ -133,40 +167,58 @@
 			
 		},
 		
-		scaleUp : function(){
-			console.log("scale up");
-			/*
-			this._scale += 0.3;	
-			this.blockShape.setTransform([dojox.gfx.matrix.scaleAt(this._scale,this.blockShape.shape.x,this.blockShape.shape.y)]);
-			this.blockShape.setStroke(cs.view.program.Block.dim.stroke);
-			*/
+		/**
+		 * Resize the block-shape (also used in statement shape)
+		 */
+		updateView : function(a_x, a_y, a_width, a_height){
 			
-			// �bernehmen f�r scale down!
-			this._scale += 0.3;	
-	        var shape = this.blockShape.getShape(); // get the shape
-	        shape.width = Math.round(this._getDim().defaultWidth*this._scale); // just add 1 to see it move
-	        shape.height =Math.round(this._getDim().defaultHeight*this._scale);
-	        this.blockShape.setShape(shape); 
+			// Position in the model
+			this._position.x = a_x;
+			this._position.y = a_y;
+			
+			// get component
+			var statement = this._blockModel.getOwner();
+
+			/**
+			 * Move the whole Block (incl. Text and pictures) to the new position (a_x, a_y)
+			 * The distance to move is the new position - the old position
+			 * The old position we get with the transformed boundry box
+			 */			
+			var tbb = this.getShape().getTransformedBoundingBox();
+			var deltaX = a_x - tbb[0].x;
+			var deltaY = a_y - tbb[0].y;
+			this.getShape().applyTransform({dx: deltaX, dy: deltaY});
+
+			/**
+			 * Resize only the Block element
+			 */
+			var blockShape = this.getBlockShape();
+	        blockShape.width = a_width; // just add 1 to see it move
+	        blockShape.height =a_height;
+	        this._blockShape.setShape(blockShape);
+	        
+			/** 
+			 * SCALE would be possible but also stroke is scaled
+			 *//*
+	        var blockShapeTbb = this.getBlockShape().getTransformedBoundingBox();
+	        var scaleX = a_width / (blockShapeTbb[1].x-blockShapeTbb[0].x);          
+	        var scaleY = a_height / (blockShapeTbb[2].y-blockShapeTbb[0].y); 
+	        this.getBlockShape().applyTransform({xx:scaleX, yy:scaleY, dx: -(scaleX-1)*blockShapeTbb[0].x, dy: -(scaleY-1)*blockShapeTbb[0].y});
+	        */
 		},
 		
-		scaleDown : function(){
-			console.log("scale down" + this._scale);
-			if(this._scale > 0.4){
-				this._scale -= 0.3;}
-	        var shape = this.blockShape.getShape(); // get the shape
-	        shape.width = Math.round(this._getDim().defaultWidth*this._scale); // just add 1 to see it move
-	        shape.height =Math.round(this._getDim().defaultHeight*this._scale);
-	        this.blockShape.setShape(shape);			
-			//this.blockShape.setTransform([dojox.gfx.matrix.scaleAt(this._scale,this.blockShape.shape.x,this.blockShape.shape.y)]);
-			//this.blockShape.setStroke(cs.view.program.Block.dim.stroke);
-		},
 		
 		/**
 		 * Todo: Needed, could be moved to Shape.js
 		 */
 		moveToFront : function(){
 			
-		}
+		},
+		
+		/**
+		 * getter
+		 */
+		getBlockShape : function() {return this._blockShape;}
 
 	});
 	
@@ -202,7 +254,18 @@
 						width: 16,
 						height: 16
 					},
+					resize: { // icon
+						path : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ) + "util/images/resize.png",
+						width: 16,
+						height: 16
+					},
 					getCorrectX : function(a_componentModel){
-						return a_componentModel.isPrimitive() ? 13+cs.view.program.Field.dim.width  : cs.view.program.Component.dim.width-2*cs.view.program.Component.dim.paddingLeftRight;
+						
+						// correctX of a Component (cause of the input-sockets)
+						var correctX =  cs.view.program.Component.dim.getCorrectX(a_componentModel);
+						
+						// correctX because of the body of the component
+						    correctX += a_componentModel.isPrimitive() ? 13+cs.view.program.Field.dim.width  : cs.view.program.Component.dim.width-2*cs.view.program.Component.dim.paddingLeftRight;
+						return correctX; 
 					}
 				};

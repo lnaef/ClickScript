@@ -81,7 +81,19 @@ doh.register("cs.util.tests.model.program.testBlock", [
 		block.removeBlock(childBlock1);
 		doh.f(block.hasBlock(childBlock1));		
 		doh.is(0,block.getBlocks().size());
+	},
+	
+	function blockCheckDimension(){
+		var block = new cs.model.program.Block();
+		block.setDimension({width:12,height:13});
+		doh.is(12,block.getDimension().width);
+		doh.is(13,block.getDimension().height);
+	},
+	
+	function blockDefaultSize(){
+		var block = new cs.model.program.Block();
+		doh.is(cs.model.program.Block.dim.width, block.getDimension().width);	
+		doh.is(cs.model.program.Block.dim.height, block.getDimension().height);
 	}
-
 	
 ]);
