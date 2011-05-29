@@ -37,7 +37,7 @@
 			this._observers = new cs.util.Container();
 		},
 		
-		addComponent : function(a_component_type_name, a_x, a_y){
+		addComponent : function(a_component_type_name, a_position_program, a_position_exec){
 			/*
 			 * TODO put module to the right subblock
 			 */
@@ -50,7 +50,11 @@
 				throw Error("Unknown component: '" + a_component_type_name +"'");
 			}
 
-			component.setPositionProg(a_x,a_y);
+			component.setPositionProg(a_position_program.x,a_position_program.y);
+			if(component.getMetaData().hasView()){
+				component.setPositionExec(a_position_exec.x,a_position_exec.y);
+			}
+			
 			this._rootBlock.addComponent(component);
 			
 			console.log("MODEL-CONTROLLER: Added Component of type: "+a_component_type_name);

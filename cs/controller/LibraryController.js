@@ -362,7 +362,7 @@
 		
 		
 		onClickLibButton : function(a_name,e){
-				cs.modelController.addComponent(a_name,200+Math.round(Math.random()*40),200+Math.round(Math.random()*40));
+				cs.modelController.addComponent(a_name,{x:200+Math.round(Math.random()*40),y:200+Math.round(Math.random()*40)},{x:0,y:0});
 		},
 		
 		onMouseDownLibButton : function(a_name,e){

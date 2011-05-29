@@ -54,7 +54,7 @@
 				 */
 				var component = null;
   				if (type != "cs.statement.program"){
-					component = cs.modelController.addComponent(type,coordProgX,coordProgY);
+					component = cs.modelController.addComponent(type,{x:coordProgX,y:coordProgY},{x:coordExecX,y:coordExecY});
 					cs.modelController.moveComponentToBlock(component,blockMap.get(parentBlock));
 				} else {
 					component = cs.modelController.getRootStatement();
@@ -87,16 +87,18 @@
 						 * Depending on the fieldtype we have to parse the value first.
 						 * Get the fieldtype first.
 						 */
-						switch(cs.library.getMetaComponent(type).getField(index).getType().getName()){
-							case "cs.type.Number": 
-								cs.modelController.updateFieldSocket(component.getFieldSocket(index),parseFloat(value));
-								break;
-							case "cs.type.Boolean": 
-								cs.modelController.updateFieldSocket(component.getFieldSocket(index),(value == "true" || value == "1"));
-								break;
-							default:
-								cs.modelController.updateFieldSocket(component.getFieldSocket(index),value);
-						};
+						if(value){
+							switch(cs.library.getMetaComponent(type).getField(index).getType().getName()){
+								case "cs.type.Number": 
+									cs.modelController.updateFieldSocket(component.getFieldSocket(index),parseFloat(value));
+									break;
+								case "cs.type.Boolean": 
+									cs.modelController.updateFieldSocket(component.getFieldSocket(index),(value == "true" || value == "1"));
+									break;
+								default:
+									cs.modelController.updateFieldSocket(component.getFieldSocket(index),value);
+							};
+						}
 					});
 				}					
 				

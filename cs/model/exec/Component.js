@@ -66,7 +66,7 @@
 			},this);
 			
 			if(this.hasView()){
-				this._view = cs.executionViewController.addComponent(this._model.getMetaData().getView());
+				this._view = cs.executionViewController.addComponent(this._model);
 			}
 			
 		},
@@ -286,5 +286,6 @@
 		getOutputs : function(){return this._outputs;},
 		getFields : function(){return this._fields;},
 		getView : function(){return this._view;},
-		hasView : function(){return this._model.getMetaData().hasView();}
+		hasView : function(){return this._model.getMetaData().hasView();},
+		getModel : function() {return this._model;}
 	});

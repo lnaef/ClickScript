@@ -67,10 +67,11 @@
  		 * creates a execution view component from meta data and add's a_component to the execution view
  		 * @returns cs.view.exec.Component 
  		 */
- 		addComponent : function(a_meta_view_component){
+ 		addComponent : function(a_component_program_model){
+
  			
  			// create new execution view component from meta view component
- 			var viewComponent = new cs.view.exec.Component(a_meta_view_component,this._playground);
+ 			var viewComponent = new cs.view.exec.Component(a_component_program_model,this._playground);
  
  			
  			// add view component to components container

@@ -14,7 +14,7 @@
 		
 		function addComponent(){
 			var controller = new cs.controller.ModelController();
-			controller.addComponent("cs.module.string.concat",200,100);
+			controller.addComponent("cs.module.string.concat",{x:200,y:100});
 			
 			var module = controller._rootStatement.getBlock(0).getComponentContainer().get(0);			
 			doh.is("cs.module.string.concat",module.getMetaData().getName());
