@@ -41,7 +41,9 @@
 			'		<div id="csConsole"></div>'+
 			'		<div id="csTutorial"></div>'+
 			'		<div id="csExercise"></div>'+			
-			'       <div id="csTestInput">Testinput<textarea id="csTestTextarea"></textarea></div>'+
+			'       <div id="csTestInput">Testinput<textarea id="csTestTextarea" style="width:800px;height:300px;font-size:7pt"></textarea></div>' + 
+			'		<button onclick="cs.global.scriptPlayer.run();">run</button>' +
+			'		<button onclick="dojo.byId(\'csTestTextarea\').innerHTML=cs.modelController.serializeScript();">serialize</button>'+
 			'		<div id="footer">'+
 			'			&copy; 2011 powered by lukas naef - contact\'at\'clickscript.ch - <a href="http://clickscript.ch">www.clickscript.ch</a>'+
 			'		</div>'
@@ -194,7 +196,7 @@
 			out += "	<input onclick='cs.executionController.run();' type=\"button\" value=\"Run\"/>";
 			out += "	<input onclick='cs.executionController.repeatedRun();' type=\"button\" value=\"Repeated Run\"/>";
 			out += "	<input onclick='cs.executionController.stop();' type=\"button\" value=\"Stop\"/>";
-			out += "	<input onclick='cs.console.write(cs.modelController.serializeScript());' type=\"button\" value=\"Serialize\"/>"+
+			out += "	<input onclick='dojo.byId(\"csTestTextarea\").innerHTML=cs.modelController.serializeScript());' type=\"button\" value=\"Serialize\"/>"+
 					"	<span id='runCounter'>0</span>"+
 					"	<span class='actionLabel'> status: </span>"+
 					"	<span id='csState'>" +

@@ -274,21 +274,30 @@
 			this._moveable = moveable;
 			
 			this._moveableEvents.push(dojo.connect(moveable,"onMove",this,"onMove"));
-			this._moveableEvents.push(dojo.connect(moveable,"onMoveStop",this,function(mover){
+			
+			//test propagating also onMoveStop event
+			this._moveableEvents.push(dojo.connect(moveable,"onMoveStop",this,"onMoveStop"));
+			
+		},
+
+		onMoveStop : function(mover){
+				
+				
+
 				//Todo: REMOVE THIS ON DISCONNECT
 				dojo.publish("/cs/dnd/ondrop",[this,mover]);
 
-				// TODO: Problem that this are not the extact positions. Mayby we would have to add also width or something like that
-				var tbb = mover.shape.getTransformedBoundingBox();
+				var tbb = this.getShape().getTransformedBoundingBox();
 				
-				// coordinates of the group shape with correction of the socket width on the left if available
-				var x = tbb[0].x; //+ cs.view.program.Component.dim.getCorrectX(this.getModel());
+				// coordinates of the group shape
+				var x = tbb[0].x; 
 				var y = tbb[0].y;
 
 				cs.console.writeDebug("Moved Element (UID:" + this.getModel().getUid() + ") to position x: " + x + ", y: " + y);
-				//this._moduleModel.setPositionProg(x,y);
+				
+				// update model position
 				cs.modelController.updatePositionProg(this.getModel(),x,y);
-			}));
+			
 		},
 		
 		_consParentBlock : null,
@@ -298,10 +307,12 @@
 				dojo.forEach(this._consParentBlock,dojo.disconnect);
 				this._consParentBlock = null;
 			}
+			debugger;
 			this._consParentBlock = [];
 			this._consParentBlock.push(dojo.connect(a_block,"moveToFront",this,"moveToFront"));
 			this._consParentBlock.push(dojo.connect(a_block,"onMove",this,"onMove"));
 			this._consParentBlock.push(dojo.connect(a_block,"onMove",this._moveable,"onMove"));
+			this._consParentBlock.push(dojo.connect(a_block,"onMoveStop",this._moveable,"onMoveStop"));
 		},
 		
 		/**

@@ -45,19 +45,39 @@
 		},
 		
 		resizeBlocks : function(){
+			
+			/** 
+			 * Each Blocks Y-Coordinate has to be changed according to the blocks before (adding the block heihgts)
+			 */
 			var currentY = 0;
+			
+			/**
+			 * Correction to the right because of the Component body (grey block and input sockets)
+			 */
 			var correctX = cs.view.program.Block.dim.getCorrectX(this.getModel());
+			
 			var posX = 0;
 			var poxY = 0;
 			this._blocks.forEach(function(blockView,index){
 				var dimension = blockView.getModel().getDimension();
 				posX = blockView.getModel().getOwner().getPositionProg().x + correctX;
 				posY = blockView.getModel().getOwner().getPositionProg().y + currentY;    
-				console.log("resizeBlocks x,y"+posX+":"+posY);
+				console.log("resizeBlocks x,y "+posX+":"+posY);
 				blockView.updateView(posX, posY , dimension.width, dimension.height);
 				currentY += dimension.height;
 			},this);
 		},
+		/**
+		updatePosition : function(a_x,a_y){
+			
+			 * Call method in superclass (cs.view.Component)
+			
+			this.getBlocks().forEach(function(blockShape,index){
+				blockShape.getComponentContainer().forEach(function(componentShape,index){
+					console.log('now');
+				});
+			});
+		}, */
 		
 		getBlocks : function(){
 			return this._blocks;

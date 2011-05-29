@@ -41,6 +41,7 @@
 			/*
 			 * TODO put module to the right subblock
 			 */
+
 			if(cs.library.hasStatement(a_component_type_name)){
 				var component = cs.library.getNewStatement(a_component_type_name);	
 			} else if(cs.library.hasModule(a_component_type_name)){
@@ -51,6 +52,8 @@
 
 			component.setPositionProg(a_x,a_y);
 			this._rootBlock.addComponent(component);
+			
+			console.log("MODEL-CONTROLLER: Added Component of type: "+a_component_type_name);
 			this.onAddComponent(component);
 			return component;
 		},
@@ -126,8 +129,7 @@
 		updateBlockDimension : function(a_block, a_dimension){
 			a_block.setDimension(a_dimension);
 			this.onUpdateBlockDimension(a_block);
-		},
-		
+		},		
 		
 		focusComponent : function(a_model_component){
 			this.onFocusComponent(a_model_component);

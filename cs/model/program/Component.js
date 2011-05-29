@@ -88,6 +88,9 @@
 		isModule : function(){
 			return this._metadata.isModule();
 		},
+		isProgram: function(){
+			return this._metadata.isProgram();
+		},
 		
 		
 		setPositionProg : function(x,y){
@@ -164,8 +167,8 @@
 			
 			// Exec-View Coords
 			if (this.getMetaData().hasView()){
-				attibutes['coord-exec-x'] = this.getPositionExec().x,
-				attibutes['coord-exec-y'] = this.getPositionExec().y		
+				attributes['coord-exec-x'] = this.getPositionExec().x,
+				attributes['coord-exec-y'] = this.getPositionExec().y		
 			}
 			
 			// if there is a parent Block, set parent uid

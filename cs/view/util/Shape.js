@@ -51,6 +51,7 @@
 				
 				//todo : disconnect - ie memory leaks
 				dojo.connect(this,"onMove",a_shape,"onMove");
+				dojo.connect(this,"onMoveStop",a_shape,"onMoveStop");
 				
 				
 				//update the bounding Box of this shape
@@ -146,6 +147,10 @@
 		 */
 		onMove : function(){
 			// to be overwritten by sublcasses
+		},
+		
+		onMoveStop : function(){
+			// to be overwritten by subclasses
 		},
 		
 		/**

@@ -113,7 +113,7 @@
 				width : dim.resize.width,
 				height: dim.resize.height,
 				x: this._position.x + this.getModel().getDimension().width  - dim.resize.width,// + correctX,
-				y: this._position.y + this.getModel().getDimension().height - dim.resize.width
+				y: this._position.y + this.getModel().getDimension().height - dim.resize.height
 			});	
 			
 
@@ -186,6 +186,16 @@
 			var deltaY = a_y - tbb[0].y;
 			this.getShape().applyTransform({dx: deltaX, dy: deltaY});
 
+			/**
+			 * Because of changing the size directly on modelController level we also 
+			 * have to change the position of the resize-Icon on the bottom right corner.
+			 */
+			var tbbResizeShape = this._resizeShape.getTransformedBoundingBox();
+			var deltaXResizeShape = a_x + a_width  - cs.view.program.Block.dim.resize.width - tbbResizeShape[0].x;
+			var deltaYResizeShape = a_y + a_height - cs.view.program.Block.dim.resize.height - tbbResizeShape[0].y;
+			this._resizeShape.applyTransform({dx: deltaXResizeShape, dy: deltaYResizeShape});			
+			
+			
 			/**
 			 * We have to move each component. Inside the block
 			 */

@@ -32,82 +32,101 @@
 			var test = dojo.query("component",clickscriptAsDom).forEach(function(componentNode, index, arr){
 			      
   				var type = dojo.attr(componentNode,"type");
-  				if (type != "cs.statement.program"){
+
 	
-					/**
-					 * Place this attibute-keys to a seperate class
-					 */
-					// attributes on component level
-					var uid = parseInt(dojo.attr(componentNode,"uid"));
-					var parentBlock = dojo.attr(componentNode,"_reference-parent");
-					
-					var componentType = dojo.attr(componentNode, "component-type");
-					var coordProgX = parseFloat(dojo.attr(componentNode,"coord-prog-x"));
-					var coordProgY = parseFloat(dojo.attr(componentNode,"coord-prog-y"));
-					var coordExecX = parseFloat(dojo.attr(componentNode,"coord-exec-x"));
-					var coordExecY = parseFloat(dojo.attr(componentNode,"coord-exec-y"));
-					
-					console.log("Play Component: "+dojo.attr(componentNode,"uid")+" [ uid: "+uid+", type: "+type+"]");
-					
-					/*
-					 * ADD NEW COMPONENT TO THE MODEL
-					 */
-					var component = cs.modelController.addComponent(type,coordProgX,coordProgY);
-					
-					// Input sockets
-					var inputSockets = dojo.query("inputs > socket",componentNode);
-					if(inputSockets){
-						inputSockets.forEach(function(socket,index){
-							socketMap.put(dojo.attr(socket,"uid"),component.getInputSocket(index));
-						});
-					}
-					
-					// Output sockets
-					var outputSockets = dojo.query("outputs > socket",componentNode);
-					if(outputSockets){
-						outputSockets.forEach(function(socket,index){
-							socketMap.put(dojo.attr(socket,"uid"),component.getOutputSocket(index));
-						});
-					}
-					
-					// Field sockets
-					var fieldSockets = dojo.query("fields > field",componentNode);
-					if(fieldSockets){
-						fieldSockets.forEach(function(socket,index){
-							socketMap.put(dojo.attr(socket,"uid"),component.getFieldSocket(index));
-							var value = dojo.attr(socket,"value");
-							
-							/**
-							 * Depending on the fieldtype we have to parse the value first.
-							 * Get the fieldtype first.
-							 */
-							switch(cs.library.getMetaComponent(type).getField(index).getType()){
-								case "cs.type.Number": 
-									component.getFieldSocket(index).setValue(parseFloat(value));
-									break;
-								case "cs.type.Boolean": 
-									component.getFieldSocket(index).setValue(value == "true" || value == "1");
-									break;
-								default:
-									component.getFieldSocket(index).setValue(value);
-							};
-						});
-					}					
-					
-					// blocks
-					var blocks = dojo.query("block",componentNode);
-					if(blocks){
-						blocks.forEach(function(block,index){
-							component.getBlock(index).setDimension({width: dojo.attr(block,"width"), height: dojo.attr(block,"height") });
-							blockMap.put(dojo.attr(block,"uid"),component.getBlock(index));	
-						});
-					}
+				/**
+				 * Place this attibute-keys to a seperate class
+				 */
+				// attributes on component level
+				var uid = parseInt(dojo.attr(componentNode,"uid"));
+				var parentBlock = dojo.attr(componentNode,"_reference-parent");
 				
-				      
-				    // Set Component at the right position
-				    // Resize Blocks if Statement
-			   		//TODO: TESTSCRIPT for Import
-			   }
+				var componentType = dojo.attr(componentNode, "component-type");
+				var coordProgX = parseFloat(dojo.attr(componentNode,"coord-prog-x"));
+				var coordProgY = parseFloat(dojo.attr(componentNode,"coord-prog-y"));
+				var coordExecX = parseFloat(dojo.attr(componentNode,"coord-exec-x"));
+				var coordExecY = parseFloat(dojo.attr(componentNode,"coord-exec-y"));
+				
+				console.log("Play Component: "+dojo.attr(componentNode,"uid")+" [ uid: "+uid+", type: "+type+"]");
+				
+				/*
+				 * ADD NEW COMPONENT TO THE MODEL
+				 */
+				var component = null;
+  				if (type != "cs.statement.program"){
+					component = cs.modelController.addComponent(type,coordProgX,coordProgY);
+					cs.modelController.moveComponentToBlock(component,blockMap.get(parentBlock));
+				} else {
+					component = cs.modelController.getRootStatement();
+				}
+				
+				// Input sockets
+				var inputSockets = dojo.query("inputs > socket",componentNode);
+				if(inputSockets){
+					inputSockets.forEach(function(socket,index){
+						socketMap.put(dojo.attr(socket,"uid"),component.getInputSocket(index));
+					});
+				}
+				
+				// Output sockets
+				var outputSockets = dojo.query("outputs > socket",componentNode);
+				if(outputSockets){
+					outputSockets.forEach(function(socket,index){
+						socketMap.put(dojo.attr(socket,"uid"),component.getOutputSocket(index));
+					});
+				}
+				
+				// Field sockets
+				var fieldSockets = dojo.query("fields > field",componentNode);
+				if(fieldSockets){
+					fieldSockets.forEach(function(socket,index){
+						socketMap.put(dojo.attr(socket,"uid"),component.getFieldSocket(index));
+						var value = dojo.attr(socket,"value");
+						
+						/**
+						 * Depending on the fieldtype we have to parse the value first.
+						 * Get the fieldtype first.
+						 */
+						switch(cs.library.getMetaComponent(type).getField(index).getType()){
+							case "cs.type.Number": 
+								component.getFieldSocket(index).setValue(parseFloat(value));
+								break;
+							case "cs.type.Boolean": 
+								component.getFieldSocket(index).setValue(value == "true" || value == "1");
+								break;
+							default:
+								component.getFieldSocket(index).setValue(value);
+						};
+					});
+				}					
+				
+				// blocks
+				var blocks = dojo.query("block",componentNode);
+				if(blocks){
+					blocks.forEach(function(block,index){
+						var blockWidth = parseFloat(dojo.attr(block,"width"));
+						var blockHeight = parseFloat(dojo.attr(block,"height"));
+						var blockUid = dojo.attr(block,"uid");
+						
+						/**
+						 * do not resize the program component!
+						 */
+						debugger;
+						if(!component.isProgram()){
+							cs.modelController.updateBlockDimension(component.getBlock(index),{width: blockWidth, height: blockHeight });
+							console.log("SCRIPT-PLAYER: Resize block "+blockUid+ " to dimension width:"+blockWidth+" height: "+blockHeight);
+						}
+						// put the block to the block map
+						blockMap.put(blockUid, component.getBlock(index));	
+					});
+				}
+			
+			      
+			    // TODO:set execview
+			    // TODO:set parent
+			    // Resize Blocks if Statement
+		   		//TODO: TESTSCRIPT for Import
+
 			});
 			
 			

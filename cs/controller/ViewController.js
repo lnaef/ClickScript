@@ -375,9 +375,9 @@
 
 		},
 		
-		onUpdateBlockDimension : function(a_module){
-			console.log("dimension of UID"+a_module.getOwner().getUid());
-			this._getComponentShape(a_module.getOwner()).resizeBlocks();
+		onUpdateBlockDimension : function(a_blockModel){
+			console.log("dimension of block UID"+a_blockModel.getOwner().getUid());
+			this._getComponentShape(a_blockModel.getOwner()).resizeBlocks();
 		},
 		
 		onUpdateData : function(a_module, a_data){

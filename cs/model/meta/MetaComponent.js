@@ -150,6 +150,10 @@
 			return this._type == cs.model.meta.MetaComponent.TYPE_MODULE;
 		},
 		
+		isProgram : function(){
+			return this._name == "cs.statement.program";
+		},
+		
 		_getMetaSocket : function(a_socket_info,a_mode,a_index){
 			if (cs.util.isDojoObject(a_socket_info)&&cs.util.isTypeOf(a_socket_info, "cs.type.Type")) {
 				return new cs.model.meta.MetaSocket("", a_socket_info, a_mode, a_index);
