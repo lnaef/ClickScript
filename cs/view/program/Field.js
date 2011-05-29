@@ -86,7 +86,10 @@
 			var value = this.getValue()+(this.isSelected()?"<":"");
 			
 			if(!this.isSelected()){
+				// Number of letters to be displayed if not selected
 				var cut = (Math.floor((dim.width-dim.textOffsetX)/dim.letterwidth)<value.length) ? Math.floor((dim.width-dim.textOffsetX)/dim.letterwidth) : value.length;
+				
+				// Only take the first few letters
 				value = value.substring(0,cut);
 			}
 			

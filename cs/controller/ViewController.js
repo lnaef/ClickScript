@@ -355,6 +355,7 @@
 		},
 		
 		onUpdateFieldSocket : function (a_model_value_socket){
+			debugger;
 			var socketshape = this._getSocketShape(a_model_value_socket);
 			socketshape.draw();
 		},

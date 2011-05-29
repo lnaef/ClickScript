@@ -87,15 +87,15 @@
 						 * Depending on the fieldtype we have to parse the value first.
 						 * Get the fieldtype first.
 						 */
-						switch(cs.library.getMetaComponent(type).getField(index).getType()){
+						switch(cs.library.getMetaComponent(type).getField(index).getType().getName()){
 							case "cs.type.Number": 
-								component.getFieldSocket(index).setValue(parseFloat(value));
+								cs.modelController.updateFieldSocket(component.getFieldSocket(index),parseFloat(value));
 								break;
 							case "cs.type.Boolean": 
-								component.getFieldSocket(index).setValue(value == "true" || value == "1");
+								cs.modelController.updateFieldSocket(component.getFieldSocket(index),(value == "true" || value == "1"));
 								break;
 							default:
-								component.getFieldSocket(index).setValue(value);
+								cs.modelController.updateFieldSocket(component.getFieldSocket(index),value);
 						};
 					});
 				}					
