@@ -1,0 +1,50 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    background-color: #ddd;
+}
+ 
+#appLayout {
+    height: 100%;
+}
+
+#rightCol {
+    /*width: 14em;*/
+}
+
+.tabContainerRight {
+	width: 250px;
+	min-width: 20px;
+}
+
+.consolePanel {
+	height: 50px;
+	min-height: 20px;
+}
+
+.footerRow {
+	padding: 8px 0px;
+	font-size: 7pt;
+}
+
+.cs .bottomLeftContainer {
+	border: none;
+}
+
+.cs .leftCol, .cs .bottomLeftContainer, .cs .footerRow {
+	background-color: #eee;
+}
+
+
+
+/* 
+ * one-word-action
+ */
+.left {float: left}
+.right {float: right}
+.clear {clear: both}
+
+
+.dijitLayoutContainer .dijitLayoutContainer {border: none; padding: 0px}

@@ -1,15 +1,15 @@
 /**
  * @author elcc
  * 
- * Class cs.controller.Serializer 
+ * Class cs.system.Serializer 
  * 
  * @description: This is a helper class to serialize an DOM-Element.
- * It also Generates the singleton cs.serializer which is a helper for serialisation
+ * It also Generates the singleton cs.global.serializer which is a helper for serialisation
  */
 	
-	dojo.provide("cs.controller.Serializer");
+	dojo.provide("cs.system.Serializer");
 	
- 	dojo.declare("cs.controller.Serializer", null, {
+ 	dojo.declare("cs.system.Serializer", null, {
 		
 		/**
 		 * Linebreak symbol
@@ -89,7 +89,7 @@
 		}
 	});
 	
-	cs.serializer = new cs.controller.Serializer();
+	cs.global.serializer = new cs.system.Serializer();
 
 	
 	/**

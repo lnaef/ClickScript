@@ -46,7 +46,6 @@
 		
 		resizeBlocks : function(){
 			var currentY = 0;
-			debugger;
 			var correctX = cs.view.program.Block.dim.getCorrectX(this.getModel());
 			var posX = 0;
 			var poxY = 0;

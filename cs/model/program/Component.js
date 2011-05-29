@@ -11,7 +11,7 @@
 	dojo.require("cs.util.Container");
 	dojo.require("cs.model.program.Socket");
 	dojo.require("cs.model.program.Field");
-	dojo.require("cs.controller.Serializer");
+	dojo.require("cs.system.Serializer");
 	
  	dojo.declare("cs.model.program.Component", null, {
 		
@@ -52,7 +52,7 @@
 		 */
 		constructor : function(a_metadata){
 			this._metadata = a_metadata;
-			this.setId(cs.serializer.getUid());
+			this.setId(cs.global.serializer.getUid());
 			this._positionProg = {x:0,y:0},
 			this._positionExec = {x:0,y:0},
 			
@@ -119,29 +119,33 @@
 		 * 
 		 * @param {string} a_additionalData : used for example for Statement on superclass-call
 		 */
-		serialize : function(a_additionalData){
+		serialize : function(/* string */ a_additionalData){
 			
 			var additionalData = a_additionalData || "";
 			var componentType = this.getMetaData().getType();
 			
+			// Component Inputs
 			var input = "";
 			this.getInputSockets().forEach(function(item){
 				input += item.serialize();
 			});
-			input = cs.serializer.serialize("inputs",null,input);
+			input = cs.global.serializer.serialize("inputs",null,input);
 			
+			// Component Outputs
 			var output = "";
 			this.getOutputSockets().forEach(function(item){
 				output += item.serialize();
 			});
-			output = cs.serializer.serialize("outputs",null,output);
+			output = cs.global.serializer.serialize("outputs",null,output);
 			
+			// Component Fields
 			var field = "";
 			this.getFieldSockets().forEach(function(item){
 				field += item.serialize();
 			});
-			field = cs.serializer.serialize("fields",null,field);
+			field = cs.global.serializer.serialize("fields",null,field);
 			
+			// wires of the component
 			var wires = "";
 			this.getOutputSockets().forEach(function(socket){
 				socket.forEachWire(function(wire){
@@ -149,6 +153,7 @@
 				});				
 			});
 			
+			// init attributes
 			var attributes = {
 				'uid':this.getUid(),
 				'component-type':componentType,
@@ -157,13 +162,33 @@
 				'coord-prog-y':this.getPositionProg().y		
 			}
 			
+			// Exec-View Coords
 			if (this.getMetaData().hasView()){
 				attibutes['coord-exec-x'] = this.getPositionExec().x,
 				attibutes['coord-exec-y'] = this.getPositionExec().y		
 			}
 			
+			// if there is a parent Block, set parent uid
+			// this should always be the case except on program level
+			if (this.getParentBlock())
+			{
+				attributes['_reference-parent'] = this.getParentBlock().getUid();
+			}
 			
-			return cs.serializer.serialize("component",attributes,input + output + field + additionalData + wires);
+			// all child components if statement 
+			// TODO evtl. in statement klasse ?
+			var childComponents = "";
+			if (this.isStatement()){
+				this.getBlocks().forEach(function(block){
+					block.getComponentContainer().forEach(function(item){
+						childComponents += item.serialize();
+					});
+				});			
+			}
+			
+			// TODO: additional data not needed any more
+			
+			return cs.global.serializer.serialize("component",attributes,input + output + field + additionalData )+ childComponents + wires;
 		},
 		
 		destroy : function(){

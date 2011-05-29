@@ -36,7 +36,7 @@
 		 * @param {cs.model.program.Component} a_component   parent component
 		 */
 		constructor : function(a_metaSocket, a_component){
-			this._uid = cs.serializer.getUid();
+			this._uid = cs.global.serializer.getUid();
 			this._wires = new cs.util.Container();
 			this._metadata = a_metaSocket;
 			this._component = a_component;
@@ -96,7 +96,7 @@
 		},
 		
 		serialize : function(){
-			return cs.serializer.serialize('socket',{'uid':this.getUid()});
+			return cs.global.serializer.serialize('socket',{'uid':this.getUid()});
 		},
 		
 		/**

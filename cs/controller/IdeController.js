@@ -18,6 +18,7 @@
 	dojo.require("cs.controller.ExecutionViewController");
 	dojo.require("cs.view.util.EasyConsole");
 	dojo.require("cs.view.util.Toggler");
+	dojo.require("cs.system.scriptPlayer");
 	
  	dojo.declare("cs.controller.IdeController", null, {
 		
@@ -40,6 +41,7 @@
 			'		<div id="csConsole"></div>'+
 			'		<div id="csTutorial"></div>'+
 			'		<div id="csExercise"></div>'+			
+			'       <div id="csTestInput">Testinput<textarea id="csTestTextarea"></textarea></div>'+
 			'		<div id="footer">'+
 			'			&copy; 2011 powered by lukas naef - contact\'at\'clickscript.ch - <a href="http://clickscript.ch">www.clickscript.ch</a>'+
 			'		</div>'
@@ -200,7 +202,8 @@
 					"		<span title='STOP...' id='csStateSTOP'  style='display:none' class='csStateIcon'></span>" +
 					"		<span title='WAIT...' id='csStateWAIT'  style='display:none' class='csStateIcon'></span>" +
 					"		<span title='FINISH...' id='csStateFINISH' class='csStateIcon'></span>" +
-					"	</span>";
+					"	</span>" +
+					"   <input onclick='cs.global.scriptPlayer.run();' type=\"button\" value=\"Play Script\"/>";
 			out += "</div>";
 			dojo.place(out,dojo.byId("csActions"));
 

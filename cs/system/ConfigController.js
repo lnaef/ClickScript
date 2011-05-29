@@ -9,7 +9,6 @@
     window.cs.modelController = null;
 	window.cs.viewController = null;	
 	window.cs.config = null;
-	window.cs.ide = null;
 	window.cs.componentContainer = [];
 	
 	/**
@@ -76,19 +75,38 @@
  		
 	};		
 	
-	/**
-	 * Set global ClickScript IDE
-	 */
-	cs.ide = {
+	cs.global = {
+		
+			/**
+			 * Set global ClickScript IDE
+			 */
+		ide : {
+		
+			/**
+			 * Initialize the ClickScript IDE. You can use this function
+			 * to setup an ClickScript IDE. At the beginning of a project.
+			 */
+			init : function(){
+	 			window.cs.global.ide = new cs.controller.IdeController();
+			}
+		},
 		
 		/**
-		 * Initialize the ClickScript IDE. You can use this function
-		 * to setup an ClickScript IDE. At the beginning of a project.
+		 * Gets initialized later
+		 * {cs.system.Serializer.js}
 		 */
-		init : function(){
- 			window.cs.ide = new cs.controller.IdeController();
-		}
+		serializer : null,
+
+		/**
+		 * Gets initialized later
+		 * {cs.system.ScriptPlayer.js}
+		 */		
+		scriptPlayer : null
+		
 	}
+	
+
+	
 	
 	/**
 	 * Initialize ComponentContainer. Every Component you add to this

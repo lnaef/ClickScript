@@ -105,7 +105,7 @@
 					throw Error("output have to be arrayLike in : '" + data.name+"'");
 				}					
 			
-				// LOAD fieldS
+				// LOAD FIELDS
 				if(dojo.isArrayLike(data.fields)){
 					for (var i = 0; i < data.fields.length; i++) {
 						this._field.add(this._getMetaSocket(data.fields[i], cs.model.meta.MetaSocket.MODE_INPUT_FIELD, i));

@@ -32,7 +32,7 @@
 		},
 		
 		serialize : function(){
-			return cs.serializer.serialize('field',{'uid':this.getUid(),'value':this.getValue()});
+			return cs.global.serializer.serialize('field',{'uid':this.getUid(),'value':this.getValue()});
 		}
 		
 	});

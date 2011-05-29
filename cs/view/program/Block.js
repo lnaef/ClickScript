@@ -92,25 +92,25 @@
 			
 			// block rect
 			this._blockShape = this.getShape().createRect({
-				x : this._position.x ,
-				y : this._position.y,
-				width : this.getModel().getDimension().width,//dim.defaultWidth
-				height : this.getModel().getDimension().height,//dim.defaultHeight,
-				r : dim.roundCorner
+				x      : this._position.x ,
+				y      : this._position.y,
+				width  : this.getModel().getDimension().width,
+				height : this.getModel().getDimension().height,
+				r      : dim.roundCorner
 			}).setFill(dim.fill).setStroke(dim.stroke);
 			
 			// block name
 			this.getShape().createText({					
-					x: this._position.x + 12, //+ correctX, //+ dim.plus.width + dim.minus.width
+					x: this._position.x + 12, 
 					y: this._position.y + 17,
-					text: this.getModel().getMetaData().getName(),
+					text : this.getModel().getMetaData().getName(),
 					align: "left"}).setFont(dim.font.style).setFill(dim.font.fill);
 			
 			
 			// block resize
 			this._resizeShape = this.getShape().createImage({
-				src:  dim.resize.path,
-				width: dim.resize.width,
+				src   : dim.resize.path,
+				width : dim.resize.width,
 				height: dim.resize.height,
 				x: this._position.x + this.getModel().getDimension().width  - dim.resize.width,// + correctX,
 				y: this._position.y + this.getModel().getDimension().height - dim.resize.width
@@ -146,26 +146,23 @@
 			/**
 			 * Reset the bounding Box
 			 */
-			var blockShape = this.getBlockShape();
+			var blockShape    = this.getBlockShape();
 	        var blockShapeTbb = blockShape.getTransformedBoundingBox();
-	        blockShape.width =  moverTbb[2].x - blockShapeTbb[0].x; // just add 1 to see it move
+	        blockShape.width  = moverTbb[2].x - blockShapeTbb[0].x; // just add 1 to see it move
 	        blockShape.height = moverTbb[2].y - blockShapeTbb[0].y;
 	        this.getBlockShape().setShape(blockShape);	
 	        return {width: blockShape.width, height: blockShape.height};		
 		},
-		getModel : function(){
-			return this._blockModel;
-		},
 		
-		_getDim : function(){
-			return cs.view.program.Block.dim;
-		},
-		
+		/**
+		 * Add component to this block???
+		 * @param {???} a_component: Component which to be added to the block
+		 */
 		addComponent : function(a_component){
-		
 			a_component.setParentBlock(this);
-			
 		},
+		
+		
 		
 		/**
 		 * Resize the block-shape (also used in statement shape)
@@ -190,6 +187,19 @@
 			this.getShape().applyTransform({dx: deltaX, dy: deltaY});
 
 			/**
+			 * We have to move each component. Inside the block
+			 */
+			// TODO: we have to update each component in this block.
+			this.getModel().getComponentContainer().forEach(function(a_componentModel){
+				
+				// TODO: also update wires
+				// TODO: by Event
+				// TODO: use move function on component to update component position ?! (Through event)
+				cs.viewController._getComponentShape(a_componentModel).getShape().applyTransform({dx: deltaX, dy: deltaY});
+			},this);
+			
+			
+			/**
 			 * Resize only the Block element
 			 */
 			var blockShape = this.getBlockShape();
@@ -211,15 +221,15 @@
 		/**
 		 * Todo: Needed, could be moved to Shape.js
 		 */
-		moveToFront : function(){
-			
-		},
+		moveToFront : function(){},
 		
 		/**
 		 * getter
 		 */
-		getBlockShape : function() {return this._blockShape;}
-
+		getBlockShape : function(){ return this._blockShape; },
+		getModel      : function(){ return this._blockModel; },		
+		_getDim       : function(){ return cs.view.program.Block.dim; }
+		
 	});
 	
 	cs.view.program.Block.dim ={ 

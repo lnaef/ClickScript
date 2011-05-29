@@ -115,7 +115,7 @@
 		},
 		
 		serialize : function(){
-			return cs.serializer.serialize('wire',{'from':this.getFROM().getUid(), 'to':this.getTO().getUid()});
+			return cs.global.serializer.serialize('wire',{'_reference-from':this.getFROM().getUid(), '_reference-to':this.getTO().getUid()});
 		}
 	
 	});

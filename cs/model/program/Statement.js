@@ -58,7 +58,7 @@
 			this.getBlocks().forEach(function(item){
 				blocks += item.serialize();
 			});
-			blocks = cs.serializer.serialize("blocks",null,blocks);
+			blocks = cs.global.serializer.serialize("blocks",null,blocks);
 			
 			// call serialize on superclass
 			return this.constructor.superclass.serialize.call(this,blocks); 

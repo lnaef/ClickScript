@@ -142,7 +142,7 @@
 		},
 		
 		serializeScript : function(){
-			return cs.serializer.serialize('clickscript',{'version':cs.config.version},this._rootStatement.serialize());
+			return cs.global.serializer.serialize('clickscript',{'version':cs.config.version},this._rootStatement.serialize());
 		},
 		
 		onAddComponent : function(a_model_module){

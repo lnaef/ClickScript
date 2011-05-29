@@ -41,7 +41,17 @@
 		 */
 		_dimension : null,
 		
+		/**
+		 * uid of a block
+		 * needed to reference contained blocks
+		 */
+		_uid : null,
+		
 		constructor : function(a_metaBlock, a_ownerStatement){
+			
+			// Set Uid
+			this._uid = cs.global.serializer.getUid();
+			
 			this._metadata = a_metaBlock;
 			this._owner = a_ownerStatement;
 			
@@ -143,12 +153,14 @@
 		},
 		
 		serialize : function(){
-			var components = "";
+			/*
+			 * Do not nested components at the moment
+			 *//*var components = "";
 			
 			this.getComponentContainer().forEach(function(item){
 				components += item.serialize();
-			});
-			return cs.serializer.serialize("block",{width:this.getDimension().width,height:this.getDimension().height},components);
+			});*/
+			return cs.global.serializer.serialize("block",{uid: this._uid, width:this.getDimension().width,height:this.getDimension().height}/*,components*/);
 		},
 		
 		/**
@@ -159,6 +171,7 @@
 		getMetaData : function(){return this._metadata;},
 		getOwner : function(){return this._owner;},
 		getDimension : function(){return this._dimension;},
+		getUid : function(){return this._uid},
 		
 		/**
 		 * Setters
