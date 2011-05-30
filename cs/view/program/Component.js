@@ -307,7 +307,6 @@
 				dojo.forEach(this._consParentBlock,dojo.disconnect);
 				this._consParentBlock = null;
 			}
-			debugger;
 			this._consParentBlock = [];
 			this._consParentBlock.push(dojo.connect(a_block,"moveToFront",this,"moveToFront"));
 			this._consParentBlock.push(dojo.connect(a_block,"onMove",this,"onMove"));

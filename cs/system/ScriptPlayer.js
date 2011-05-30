@@ -113,7 +113,6 @@
 						/**
 						 * do not resize the program component!
 						 */
-						debugger;
 						if(!component.isProgram()){
 							cs.modelController.updateBlockDimension(component.getBlock(index),{width: blockWidth, height: blockHeight });
 							console.log("SCRIPT-PLAYER: Resize block "+blockUid+ " to dimension width:"+blockWidth+" height: "+blockHeight);
