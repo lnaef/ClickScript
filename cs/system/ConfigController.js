@@ -58,7 +58,7 @@
  		 * LIBRARY configuration
  		 */
  		library : {
- 			defaultStyle : 3 // 1 (small icons), 2, 3 (big icons, name)
+ 			defaultStyle : 1 // 1 (small icons), 2, 3 (big icons, name)
  		},
  		
  		util : {

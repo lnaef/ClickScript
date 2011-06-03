@@ -1,0 +1,311 @@
+<html>
+    <head>
+        <title>Testing new IDE Clickscript</title>
+		
+
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" media="all" href="../dojo-release-1.6.1-src/dojo/resources/dojo.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="../dojo-release-1.6.1-src/dijit/themes/claro/claro.css" />
+		
+		<!-- CSS ClickScript -->
+		<link rel="stylesheet" type="text/css" media="all" href="../cs/util/css/csIdeNew.css" />
+
+		<!-- FAVICON -->
+		<link href="../cs/util/images/logo32x32.gif" rel="icon" type="image/gif" />
+
+		<!-- LOAD JQUERY -->
+		<script type="text/javascript" src="../jquery/jquery-1.6.1.js"></script>
+ 
+		<!-- LOAD DOJO FROM LOCAL LIB - for debugging purpose!-->
+		<script type="text/javascript">
+		        djConfig={
+		          parseOnLoad: false,
+		          isDebug: true,
+		          modulePaths: { "cs": "../../cs/" },
+		          debugAtAllCosts : true
+		        };
+		</script>
+		<script type="text/javascript" src="../dojo-release-1.6.1-src/dojo/dojo.js"></script>
+	
+		<!-- SETUP PAGE -->
+        <script type="text/javascript">//<![CDATA[
+
+			/**
+			 * DESIGN STUFF ONLY
+			 */
+			
+			// Init ClickScript globals and settings
+			dojo.require("dojo.parser");
+			
+			// Layout / Container
+			dojo.require("dijit.layout.BorderContainer");
+    		dojo.require("dijit.layout.TabContainer");
+    		dojo.require("dijit.layout.ContentPane");
+    		
+    		// Forms
+    		dojo.require("dijit.form.Button");
+    		dojo.require("dijit.form.Textarea");
+
+    		
+    		// Menu
+    		dojo.require("dijit.MenuBar");
+		    dojo.require("dijit.PopupMenuBarItem");
+		    dojo.require("dijit.Menu");
+		    dojo.require("dijit.MenuItem");
+		    dojo.require("dijit.PopupMenuItem");
+	
+			// Dialogs like configuration
+			dojo.require("dijit.Dialog");
+
+			
+			/**
+			 * CLICKSCRIPT STUFF
+			 */
+			
+			// Init ClickScript globals and settings
+			dojo.require("cs.system.ConfigController");
+			
+			// Load IDE-Class
+			dojo.require("cs.controller.IdeController");
+			
+			/**
+			 * Load libraries
+			 */		
+			dojo.require("cs.lib.default.init");
+			dojo.require("cs.lib.statement.init");
+			dojo.require("cs.lib.web.browse.init");
+			//dojo.require("cs.lib.web.misc.init");
+			dojo.require("cs.lib.math.init");
+			dojo.require("cs.lib.string.init");
+			dojo.require("cs.lib.converter.init");
+			dojo.require("cs.lib.logic.init");
+			dojo.require("cs.lib.robotic.init");
+			dojo.require("cs.lib.collection.init");
+
+					
+
+			// If all Javascriptfiles and Classes are loaded...
+			dojo.addOnLoad(function(){
+
+				
+				
+				// Build Dijit Layout
+				dojo.parser.parse();
+				
+
+				
+				/** 
+				 * TODO Move to external class
+				 */
+				showExportDialog = function(){
+					var exportDialog = dijit.byId('dialog-export');
+					exportDialog.show();
+					dojo.byId("exportValue").value = cs.modelController.serializeScript();
+				};
+				
+				
+				
+				
+				
+
+				// Inizialize the IDE
+				cs.global.ide.init();
+				
+				
+				/**
+				 * Show the loaded libraries in the IDE
+				 */
+				cs.global.ide.showLibrary();	
+				
+				
+				/**
+				 * Shutoff loading screen
+				 */
+				dojo.style(dojo.byId("loading"), "display", "none"); 
+		    });   
+			
+//]]></script>
+
+    </head>
+	<body class="cs claro" >
+	    <div id="loading" style="position:absolute;left:0px;top:0px;width:100%;height:100%;background-color:white;z-index:999;">
+	    	<div>
+	    		<h1>ClickScript is loading...</h1>
+	    		<div><img src="../cs/util/images/loadingbar.gif"/></div>
+	    	</div>
+	    	
+	    </div>
+	    
+	    
+	    <div    
+	    	id="ide"
+	        data-dojo-type="dijit.layout.BorderContainer"
+	        data-dojo-props="design: 'headline'">
+	        
+
+	        <!-- HEADER 
+	        <div
+	            class="headerPanel"
+	            data-dojo-type="dijit.layout.ContentPane"
+	            data-dojo-props="region: 'top'">-->
+	            
+	            
+	            <!-- START MENUBAR -->
+	            <div dojoType="dijit.MenuBar" id="navMenu" region="top">
+		            <div dojoType="dijit.PopupMenuBarItem">
+		                <span>
+		                    File
+		                </span>
+		                <div dojoType="dijit.Menu" id="fileMenu">
+		                    <div dojoType="dijit.MenuItem" onClick="showExportDialog()" iconClass="csMenuExport">
+		                        Export
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-import').show()" iconClass="csMenuImport">
+		                        Import
+		                    </div>
+		                </div>
+		            </div>
+		            <div dojoType="dijit.PopupMenuBarItem">
+		                <span>
+		                    Extras
+		                </span>
+		                <div dojoType="dijit.Menu" id="editMenu">
+		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-configuration').show()">
+		                        Configuration
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 2')">
+		                        Tutorial
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 2')">
+		                        Exercise
+		                    </div>
+		                </div>
+		            </div>
+		            <div dojoType="dijit.PopupMenuBarItem">
+		                <span>
+		                    ?
+		                </span>
+		                <div dojoType="dijit.Menu" id="helpMenu">
+		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 1')">
+		                        Config
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 2')">
+		                        About
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 3')">
+		                        Contact
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+			<!-- END MENUBAR -->
+	        <!-- END HEADER -->
+
+	        <!-- RIGHT COLONE -->
+	        <div    
+	        	class="rightCol"
+	            data-dojo-type="dijit.layout.ContentPane"
+	            data-dojo-props="region: 'right', splitter: true">
+				
+				<!-- ACTIONS; CONTROLERS -->
+				<div id="csActions"></div>
+				
+				<!-- LIBRARY -->
+				<div id="csLib"></div>
+
+				
+				INFO <br/>
+
+		   </div>
+	        <!-- END RIGHT-COL -->
+
+	                
+	        <!-- LEFT-COLONE -->
+	        <div
+	            class="leftCol" 
+	            data-dojo-type="dijit.layout.ContentPane"
+	            data-dojo-props="region: 'center'">
+	           	<div    
+			    	class="leftColContainer"
+			        data-dojo-type="dijit.layout.BorderContainer"
+			        data-dojo-props="design: 'bottomline'">	        
+		            <div
+			            class="mainPanel" 
+			            data-dojo-type="dijit.layout.ContentPane"
+			            data-dojo-props="region: 'center', splitter: true">
+			            <!-- PLAYGROUND -->
+			            <div id="csPlayground"></div>
+					</div>
+					<div
+			            class="bottomLeftContainer" 
+			            data-dojo-type="dijit.layout.ContentPane"
+			            data-dojo-props="region: 'bottom', splitter: true">
+					    <div 
+			            	class="tabContainerRight"
+			            	dojoType="dijit.layout.TabContainer"
+			            	data-dojo-props="tabPosition: 'bottom'">
+			                <div 
+			                	class="execViewPanel"
+			                	dojoType="dijit.layout.ContentPane" title="Exec View" selected="true">
+			                    <!-- EXECUTION VIEW -->
+			                    <div id="csExecutionView"></div>
+			                </div>
+			                <div 
+			                	class="consolePanel"
+			                	dojoType="dijit.layout.ContentPane" title="Console">
+			                	<!-- CONSOLE -->
+			                    <div id="csConsole"></div>
+			                </div>
+				        </div>
+					</div>
+				</div>
+			</div>   
+	    	<!-- END LEFT-COL -->
+        
+        	<!-- BOTTOM -->
+	        <!--<div
+	            class="footerRow"
+	            data-dojo-type="dijit.layout.ContentPane"
+	            data-dojo-props="region: 'bottom'">
+	           	<div class="left">ClickScript</div><div class="right">&copy; 2011 by clickscript.ch</div><div class="clear"/>
+	       </div>-->
+	       <!-- END BOTTOM-->
+       </div>
+    
+    	<div dojoType="dijit.Dialog" id="dialog-configuration" title="Configuration">
+    		Do be defined
+    	</div>
+    	<div dojoType="dijit.Dialog" id="dialog-import" title="Import">
+    		<textarea id="importValue" dojoType="dijit.form.Textarea"></textarea>
+    		<div>
+	    		<button dojoType="dijit.form.Button" type="button" id="button-import">Import
+	    		    <script type="dojo/method" event="onClick" args="evt">
+	    				// import Data
+	    				cs.global.scriptPlayer.run(dojo.byId("importValue").value);
+	    				
+	    				// reset value
+	    				dojo.byId("importValue").value = "";
+	    				
+	    				// close import dialog
+	    				dijit.byId('dialog-import').hide();
+	    			</script>
+	    		</button>
+	    		<button dojoType="dijit.form.Button" type="button" id="button-import-cancel">Cancel
+	    		    <script type="dojo/method" event="onClick" args="evt">
+				        dijit.byId('dialog-import').hide();
+				    </script>		
+	    		</button>
+    		</div>
+    	</div>
+    	<div dojoType="dijit.Dialog" id="dialog-export" title="Export">
+  			<textarea id="exportValue" dojoType="dijit.form.Textarea"></textarea>
+  			<div>
+	    		<button dojoType="dijit.form.Button" type="button" id="button-export-cancel">Cancel
+	    		    <script type="dojo/method" event="onClick" args="evt">
+				        dijit.byId('dialog-export').hide();
+				    </script>		
+	    		</button>  				
+  			</div>
+    	</div>
+	</body>
+</html>

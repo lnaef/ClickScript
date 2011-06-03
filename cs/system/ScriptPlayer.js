@@ -18,7 +18,7 @@
 		},
 		
 		run : function(/*string*/ a_script){
-			var clickscript = dojo.attr("csTestTextarea","value");
+			var clickscript = a_script || dojo.attr("csTestTextarea","value");
 			var clickscriptAsDom = dojox.xml.parser.parse(clickscript);
 			
 			/**

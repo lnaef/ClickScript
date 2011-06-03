@@ -1,3 +1,17 @@
+/*
+	IE 8.0 VML requires doctype and html namespaces like this
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+		      xmlns:svg="http://www.w3.org/2000/svg"
+		      xmlns:v="urn:schemas-microsoft-com:vml"
+		      xmlns:xlink="http://www.w3.org/1999/xlink">			
+
+    and the following css definitions:
+ */	
+v\:imagedata, v\:rect, v\:roundrect, v\:line, v\:polyline, v\:curve, v\:arc, v\:oval, v\:image, v\:shape, v\:group, v\:skew, v\:stroke, v\:fill { behavior:url(#default#VML); display:inline-block }
+
+
+
 html, body {
     height: 100%;
     margin: 0;
@@ -6,23 +20,24 @@ html, body {
     background-color: #ddd;
 }
  
-#appLayout {
+#ide {
     height: 100%;
 }
 
-#rightCol {
-    /*width: 14em;*/
+.cs .rightCol {
+    width: 200px;
+    overflow-y:scroll;
 }
-
+/*
 .tabContainerRight {
 	width: 250px;
-	min-width: 20px;
+	min-width: 100px;
 }
 
 .consolePanel {
 	height: 50px;
 	min-height: 20px;
-}
+}*/
 
 .footerRow {
 	padding: 8px 0px;
@@ -48,3 +63,231 @@ html, body {
 
 
 .dijitLayoutContainer .dijitLayoutContainer {border: none; padding: 0px}
+
+
+/**
+ * 	CLICKSCRIPT ELEMENTS
+ */
+
+
+/**
+ * 	PLAYGROUND
+ */
+#csPlayground {
+  border:             2px solid #aaa;
+  -moz-border-radius: 8pt 8pt;
+  background-color:   white;
+}
+
+/* ALL ABOUT THE TOOLTIP */
+.csTooltip {
+  border:      solid #ccc 1px;
+  background:  #eee;
+  color:       #444;
+  position:    absolute;
+  font-size:   10px;
+  line-height: 1.4em;
+  padding:     5px;
+  z-index:     10;
+  display:     block;
+ -moz-border-radius: 5pt 5pt;
+  max-width:   200px;
+}
+
+.csTooltip img     { float:right; padding-top:10px; }
+.csInfoTitle       { font-weight: bold; }
+.csInfoDescription { padding: 5px; }
+
+.csInfoSocket{
+  -moz-border-radius: 3pt 3pt;
+  display: block;
+  width: 20px;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin: 1px 5px;
+}
+
+.csSocketLine{ overflow: auto; }
+
+
+
+/**
+ * 	EXECUTION VIEW
+ */
+#csExecutionViewContainer {
+  padding:            5px;
+  background-color:   #aaccdd;
+  -moz-border-radius: 8pt 8pt;
+  border:             3px solid #1c72ba;
+}
+
+#csExecutionViewTitle {display: none;}
+#csExecutionView {}
+
+#csExecutionViewPlayground {
+  min-height: 150px;
+}
+
+.csEVItem{
+  border: 1px solid #777;
+  min-width: 50px;
+  min-height: 50px;
+  text-align: center;
+  cursor : pointer;
+  position: absolute;
+  padding: 3px;
+  background-color: #ddd;
+  -moz-border-radius: 5pt 5pt;
+  z-index : 1;
+}
+
+.csEVItemNode {
+  min-height: 40px;
+}
+
+.csEVItemLabel {
+  min-height: 12px;
+  font-size : 10px;
+  color: #666;
+}
+
+/** exec component view on move **/
+.csEVItemActive {
+  background-color: #cde !important;
+  border: 1px solid #567 !important;
+}
+
+/** exec component view if referenced component in programming view is hovered **/
+.csEVItemHighlight {
+  border: 2px solid red ! important;
+}
+
+
+/**
+ * 	CONSOLE
+ */
+
+#csConsole{background-color:black; padding: 5px;}
+#csConsoleTitle {display:none;}
+#csEasyConsole {height: 93%;}
+
+
+/**
+ * 	TOOLBAR
+ */
+.csLibButton {
+	overflow:hidden;
+	/*background-color: white;*/
+	margin: 0px 2px;
+    -moz-border-radius: 0pt 0pt 3pt 3pt;
+}
+
+.libStyle1 .csLibButton {width:32px;height:32px;}
+.libStyle2 .csLibButton {width:32px;height:32px;}
+.libStyle3 .csLibButton {width:60px;height:62px;}
+
+div.csLibButton:hover {
+	background-color: #aaa;
+}
+div.csLibButton:active {
+	background-color: #4ad;
+}
+
+.csLibButton, .csLibToolbar {
+	float:left;
+	font-size: 9pt;
+	
+}
+
+
+.csLibToolbarTitle {
+ 	background-color: #444;
+ 	color: #ddd;		 	
+ 	-moz-border-radius: 3pt 3pt 0pt 0pt;		
+ 	overflow: auto;	
+ 	height: 13px;
+}
+
+.libStyle2 .csLibToolbarTitle {
+  padding:0px 3px;
+  font-size: 7pt;
+  font-weight: normal;
+}
+
+.libStyle3 .csLibToolbarTitle {
+  padding:1px 3px;
+  font-size: 8pt;
+  font-weight: bold;
+}
+
+
+.libStyle2 .csLibToolbarTitle, .libStyle3 .csLibToolbarTitle {
+ 	display: block;
+}
+
+.libStyle1 .csLibToolbarTitle {
+    display: none;
+}
+
+.csLibToolbar {
+	border: 1px solid #999;
+	margin: 2px;
+	background-color: #eee;
+	-moz-border-radius: 3pt 3pt;
+}
+.csLibToolbarContent {
+	padding: 3px;
+	overflow: auto;
+	clear:both;
+}
+
+.csLibButtonLabel{
+  font-size: 7pt;
+  text-align: center;
+  background-color: #ddd;
+  -moz-border-radius: 0pt 0pt 3pt 3pt;
+}
+
+.libStyle1 .csLibButtonLabel {display: none}
+.libStyle2 .csLibButtonLabel, .libStyle3 .csLibButtonLabel {display: block}
+
+.csLibButtonImg{
+  text-align: center;
+  height: 48px;
+  margin-bottom:2px;
+}
+
+.libStyle1 .csLibButtonImg img, .libStyle2 .csLibButtonImg img{
+  width: 32px;
+  height: 32px;
+}			
+.csLibToolbar .minimize, .csLibToolbar .maximize, .csLibToolbar .close {
+  cursor: pointer;
+}
+.csLibToolbar .buttons{
+  float: right;
+}
+.csLibToolbar .text{
+  float:left;
+}
+
+/**
+ * 	ACTIONS
+ */
+#csActionMenu .actionLabel 		{ font-weight: bold; padding-left: 5px; }
+#csActionMenu #csStateRUN		{background: url('../images/run.png') no-repeat right center;}
+#csActionMenu #csStateWAIT		{background: url('../images/wait.png') no-repeat right center;}
+#csActionMenu #csStateSTOP		{background: url('../images/stop.png') no-repeat right center;}
+#csActionMenu #csStateFINISH	{background: url('../images/finish.png') no-repeat right center;}
+#csActionMenu .csStateIcon		{padding: 0px 10px 0px 14px;}
+
+
+/**
+ * 	EXPORT DIALOG
+ */
+#dialog-export textarea, #dialog-import textarea { width: 900px; height: 400px}
+
+.csMenuExport {background-image:url("../images/ide/menu/export.png"); width: 16px; height: 16px;}
+.csMenuImport {background-image:url("../images/ide/menu/import.png"); width: 16px; height: 16px;}

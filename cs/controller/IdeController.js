@@ -28,26 +28,6 @@
 		constructor : function(){
  			
  			// setup basic html for ClickSciript into the HTML-Tag with id="clickscript"
- 			dojo.place(
-			'    	'+
-			'    	<div id="csMenu">	'+
-			'			<div id="csViewSwitches"></div>'+
-			'			<div id="csLib"></div>'+
-			'           <div id="csOptions"></div>'+
-			'			<div id="csTodo"></div><div id="csExecutionView"></div>'+
-			'			<div id="csActions"></div>'+
-			'		</div>'+
-			'		<div id="csPlayground"></div>'+
-			'		<div id="csConsole"></div>'+
-			'		<div id="csTutorial"></div>'+
-			'		<div id="csExercise"></div>'+			
-			'       <div id="csTestInput">Testinput<textarea id="csTestTextarea" style="width:800px;height:300px;font-size:7pt"></textarea></div>' + 
-			'		<button onclick="cs.global.scriptPlayer.run();">run</button>' +
-			'		<button onclick="dojo.byId(\'csTestTextarea\').innerHTML=cs.modelController.serializeScript();">serialize</button>'+
-			'		<div id="footer">'+
-			'			&copy; 2011 powered by lukas naef - contact\'at\'clickscript.ch - <a href="http://clickscript.ch">www.clickscript.ch</a>'+
-			'		</div>'
-			,dojo.byId("clickscript"));
  			
 			/**
 			 * SURFACE: Prepare the surface with the ClickScript playground
@@ -233,7 +213,7 @@
 			/**
 			 * LOAD CS OPTIONS
 			 */
-			if(cs.config.ide.optionalParts.option){
+			if(cs.config.ide.optionalParts.option && dojo.byId("csOptions")){
 				out = "<ul id='csOptionList'>" +
 					"<li><fieldset><legend>Toolbar</legend>" +
 					"		<div id='csOptionToolbarVisibility'></div>" +
@@ -316,7 +296,7 @@
 			 * LOAD TUTORIALs
 			 */
 			
-			if(cs.config.ide.optionalParts.tutorial){
+			if(cs.config.ide.optionalParts.tutorial && dojo.byId("csTutorial")){
 				var url = dojo.byId("csTutorial").innerHTML;
 				url = (url) ? url : cs.config.rootPath+"util/tutorial/tutorialEN.html";
 				var tutorial = "<div id='csTutorialTitle'>tutorial</div><iframe src='"+url+"'/>";
@@ -328,7 +308,7 @@
 			 * LOAD EXERCISEs
 			 */
 			
-			if(cs.config.ide.optionalParts.exercise){
+			if(cs.config.ide.optionalParts.exercise && dojo.byId("csExercise")){
 				var url = dojo.byId("csExercise").innerHTML;
 				url = (url) ? url : cs.config.rootPath+"util/exercise/index.html";
 				var tutorial = "<div id='csExerciseTitle'>exercises</div><iframe src='"+url+"'/>";

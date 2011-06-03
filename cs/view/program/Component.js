@@ -169,6 +169,7 @@
 			// todo remove connection before redraw!
 			this._removeIcon.connect("onclick",this,
 					function(e){
+						dojo.stopEvent(e);
 						dojo.publish("view/program/Component/Remove/Clicked", [this]);
 					}
 			);
