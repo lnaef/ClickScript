@@ -368,11 +368,11 @@
 		},
 		
 		onUpdatePositionProg : function(a_module, a_x, a_y){
-
+			this._getComponentShape(a_module).moveTo(a_x,a_y);
 		},
 		
 		onUpdatePositionExec : function(a_module, a_x, a_y){
-
+			
 		},
 		
 		onUpdateBlockDimension : function(a_blockModel){

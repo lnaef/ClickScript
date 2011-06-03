@@ -18,7 +18,7 @@
 	dojo.require("cs.controller.ExecutionViewController");
 	dojo.require("cs.view.util.EasyConsole");
 	dojo.require("cs.view.util.Toggler");
-	dojo.require("cs.system.scriptPlayer");
+	dojo.require("cs.system.ScriptPlayer");
 	
  	dojo.declare("cs.controller.IdeController", null, {
 		

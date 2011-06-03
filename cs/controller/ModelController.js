@@ -122,7 +122,7 @@
 		
 		updatePositionProg : function(a_module, a_x, a_y){
 			a_module.setPositionProg(a_x,a_y);
-			this.onUpdatePositionProg(a_module);
+			this.onUpdatePositionProg(a_module,a_x,a_y);
 		},
 		
 		updatePositionExec : function(a_module, a_x, a_y){

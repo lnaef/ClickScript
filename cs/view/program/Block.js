@@ -200,12 +200,16 @@
 			 * We have to move each component. Inside the block
 			 */
 			// TODO: we have to update each component in this block.
-			this.getModel().getComponentContainer().forEach(function(a_componentModel){
+			this.getModel().getComponentContainer().forEach(function(componentModel){
 				
 				// TODO: also update wires
 				// TODO: by Event
 				// TODO: use move function on component to update component position ?! (Through event)
-				cs.viewController._getComponentShape(a_componentModel).getShape().applyTransform({dx: deltaX, dy: deltaY});
+				var x = componentModel.getPositionProg().x + deltaX;
+				var y = componentModel.getPositionProg().y + deltaY;
+				cs.modelController.updatePositionProg(componentModel,x,y);
+				//cs.viewController._getComponentShape(componentModel).getShape().applyTransform({dx: deltaX, dy: deltaY});
+		
 			},this);
 			
 			

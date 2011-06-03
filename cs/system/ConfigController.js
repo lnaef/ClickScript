@@ -17,7 +17,7 @@
 	cs.config = {
 		
 		// Version
-		version : "0.5",
+		version : "0.5 BETA",
 		
 		// Path for the ClickScript class folder
 		rootPath : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ),

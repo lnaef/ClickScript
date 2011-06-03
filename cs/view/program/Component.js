@@ -274,16 +274,12 @@
 			this._moveable = moveable;
 			
 			this._moveableEvents.push(dojo.connect(moveable,"onMove",this,"onMove"));
-			
-			//test propagating also onMoveStop event
 			this._moveableEvents.push(dojo.connect(moveable,"onMoveStop",this,"onMoveStop"));
 			
 		},
 
 		onMoveStop : function(mover){
 				
-				
-
 				//Todo: REMOVE THIS ON DISCONNECT
 				dojo.publish("/cs/dnd/ondrop",[this,mover]);
 
@@ -298,6 +294,25 @@
 				// update model position
 				cs.modelController.updatePositionProg(this.getModel(),x,y);
 			
+		},
+		
+		/**
+		 * Move the shape to x,y
+		 * @param int a_x: x-coordinate
+		 * @param int a_y: y-coordinate
+		 */
+		moveTo : function(a_x,a_y){
+			var tbb = this.getShape().getTransformedBoundingBox();
+			var deltaX = a_x - tbb[0].x;
+			var deltaY = a_y - tbb[0].y;
+			this.getShape().applyTransform({dx: deltaX, dy: deltaY});
+			
+			/*
+			 * seems to work, but normaly we have to pass an object on this function
+			 * used for the update of the wires view (cs.view.program.wire.updateView)
+			 * which has to be triggered if a component is moved
+			 */
+			this._moveable.onMove();
 		},
 		
 		_consParentBlock : null,

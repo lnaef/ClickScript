@@ -7,11 +7,11 @@
  * It also Generates the singleton cs.global.serializer which is a helper for serialisation
  */
 	
-	dojo.provide("cs.system.scriptPlayer");
+	dojo.provide("cs.system.ScriptPlayer");
 	
 	dojo.require("dojox.xml.parser");
 	
- 	dojo.declare("cs.system.scriptPlayer", null, {
+ 	dojo.declare("cs.system.ScriptPlayer", null, {
 		
 		constructor : function(){
 			
@@ -151,7 +151,7 @@
 		}
 	});
 	
-	cs.global.scriptPlayer = new cs.system.scriptPlayer();
+	cs.global.scriptPlayer = new cs.system.ScriptPlayer();
 
 	
 	/**
