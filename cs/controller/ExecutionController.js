@@ -50,6 +50,10 @@
 			this._worklist = new cs.controller.Worklist(this._rootStatement);
 			
 			// register round updater
+			
+			/**
+			 * TODO: REMOVE, DEPRICATED SINCE 0.5
+			 */
 			dojo.connect(this.getWorklist(),"onNewRun",this,function(){
 				if(dojo.byId("runCounter")){
 					dojo.byId("runCounter").innerHTML = (this.getWorklist().getRunCounter());
@@ -99,8 +103,16 @@
 		
 		repeatedRun : function(){
 			this.getWorklist().reset();
-			this.getWorklist().setRepeatedRun(true);
+			this.setRepeatedRun(true);
 			this.getWorklist().run();
+		},
+		
+		setRepeatedMode : function(a_value){
+			this.getWorklist().setRepeatedRun(a_value);
+		},
+		
+		getRepeatedMode : function(){
+			return this.getWorklist().getRepeatedRun();
 		},
 		
 		stop : function(){
