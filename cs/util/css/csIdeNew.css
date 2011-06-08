@@ -17,7 +17,7 @@ html, body {
     margin: 0;
     overflow: hidden;
     padding: 0;
-    background-color: #ddd;
+    background: url('../images/ide/background.png') repeat-x left bottom;
 }
  
 #ide {
@@ -25,8 +25,22 @@ html, body {
 }
 
 .cs .rightCol {
-    width: 200px;
-    overflow-y:scroll;
+	/* default width of right column */
+    width: 250px;
+    overflow-y:auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.cs .mainPanel {
+	-moz-border-radius: 5px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.cs .bottomLeftContainer {
+	height: 200px;
+	margin-right: 10px;
 }
 /*
 .tabContainerRight {
@@ -37,7 +51,7 @@ html, body {
 .consolePanel {
 	height: 50px;
 	min-height: 20px;
-}*/
+}
 
 .footerRow {
 	padding: 8px 0px;
@@ -50,11 +64,69 @@ html, body {
 
 .cs .leftCol, .cs .bottomLeftContainer, .cs .footerRow {
 	background-color: #eee;
-}
+}*/
+
+
 
 #navMenu {
 	left: 0px;
 	top: 0px;
+	-moz-border-radius: 5px 0px 0px 5px;
+	margin-left: 5px;
+}
+
+.cs.claro .dijitMenuBar {
+	background: transparent url('../images/ide/background-right-column.png') repeat center center;
+}
+
+.clickScriptTitle {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	background: url('../images/ide/title.png') no-repeat;
+	padding: 23px 76px;
+}
+
+.cs .dijitSplitContainer-dijitContentPane.rightCol, .cs .dijitBorderContainer-dijitContentPane.rightCol {
+    background: url('../images/ide/background-right-column.png') repeat;
+    padding: 5px;
+    -moz-border-radius: 5px 0px 0px 5px;
+}
+.cs.claro .dijitTabPaneWrapper {
+	background: transparent;
+    -moz-border-radius: 0px 5px 5px 5px;
+}
+
+.cs.claro .dijitTabContainerTop-tabs {
+	border: none;
+}
+
+.cs.claro .dijitSplitterH {
+	background: url('../images/ide/splitterHorizontal.png') no-repeat center center;
+}
+.cs.claro .dijitSplitterV {
+	background: url('../images/ide/splitterVertical.png') no-repeat center center;
+}
+
+.cs.claro .dijitTabContainerTop-dijitContentPane, .cs.claro .dijitTabContainerLeft-dijitContentPane, .cs.claro .dijitTabContainerBottom-dijitContentPane, .cs.claro .dijitTabContainerRight-dijitContentPane, .cs.claro .dijitAccordionContainer-dijitContentPane {
+	background: url('../images/ide/background-right-column.png') repeat;
+}
+
+.cs.claro .dijitTabContainerTop-tabs .dijitTabContent {
+	background: transparent url('../images/ide/background-right-column.png') repeat center center;
+}
+
+.cs.claro .dijitTabContainerTop-tabs .dijitTabChecked .dijitTabInnerDiv {
+	background: none;
+}
+
+.cs.claro .dijitTitlePaneTitle {
+	padding: 0px 3px;
+	line-height: 12px;
+}
+
+.cs.claro .dijitTitlePaneTextNode {
+	vertical-align: middle;
 }
 
 .cs .dijitSplitContainer-dijitContentPane, .cs .dijitBorderContainer-dijitContentPane {
@@ -66,6 +138,10 @@ html, body {
 	border: none;	
 }
 
+.cs.claro .dijitMenuBar .dijitMenuItem {
+	border: 1px solid transparent;
+}
+
 
 /* 
  * one-word-action
@@ -73,6 +149,7 @@ html, body {
 .left {float: left}
 .right {float: right}
 .clear {clear: both}
+.shadow { -moz-box-shadow: 5px 5px 5px #457; -webkit-box-shadow: 5px 5px 5px #457; box-shadow: 5px 5px 5px #457; }
 
 
 .dijitLayoutContainer .dijitLayoutContainer {border: none; padding: 0px}
@@ -89,10 +166,9 @@ html, body {
  * 	PLAYGROUND
  */
 #csPlayground {
-  border:             2px solid #aaa;
-  -moz-border-radius: 8pt 8pt;
-  background-color:   white;
-  margin: 5px;
+  -moz-border-radius: 5px;
+  	background: url('../images/ide/background-playground.png') repeat;
+  /*background-color:   white;*/
 }
 
 /* ALL ABOUT THE TOOLTIP */
@@ -133,17 +209,15 @@ html, body {
  * 	EXECUTION VIEW
  */
 #csExecutionViewContainer {
-  padding:            5px;
-  background-color:   #aaccdd;
-  -moz-border-radius: 8pt 8pt;
-  border:             3px solid #1c72ba;
+  padding:            5px;	
+  background: url('../images/ide/background-execution-view.png') repeat;
 }
 
 #csExecutionViewTitle {display: none;}
 #csExecutionView {}
 
 #csExecutionViewPlayground {
-  min-height: 150px;
+  min-height: 400px;
 }
 
 .csEVItem{
@@ -292,19 +366,21 @@ div.csLibButton:active {
 /**
  * 	ACTIONS
  */
-#csActionMenu .actionLabel 		{ font-weight: bold; padding-left: 5px; }
-#csActionMenu #csStateRUN		{background: url('../images/run.png') no-repeat right center;}
-#csActionMenu #csStateWAIT		{background: url('../images/wait.png') no-repeat right center;}
-#csActionMenu #csStateSTOP		{background: url('../images/stop.png') no-repeat right center;}
-#csActionMenu #csStateFINISH	{background: url('../images/finish.png') no-repeat right center;}
-#csActionMenu .csStateIcon		{padding: 0px 10px 0px 14px;}
+.csMenuBar {margin-top: 10px;}
+
+#csStateRUN		{background: url('../images/run.png') no-repeat right center;}
+#csStateWAIT		{background: url('../images/wait.png') no-repeat right center;}
+#csStateSTOP		{background: url('../images/stop.png') no-repeat right center;}
+#csStateFINISH	{background: url('../images/finish.png') no-repeat right center;}
+.csStateIcon		{padding: 8px 10px 0px 14px; vertical-align: middle;}
 
 .csActionRun  {background-image:url("../images/ide/action/play.png"); width: 32px; height: 32px;}
 .csActionRunDisabled  {background-image:url("../images/ide/action/playDisabled.png"); width: 32px; height: 32px;}
-.csActionRepeatOn {background-image:url("../images/ide/action/repeatOn.png"); width: 32px; height: 32px;}
-.csActionRepeatOff {background-image:url("../images/ide/action/repeatOff.png"); width: 32px; height: 32px;}
 .csActionStopDisabled {background-image:url("../images/ide/action/stopDisabled.png"); width: 32px; height: 32px;}
 .csActionStop {background-image:url("../images/ide/action/stop.png"); width: 32px; height: 32px;}
+.csActionReloadPage {background-image:url("../images/ide/action/pageReload.png"); width: 32px; height: 32px;}
+
+
 
 /**
  * 	EXPORT DIALOG
@@ -316,6 +392,9 @@ div.csLibButton:active {
 .about-version { margin-top: 15px;}
 .about-contact { margin-top: 5px;}
 .about-txt     { margin-top: 10px; color: #aaa; font-size: 7pt;}
+
+#dialog-configuration li {list-style: none;}
+#dialog-configuration ul {padding: 0px; margin: 0px;}
 
 /* FILE */
 .csMenuExport {background-image:url("../images/ide/menu/export.png"); width: 16px; height: 16px;}

@@ -41,6 +41,7 @@
 			dojo.require("dijit.layout.BorderContainer");
     		dojo.require("dijit.layout.TabContainer");
     		dojo.require("dijit.layout.ContentPane");
+    		dojo.require("dijit.TitlePane");
     		
     		// Forms
     		dojo.require("dijit.form.Button");
@@ -66,7 +67,7 @@
 			dojo.require("cs.system.ConfigController");
 			
 			// Load IDE-Class
-			dojo.require("cs.controller.IdeController");
+			dojo.require("cs.controller.NewIdeController");
 			
 			/**
 			 * Load libraries
@@ -254,28 +255,59 @@
 	            data-dojo-props="region: 'right', splitter: true">
 				
 				<!-- ACTIONS; CONTROLERS -->	    		
-	    		
-	    		<button dojoType="dijit.form.Button" type="button" id="button-run" onClick="cs.executionController.run();" iconClass="csActionRun" showLabel="false">run</button>				
+	    		<div id="csActionBar" class="csMenuBar">
+		    		<button dojoType="dijit.form.Button" type="button" id="button-run" onClick="cs.executionController.run();" iconClass="csActionRun" showLabel="false">run</button>				
+					
+					<button dojoType="dijit.form.Button" type="button" id="button-stop" iconClass="csActionStopDisabled" showLabel="false">stop
+		    		    <script type="dojo/method" event="onClick" args="evt">
+		    		    	cs.executionController.stop();						
+						</script>
+		    		</button>	
+		    		
+		    		
+		    		<input id="checkbox-repeated-mode" name="loop" dojoType="dijit.form.CheckBox" value="loop" onChange="validateCheckboxRepeatedMode()">
+					<label for="checkbox-repeated-mode">
+					    Loop
+					</label>
+		    		
+		    		<button dojoType="dijit.form.Button" type="button" id="button-reload" onClick="window.location.reload();" iconClass="csActionReloadPage" showLabel="false">clean all</button>				
+				</div><!-- END: ACTIONS; CONTROLERS-->
 				
-				<button dojoType="dijit.form.Button" type="button" id="button-stop" iconClass="csActionStopDisabled" showLabel="false">stop
-	    		    <script type="dojo/method" event="onClick" args="evt">
-	    		    	cs.executionController.stop();						
-					</script>
-	    		</button>	
-	    		
-	    		
-	    		<input id="checkbox-repeated-mode" name="loop" dojoType="dijit.form.CheckBox" value="loop" onChange="validateCheckboxRepeatedMode()">
-				<label for="checkbox-repeated-mode">
-				    Loop
-				</label>
-	    		
-				<div id="csActions"></div>
+				<!-- STATUS -->	
+				<div id="csStateBar" class="csMenuBar">
+					<span>state</span>			
+					<span id='csState'>
+						<span title='RUN...' id='csStateRUN' style='display:none' class='csStateIcon' ></span>
+						<span title='STOP...' id='csStateSTOP'  style='display:none' class='csStateIcon'></span>
+						<span title='WAIT...' id='csStateWAIT'  style='display:none' class='csStateIcon'></span>
+						<span title='FINISH...' id='csStateFINISH' class='csStateIcon'></span>
+					</span>
+					<span>&nbsp;&nbsp;run-counter:</span> <span id='runCounter'>0</span>
+				</div><!-- END: STATUS -->
+				
+				
+				
+				<div id="csToolBar" style="border: solid #bbb 1px;" class="csMenuBar">
+				    <div dojoType="dijit.TitlePane" title="Statement" open="true">
+				        I'm pane #1
+				    </div>
+				    <div dojoType="dijit.TitlePane" title="String" open="false">
+				        I'm pane #2
+				    </div>
+				    <div dojoType="dijit.TitlePane" title="Number" open="false">
+				        I'm pane #3
+				    </div>
+				</div>
 				
 				<!-- LIBRARY -->
 				<div id="csLib"></div>
 
 				
+				
+				
+				
 				INFO <br/>
+				<span class="clickScriptTitle"></span>
 
 		   </div>
 	        <!-- END RIGHT-COL -->
@@ -291,7 +323,7 @@
 			        data-dojo-type="dijit.layout.BorderContainer"
 			        data-dojo-props="design: 'bottomline'">	        
 		            <div
-			            class="mainPanel" 
+			            class="mainPanel shadow" 
 			            data-dojo-type="dijit.layout.ContentPane"
 			            data-dojo-props="region: 'center', splitter: true">
 			            <!-- PLAYGROUND -->
@@ -334,7 +366,22 @@
        </div>
     
     	<div dojoType="dijit.Dialog" id="dialog-configuration" title="Configuration">
-    		Do be defined
+			<ul>
+				<li>
+					<input id="checkbox-debug-mode" name="debug-mode" dojoType="dijit.form.CheckBox" value="debug-mode" onChange="alert('debug-mode')">
+					<label for="checkbox-repeated-mode">
+					    Debug Mode ON/OFF
+					</label>					
+				</li>
+				<li>
+					<input id="checkbox-debug-worklist" name="debug-worklist" dojoType="dijit.form.CheckBox" value="debug-worklist" onChange="alert('debug-worklist')">
+					<label for="checkbox-repeated-mode">
+					    Show Worklist ON/OFF
+					</label>
+				</li>
+			</ul>
+
+
     	</div>
     	<div dojoType="dijit.Dialog" id="dialog-import" title="Import">
     		<textarea id="importValue" dojoType="dijit.form.Textarea"></textarea>
