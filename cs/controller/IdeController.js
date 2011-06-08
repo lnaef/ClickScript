@@ -23,7 +23,7 @@
  	dojo.declare("cs.controller.IdeController", null, {
 		
 
- 		
+
 
 		constructor : function(){
  			
@@ -348,5 +348,7 @@
 			dojo.connect(cs.library,"onHideToolbar",null,function(){updateOptionSwitches();});
 	
  		}
+ 		
+
 			
 	});

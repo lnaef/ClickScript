@@ -88,7 +88,9 @@
 			 */
 			init : function(){
 	 			window.cs.global.ide = new cs.controller.IdeController();
-			}
+			},
+			
+
 		},
 		
 		/**

@@ -59,8 +59,12 @@ html, body {
 
 .cs .dijitSplitContainer-dijitContentPane, .cs .dijitBorderContainer-dijitContentPane {
 	padding: 0px;
+	background-color: transparent;
 }
 
+.cs .dijitSplitContainer-child, .cs .dijitBorderContainer-child {
+	border: none;	
+}
 
 
 /* 
@@ -295,11 +299,33 @@ div.csLibButton:active {
 #csActionMenu #csStateFINISH	{background: url('../images/finish.png') no-repeat right center;}
 #csActionMenu .csStateIcon		{padding: 0px 10px 0px 14px;}
 
+.csActionRun  {background-image:url("../images/ide/action/play.png"); width: 32px; height: 32px;}
+.csActionRunDisabled  {background-image:url("../images/ide/action/playDisabled.png"); width: 32px; height: 32px;}
+.csActionRepeatOn {background-image:url("../images/ide/action/repeatOn.png"); width: 32px; height: 32px;}
+.csActionRepeatOff {background-image:url("../images/ide/action/repeatOff.png"); width: 32px; height: 32px;}
+.csActionStopDisabled {background-image:url("../images/ide/action/stopDisabled.png"); width: 32px; height: 32px;}
+.csActionStop {background-image:url("../images/ide/action/stop.png"); width: 32px; height: 32px;}
 
 /**
  * 	EXPORT DIALOG
  */
 #dialog-export textarea, #dialog-import textarea { width: 900px; height: 400px}
 
+#dialog-about  { width: 300px;}
+.about-picture { text-align:center}
+.about-version { margin-top: 15px;}
+.about-contact { margin-top: 5px;}
+.about-txt     { margin-top: 10px; color: #aaa; font-size: 7pt;}
+
+/* FILE */
 .csMenuExport {background-image:url("../images/ide/menu/export.png"); width: 16px; height: 16px;}
 .csMenuImport {background-image:url("../images/ide/menu/import.png"); width: 16px; height: 16px;}
+/* EXTRAS */
+.csMenuConfig   {background-image:url("../images/ide/menu/config.png"); width: 16px; height: 16px;}
+.csMenuTutorial {background-image:url("../images/ide/menu/tutorial.png"); width: 16px; height: 16px;}
+.csMenuExercise {background-image:url("../images/ide/menu/exercise.png"); width: 16px; height: 16px;}
+/* HELP */
+.csMenuHelp {background-image:url("../images/ide/menu/help.png"); width: 16px; height: 16px;}
+.csMenuAbout {background-image:url("../images/ide/menu/infomation.png"); width: 16px; height: 16px;}
+
+

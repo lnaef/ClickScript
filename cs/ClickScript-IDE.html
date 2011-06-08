@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Testing new IDE Clickscript</title>
+        <title>ClickScript - IDE</title>
 		
 
 		<!-- CSS -->
@@ -45,7 +45,7 @@
     		// Forms
     		dojo.require("dijit.form.Button");
     		dojo.require("dijit.form.Textarea");
-
+			dojo.require("dijit.form.CheckBox");
     		
     		// Menu
     		dojo.require("dijit.MenuBar");
@@ -92,21 +92,11 @@
 				// Build Dijit Layout
 				dojo.parser.parse();
 				
-
-				
-				/** 
-				 * TODO Move to external class
-				 */
-				showExportDialog = function(){
-					var exportDialog = dijit.byId('dialog-export');
-					exportDialog.show();
-					dojo.byId("exportValue").value = cs.modelController.serializeScript();
-				};
-				
-				
-				
-				
-				
+				// set version numbers where needed
+				dojo.query(".version-number").forEach(function(node, index, arr){
+					node.innerHTML = cs.config.version;
+				});
+								
 
 				// Inizialize the IDE
 				cs.global.ide.init();
@@ -116,6 +106,63 @@
 				 * Show the loaded libraries in the IDE
 				 */
 				cs.global.ide.showLibrary();	
+				
+				
+				/**
+				 * SOME IDE STUFF
+				 */
+				validateCheckboxRepeatedMode = function(){
+					var state = dijit.byId("checkbox-repeated-mode").get("checked");
+					cs.executionController.setRepeatedMode(state);
+					console.log("repeated? "+state);
+				};
+				
+				/*
+				dojo.connect(this.getWorklist(),"onNewRun",this,function(){
+					if(dojo.byId("runCounter")){
+						dojo.byId("runCounter").innerHTML = (this.getWorklist().getRunCounter());
+					} else {
+						this.write("NEW ROUND: "+this.getWorklist().getRunCounter());
+					}
+				});
+				*/
+				dojo.connect(cs.executionController.getWorklist(),"onStateChange",this,function(state){
+					/*
+					if(dojo.byId("csState")){
+	
+						dojo.query(".csStateIcon").style("display","none");
+						dojo.style(dojo.byId("csState"+state),"display","inline");
+					} else {
+						this.write("STATE changed to: "+state);
+					}*/
+					switch(state){
+						case "RUN":
+							dijit.byId("button-stop").set("iconClass","csActionStop");
+							dijit.byId("button-run").set("disabled",true);
+							dijit.byId("button-run").set("iconClass","csActionRunDisabled");
+							break;
+						case "STOP":
+							// someone pressed the stopbutton
+							dijit.byId("button-stop").set("iconClass","csActionStopDisabled");
+							dijit.byId("button-run").set("disabled",false);
+							dijit.byId("button-run").set("iconClass","csActionRun");						
+							break;
+						case "WAIT" :
+							break;
+						case "FINISH":
+							// script terminated on it's own (without an abord through stop-button)
+							dijit.byId("button-stop").set("iconClass","csActionStopDisabled");
+							dijit.byId("button-run").set("disabled",false);
+							dijit.byId("button-run").set("iconClass","csActionRun");
+							break;
+					};
+				});
+				
+				
+				
+				
+				
+				
 				
 				
 				/**
@@ -157,8 +204,13 @@
 		                    File
 		                </span>
 		                <div dojoType="dijit.Menu" id="fileMenu">
-		                    <div dojoType="dijit.MenuItem" onClick="showExportDialog()" iconClass="csMenuExport">
-		                        Export
+		                    <div dojoType="dijit.MenuItem" iconClass="csMenuExport">
+				    		    <script type="dojo/method" event="onClick" args="evt">
+									var exportDialog = dijit.byId('dialog-export');
+									exportDialog.show();
+									dojo.byId("exportValue").value = cs.modelController.serializeScript();
+				    			</script>
+				    			Export
 		                    </div>
 		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-import').show()" iconClass="csMenuImport">
 		                        Import
@@ -170,13 +222,13 @@
 		                    Extras
 		                </span>
 		                <div dojoType="dijit.Menu" id="editMenu">
-		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-configuration').show()">
+		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-configuration').show()" iconClass="csMenuConfig">
 		                        Configuration
 		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 2')">
+		                    <div dojoType="dijit.MenuItem" onClick="window.open('../cs/util/tutorial/tutorialEN.html','cs-window','status=1,width=900,height=600,scrollbars=1')" iconClass="csMenuTutorial">
 		                        Tutorial
 		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 2')">
+		                    <div dojoType="dijit.MenuItem" onClick="window.open('../cs/util/exercise/index.html','cs-window','status=1,width=900,height=600,scrollbars=1')" iconClass="csMenuExercise">
 		                        Exercise
 		                    </div>
 		                </div>
@@ -186,14 +238,8 @@
 		                    ?
 		                </span>
 		                <div dojoType="dijit.Menu" id="helpMenu">
-		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 1')">
-		                        Config
-		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 2')">
+		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-about').show()"  iconClass="csMenuAbout">
 		                        About
-		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="alert('edit 3')">
-		                        Contact
 		                    </div>
 		                </div>
 		            </div>
@@ -207,7 +253,22 @@
 	            data-dojo-type="dijit.layout.ContentPane"
 	            data-dojo-props="region: 'right', splitter: true">
 				
-				<!-- ACTIONS; CONTROLERS -->
+				<!-- ACTIONS; CONTROLERS -->	    		
+	    		
+	    		<button dojoType="dijit.form.Button" type="button" id="button-run" onClick="cs.executionController.run();" iconClass="csActionRun" showLabel="false">run</button>				
+				
+				<button dojoType="dijit.form.Button" type="button" id="button-stop" iconClass="csActionStopDisabled" showLabel="false">stop
+	    		    <script type="dojo/method" event="onClick" args="evt">
+	    		    	cs.executionController.stop();						
+					</script>
+	    		</button>	
+	    		
+	    		
+	    		<input id="checkbox-repeated-mode" name="loop" dojoType="dijit.form.CheckBox" value="loop" onChange="validateCheckboxRepeatedMode()">
+				<label for="checkbox-repeated-mode">
+				    Loop
+				</label>
+	    		
 				<div id="csActions"></div>
 				
 				<!-- LIBRARY -->
@@ -306,6 +367,22 @@
 				    </script>		
 	    		</button>  				
   			</div>
+    	</div>
+    	<div dojoType="dijit.Dialog" id="dialog-about" title="About ClickScript">
+    		<div class="about">
+    			<div class="about-picture">
+    				<img src="../cs/util/images/logo64x64.png" width="64" height="64" />
+     			</div>
+     			<div class="about-version">
+    				ClickScript <span class="version-number"></span>
+    			</div>
+    			<div class="about-contact">
+    				contact'at'clickscript.ch 
+    			</div>
+    			<div class="about-txt">
+    				ClickScript is a visual programming language in the browser. It is not allowed to reuse ClickScript on other pages without explicit permission of the owner. Non-commercial use only.<br/>&copy;2009-2011 powered by clickscript.ch
+    			</div>
+    		</div>			
     	</div>
 	</body>
 </html>

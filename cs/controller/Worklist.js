@@ -161,7 +161,7 @@
  			
  			this._worklist = new cs.util.Container();
  			this._isStop = false;
- 			this.setRepeatedRun(false);
+ 			//this.setRepeatedRun(false);
  			this._runCounter = 0;
  			this.logNbr = 0;
  		},
@@ -181,6 +181,10 @@
  		
  		setRepeatedRun : function(b){
  			this._isRepeatedRun = b;
+ 		},
+ 		
+ 		getRepeatedRun : function(){
+ 			return this._isRepeatedRun;
  		},
  		
  		isRepeatedRun : function(){
