@@ -34,60 +34,66 @@
 			 * DESIGN STUFF ONLY
 			 */
 			
-			// Init ClickScript globals and settings
-			dojo.require("dojo.parser");
-			
-			// Layout / Container
-			dojo.require("dijit.layout.BorderContainer");
-    		dojo.require("dijit.layout.TabContainer");
-    		dojo.require("dijit.layout.ContentPane");
-    		dojo.require("dijit.TitlePane");
-    		
-    		// Forms
-    		dojo.require("dijit.form.Button");
-    		dojo.require("dijit.form.Textarea");
-			dojo.require("dijit.form.CheckBox");
-    		
-    		// Menu
-    		dojo.require("dijit.MenuBar");
-		    dojo.require("dijit.PopupMenuBarItem");
-		    dojo.require("dijit.Menu");
-		    dojo.require("dijit.MenuItem");
-		    dojo.require("dijit.PopupMenuItem");
-	
-			// Dialogs like configuration
-			dojo.require("dijit.Dialog");
+
 
 			
 			/**
 			 * CLICKSCRIPT STUFF
 			 */
 			
-			// Init ClickScript globals and settings
-			dojo.require("cs.system.ConfigController");
-			
-			// Load IDE-Class
-			dojo.require("cs.controller.NewIdeController");
-			
-			/**
-			 * Load libraries
-			 */		
-			dojo.require("cs.lib.default.init");
-			dojo.require("cs.lib.statement.init");
-			dojo.require("cs.lib.web.browse.init");
-			//dojo.require("cs.lib.web.misc.init");
-			dojo.require("cs.lib.math.init");
-			dojo.require("cs.lib.string.init");
-			dojo.require("cs.lib.converter.init");
-			dojo.require("cs.lib.logic.init");
-			dojo.require("cs.lib.robotic.init");
-			dojo.require("cs.lib.collection.init");
+
 
 					
 
 			// If all Javascriptfiles and Classes are loaded...
 			dojo.addOnLoad(function(){
 
+				/**
+				 * TRY TO Load as much as possible in the onload-function to activate the loading screen
+				 */
+				// Init ClickScript globals and settings
+				dojo.require("dojo.parser");
+				
+				// Layout / Container
+				dojo.require("dijit.layout.BorderContainer");
+	    		dojo.require("dijit.layout.TabContainer");
+	    		dojo.require("dijit.layout.ContentPane");
+	    		dojo.require("dijit.TitlePane");
+	    		
+	    		// Forms
+	    		dojo.require("dijit.form.Button");
+	    		dojo.require("dijit.form.Textarea");
+				dojo.require("dijit.form.CheckBox");
+	    		
+	    		// Menu
+	    		dojo.require("dijit.MenuBar");
+			    dojo.require("dijit.PopupMenuBarItem");
+			    dojo.require("dijit.Menu");
+			    dojo.require("dijit.MenuItem");
+			    dojo.require("dijit.PopupMenuItem");
+		
+				// Dialogs like configuration
+				dojo.require("dijit.Dialog");
+
+				// Init ClickScript globals and settings
+				dojo.require("cs.system.ConfigController");
+				
+				// Load IDE-Class
+				dojo.require("cs.controller.NewIdeController");
+				
+				/**
+				 * Load libraries
+				 */		
+				dojo.require("cs.lib.default.init");
+				dojo.require("cs.lib.statement.init");
+				dojo.require("cs.lib.web.browse.init");
+				//dojo.require("cs.lib.web.misc.init");
+				dojo.require("cs.lib.math.init");
+				dojo.require("cs.lib.string.init");
+				dojo.require("cs.lib.converter.init");
+				dojo.require("cs.lib.logic.init");
+				dojo.require("cs.lib.robotic.init");
+				dojo.require("cs.lib.collection.init");				
 				
 				
 				// Build Dijit Layout
@@ -101,12 +107,20 @@
 
 				// Inizialize the IDE
 				cs.global.ide.init();
+		
 				
-				
+				// prepare node to add style
 				/**
-				 * Show the loaded libraries in the IDE
-				 */
-				cs.global.ide.showLibrary();	
+				var toolbarStyleNode = document.createElement("style");
+				toolbarStyleNode.type = "text/css";
+				document.getElementsByTagName("head")[0].appendChild(toolbarStyleNode);
+				var addStyle = function(newStyle){
+					toolbarStyleNode.innerHTML = toolbarStyleNode.innerHTML + newStyle;
+				}
+				**/
+
+				
+				
 				
 				
 				/**
@@ -167,19 +181,25 @@
 				
 				
 				/**
-				 * Shutoff loading screen
+				 * disable loading screen
 				 */
-				dojo.style(dojo.byId("loading"), "display", "none"); 
-		    });   
+				dojo.fadeOut({
+				        node:"loading",
+				        onEnd: function(){
+				            dojo.style("loading", "display", "none");
+				        }
+				    }).play();
+			    });   
 			
 //]]></script>
 
     </head>
 	<body class="cs claro" >
 	    <div id="loading" style="position:absolute;left:0px;top:0px;width:100%;height:100%;background-color:white;z-index:999;">
-	    	<div>
+	    	<div id="innerLoading" class="shadow">
+	    		<img src="../cs/util/images/logo64x64.png" width="64" height="64" />
 	    		<h1>ClickScript is loading...</h1>
-	    		<div><img src="../cs/util/images/loadingbar.gif"/></div>
+	    		<div id="loadingbar"><img src="../cs/util/images/loadingbar.gif"/></div>
 	    	</div>
 	    	
 	    </div>
@@ -288,15 +308,7 @@
 				
 				
 				<div id="csToolBar" style="border: solid #bbb 1px;" class="csMenuBar">
-				    <div dojoType="dijit.TitlePane" title="Statement" open="true">
-				        I'm pane #1
-				    </div>
-				    <div dojoType="dijit.TitlePane" title="String" open="false">
-				        I'm pane #2
-				    </div>
-				    <div dojoType="dijit.TitlePane" title="Number" open="false">
-				        I'm pane #3
-				    </div>
+				 
 				</div>
 				
 				<!-- LIBRARY -->
@@ -307,6 +319,10 @@
 				
 				
 				INFO <br/>
+				<!-- DO NOT REMOVE! IS USED TO SIMULATE BLUR-EVENT -->
+				<input id="blur-widget"  dojoType="dijit.form.CheckBox">
+				<!-- END DO NOT REMOVE!-->
+				
 				<span class="clickScriptTitle"></span>
 
 		   </div>
@@ -354,35 +370,41 @@
 				</div>
 			</div>   
 	    	<!-- END LEFT-COL -->
-        
-        	<!-- BOTTOM -->
-	        <!--<div
-	            class="footerRow"
-	            data-dojo-type="dijit.layout.ContentPane"
-	            data-dojo-props="region: 'bottom'">
-	           	<div class="left">ClickScript</div><div class="right">&copy; 2011 by clickscript.ch</div><div class="clear"/>
-	       </div>-->
-	       <!-- END BOTTOM-->
        </div>
     
+    
+    	<!-- 
+    	  -- DIALOG: CONFIGURATION / OPTION
+    	  -->
     	<div dojoType="dijit.Dialog" id="dialog-configuration" title="Configuration">
 			<ul>
 				<li>
-					<input id="checkbox-debug-mode" name="debug-mode" dojoType="dijit.form.CheckBox" value="debug-mode" onChange="alert('debug-mode')">
-					<label for="checkbox-repeated-mode">
-					    Debug Mode ON/OFF
+					<input id="checkbox-debug-mode" name="debug-mode" dojoType="dijit.form.CheckBox" value="debug-mode">
+					<label for="checkbox-debug-mode">
+					    Debug-Mode ClickScript ON/OFF
 					</label>					
 				</li>
 				<li>
-					<input id="checkbox-debug-worklist" name="debug-worklist" dojoType="dijit.form.CheckBox" value="debug-worklist" onChange="alert('debug-worklist')">
-					<label for="checkbox-repeated-mode">
+					<input id="checkbox-debug-dojo" name="debug-dojo" dojoType="dijit.form.CheckBox" value="debug-dojo">
+
+					<label for="checkbox-debug-dojo">
+					    Debug-Mode Dojo ON/OFF
+					</label>
+				</li>
+				<li>
+					<input id="checkbox-debug-worklist" name="debug-worklist" dojoType="dijit.form.CheckBox" value="debug-worklist">
+
+					<label for="checkbox-debug-worklist">
 					    Show Worklist ON/OFF
 					</label>
 				</li>
 			</ul>
-
-
     	</div>
+    	
+    	
+    	<!-- 
+    	  -- DIALOG: IMPORT 
+    	  -->
     	<div dojoType="dijit.Dialog" id="dialog-import" title="Import">
     		<textarea id="importValue" dojoType="dijit.form.Textarea"></textarea>
     		<div>
@@ -405,6 +427,11 @@
 	    		</button>
     		</div>
     	</div>
+    	
+    	
+    	<!-- 
+    	  -- DIALOG: EXPORT 
+    	  -->
     	<div dojoType="dijit.Dialog" id="dialog-export" title="Export">
   			<textarea id="exportValue" dojoType="dijit.form.Textarea"></textarea>
   			<div>
