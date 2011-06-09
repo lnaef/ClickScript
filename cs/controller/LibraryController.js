@@ -24,7 +24,6 @@
 		constructor : function(){
 			this._metadataMap = new cs.util.Map();
 			this._typeMap = new cs.util.Map();
-			this.setLibStyle(this._libStyle);
 		},
 		
 		
@@ -235,165 +234,12 @@
 			dojo.forEach(a_arrayOfMetacomponentData,function(item){
 				this.addMetaComponent(item);
 			},this);
-		},
-		
-		
-		
-		
-		/******
-		 * All about the toolbars
-		 * TODO Move this stuff to own class
-		 */
-	
-
- 		_libStyle : 3, // 1,2 or 3
-		
- 		setLibStyle : function(a_number){
-			this._libStyle = a_number;
-			var lib = dojo.byId("csLib");
-			if(lib){
-				dojo.addClass(lib,"libStyle"+this._libStyle);
-				for(var i = 1; i<4;i++){
-					if(i != this._libStyle){
-						dojo.removeClass(lib,"libStyle"+i);
-					}					
-				}	
-			}
-		},
- 		
-		/**
-		 * Returns true if the toolbar with a_category_name is visible
-		 */
-		isToolbarOn : function(a_category_name){
-			var idToolbar = a_category_name.replace(/\./,"");
-			return dojo.byId(idToolbar) && dojo.style(dojo.byId(idToolbar),"display") != "none";
-		},
-		
-		/**
-		 * Returns the toolbar with a_category_name
-		 */
-		getToolbar : function(a_category_name){
-			 var idToolbar = a_category_name.replace(/\./,"");
-			 return dojo.byId(idToolbar);
-		},
-		
-		/**
-		 * adds a toolbar to the library, makes it visible in case not visible
-		 */
-		showToolbar : function(a_category_name){
-			var idToolbar = a_category_name.replace(/\./,"");
-			var out = "";
-			
-			// if not available just insert a new toolbar.
-			if(!this.getToolbar(a_category_name)){
-				if(dojo.byId("csLib")){
-				   
-				   // get toolbar node where all toolbars are stored
-				   if(!dojo.byId("csLibToolbars")){
-					   dojo.place("<div id='csLibToolbars'></div><br style='clear:both'/>",dojo.byId("csLib"),"first");
-				   }
-				   var toolbarNode = dojo.byId('csLibToolbars');
-				   
-				   // get all components of this category
-				   var metaComponents = this.getMetaComponentsByCategory().get(a_category_name);
-				   out += "<div class='csLibToolbar' id='"+idToolbar+"'>" +
-				   		"<div class='csLibToolbarTitle' ><span class='text'>"+a_category_name+"</span>" + //style='background-image:url(\""+cs.config.rootPath+"util/images/toolbartitle.png\");'
-					"<span class='buttons'>	" +
-					"<span onclick=\"(function(node){" +
-					"						dojo.style(dojo.query('.csLibToolbarContent',node.parentNode.parentNode.parentNode).item(0),'display','none');" +
-					"						dojo.style(dojo.query('.minimize',node.parentNode.parentNode.parentNode).item(0),'display','none');" +
-					"						dojo.style(dojo.query('.maximize',node.parentNode.parentNode.parentNode).item(0),'display','inline');" +
-					"					})(this)\" class='minimize'><img src='"+cs.config.rootPath+"util/images/minimizeToolbar.png'/></span>" +
-					"<span onclick=\"(function(node){" +
-					"						dojo.style(dojo.query('.maximize',node.parentNode.parentNode.parentNode).item(0),'display','none');" +
-					"						dojo.style(dojo.query('.csLibToolbarContent',node.parentNode.parentNode.parentNode).item(0),'display','block');" +
-					"						dojo.style(dojo.query('.minimize',node.parentNode.parentNode.parentNode).item(0),'display','inline');" +
-					"					})(this)\" style='display:none' class='maximize'><img src='"+cs.config.rootPath+"util/images/maximizeToolbar.png'/></span>" +
-					"<span onclick=\"cs.library.hideToolbar('"+a_category_name+"')\" class='close'><img src='"+cs.config.rootPath+"util/images/closeToolbar.png'/></span> " +
-					"</span></div><div class='csLibToolbarContent'>" +
-					"   ";
-				   metaComponents.forEach(function(metaComponent,name){
-					  if (name != "program"){
-						out += this.getToolbarButton(metaComponent,name);
-					  }
-				   },this);
-
-				   out += "</div></div>";
-			       
-				   dojo.place(out,toolbarNode,"last");
-				}
-			} else {
-				dojo.style(dojo.byId(idToolbar),"display","block");
-			}
-			
-			this.onShowToolbar(a_category_name);
-		},
-		
-		/**
-		 * hides a toolbar
-		 */
-		hideToolbar : function(a_category_name){
-			if(this.getToolbar(a_category_name)){
-				var toolbar = this.getToolbar(a_category_name);
-				dojo.style(toolbar,"display","none");
-				this.onHideToolbar(a_category_name);
-			}
-		},
-		
-		/**
-		 * returns html pattern for one icon in the toolbar
-		 */
-		getToolbarButton : function(a_metaComponent,a_name){	
-			var imgRoot = cs.config.rootPath + "lib/";
-			
-			var out = "<div class='csLibButton' title='"+a_name.toUpperCase()+"' onclick='cs.library.onClickLibButton(\""+a_metaComponent.getName()+"\",event)' onmousedown='cs.library.onMouseDownLibButton(\""+a_metaComponent.getName()+"\",event)' onmouseout='cs.library.onMouseOutLibButton(\""+a_metaComponent.getName()+"\",event)'>" +
-						"<div class='csLibButtonImg'>";
-			if(!a_metaComponent.isPrimitive()){
-				out += "<img src='"+imgRoot+(a_metaComponent.getImgPath()?a_metaComponent.getImgPath():"default.gif")+"' alt='"+a_metaComponent.getName()+"'/>";		
-			} else {
-				var c = new dojo.Color(); 
-				c.setColor(a_metaComponent.getFields().item(0).getType().getColor()); // black var hex = c.toHex(); // #000000
-				out += "<div style='height:48px;background-color:"+c.toHex()+";'></div>";
-			}
-			out += "</div><div class='csLibButtonLabel'>"+a_name+"</div>" +
-			   "</div>";
-			return out;
-		},
-		
-		
-		onClickLibButton : function(a_name,e){
-				cs.modelController.addComponent(a_name,{x:200+Math.round(Math.random()*40),y:200+Math.round(Math.random()*40)},{x:0,y:0});
-		},
-		
-		onMouseDownLibButton : function(a_name,e){
-			if(e.which == 3){
-				var tooltip = cs.viewController.getTooltip();
-				var text = cs.library.getMetaComponent(a_name).toHTML();//.getDescriptionAsHTML();
-				if(tooltip.isOn()&&tooltip.getText()==text){
-					tooltip.hide();
-				} else {
-					tooltip.show(e,text);
-				}
-			}			
-		},
-		
-		onMouseOutLibButton : function(a_name,e){
-			cs.viewController.getTooltip().hide();
-			
-		},
-		
-		/**
-		 * called by the corresponding functions showToolbar and hideToolbar
-		 * used to connect other functions on it.
-		 */
-		onShowToolbar : function(a_category_name){
-			
-		},
-		
-		onHideToolbar : function(a_category_name){
-			
 		}
 		
+		
+		
+		
+
 		
 		
 		

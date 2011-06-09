@@ -50,10 +50,8 @@
 		 */
 		loadItem : function(){
  			
- 			var playgroundPosition = dojo.position(this._playground,true);
-
 			// place component to the view and save reference to the node
- 			this._item = dojo.place("<div class='csEVItem' style='left:"+(playgroundPosition.x+this._programModel.getPositionExec().x)+"px;top:"+(playgroundPosition.y+this._programModel.getPositionExec().y)+"px'>" +
+ 			this._item = dojo.place("<div class='csEVItem' style='left:"+(this._programModel.getPositionExec().x)+"px;top:"+(this._programModel.getPositionExec().y)+"px'>" +
  									"  <div class='csEVItemNode'></div>" +
  									"  <div class='csEVItemLabel'></div>" +
  									"</div>",this._playground,"last");

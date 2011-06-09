@@ -10,7 +10,9 @@
  */	
 v\:imagedata, v\:rect, v\:roundrect, v\:line, v\:polyline, v\:curve, v\:arc, v\:oval, v\:image, v\:shape, v\:group, v\:skew, v\:stroke, v\:fill { behavior:url(#default#VML); display:inline-block }
 
-
+* {
+    font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;
+}
 
 html, body {
     height: 100%;
@@ -32,6 +34,8 @@ html, body {
     margin-bottom: 5px;
 }
 
+
+
 .cs .mainPanel {
 	-moz-border-radius: 5px;
 	margin-right: 10px;
@@ -42,30 +46,6 @@ html, body {
 	height: 200px;
 	margin-right: 10px;
 }
-/*
-.tabContainerRight {
-	width: 250px;
-	min-width: 100px;
-}
-
-.consolePanel {
-	height: 50px;
-	min-height: 20px;
-}
-
-.footerRow {
-	padding: 8px 0px;
-	font-size: 7pt;
-}
-
-.cs .bottomLeftContainer {
-	border: none;
-}
-
-.cs .leftCol, .cs .bottomLeftContainer, .cs .footerRow {
-	background-color: #eee;
-}*/
-
 
 
 #navMenu {
@@ -154,6 +134,29 @@ html, body {
 
 .dijitLayoutContainer .dijitLayoutContainer {border: none; padding: 0px}
 
+/**
+ * 	LOADING
+ */
+
+#loading {
+    background: url('../images/ide/background.png') repeat-x left bottom;
+}
+
+#innerLoading {
+	width: 300px;
+	margin: 200px auto;
+	vertical-align:middle;
+	text-align:center;
+	font-size: 8pt;
+	background: url('../images/ide/background-right-column.png') repeat;
+	-moz-border-radius: 5px;
+	padding: 20px;
+}
+
+#loadingBar {
+	margin-top: 10px;
+}
+
 
 /**
  * 	CLICKSCRIPT ELEMENTS
@@ -218,6 +221,7 @@ html, body {
 
 #csExecutionViewPlayground {
   min-height: 400px;
+  position: relative;
 }
 
 .csEVItem{
@@ -267,12 +271,22 @@ html, body {
 /**
  * 	TOOLBAR
  */
+#csToolBar .dijitTitlePaneContentInner {padding: 1px;}
+#csToolBar .dijitTitlePaneContentInner img { width: 32px; height: 32px; }
+#csToolBar .primitiveButton { display: block; width: 32px; height: 32px;}
+
+#csToolBar .dijitButton .dijitButtonNode {
+	padding: 0px;
+}
+
 .csLibButton {
 	overflow:hidden;
 	/*background-color: white;*/
 	margin: 0px 2px;
     -moz-border-radius: 0pt 0pt 3pt 3pt;
 }
+
+
 
 .libStyle1 .csLibButton {width:32px;height:32px;}
 .libStyle2 .csLibButton {width:32px;height:32px;}
