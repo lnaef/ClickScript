@@ -9,7 +9,6 @@
 	
 	dojo.provide("cs.controller.NewIdeController");
 
-	dojo.require("dojox.fx.scroll");
 	dojo.require("dojox.gfx");
 	dojo.require("cs.controller.LibraryController");	
 	dojo.require("cs.controller.ViewController");		
@@ -20,6 +19,8 @@
 	dojo.require("cs.view.util.Toggler");
 	dojo.require("cs.system.ScriptPlayer");
 	
+	dojo.require("dojo.dnd.Source");
+		
  	dojo.declare("cs.controller.NewIdeController", null, {
 		
 
@@ -94,6 +95,32 @@
 			// init library
 			this.initLibrary();
 			
+			// register events on mouseenter and mouseleave
+			// of component on programming view
+			dojo.subscribe("view/program/mouseenter",this,function(componentModel){
+				var text = "<div class='csInfoUid csInfoLine'><span class='csInfoTitle'>uuid: </span>"+componentModel.getUid()+"</div>";
+				this.showInfo(componentModel.getDescriptionAsHTML()+text);
+			});
+			dojo.subscribe("view/program/mouseleave",this,function(data){
+				this.hideInfo();
+			});			
+			
+			
+			// init playground dopper
+			//dojo.connect(nodePlayground, "onDndDrop", this, "onDropComponentItem");
+			
+			/*
+			var target = new dojo.dnd.Target(nodePlayground,{ checkAcceptance:function(){
+				return true;
+			}, creator: function(){
+				alert("test");
+			}});
+			dojo.connect(nodePlayground)
+			dojo.connect(target,"onDndDrop",this,"onDropComponentItem");
+			dojo.connect(target,"onDropExternal",function(a,b,c){
+				alert("drop external");
+			});
+			*/
 			cs.console.write("ClickScript IDE loaded.");
  		},
  	
@@ -129,7 +156,13 @@
 					value:cs.executionController.getWorklist().isDebug()
 				});
  		},
- 	
+ 		
+ 		onDropComponentItem : function( source, nodes, copy, target ){
+ 			alert('dropped');
+ 		},
+ 		
+ 		_libraryStyle : "top",
+ 		
  		initLibrary : function(){
  			// Get all loaded libraries
 			var loadedComponents = cs.library.getMetaComponentsByCategory();
@@ -152,9 +185,31 @@
 		        	}
 		        },this);
 		        typeToolbar.set('content',buttonNodeList);
+		        dojo.addClass(typeToolbar.domNode,"categoryToolBar");
 		        
-		        dojo.byId("csToolBar").appendChild(typeToolbar.domNode);			
+		        if(this._libraryStyle == "top"){
+		        	typeToolbar.set('open',true);
+		        	dojo.byId("csToolBarTop").appendChild(typeToolbar.domNode);
+		        } else {
+		        	typeToolbar.set('open',false);
+		        	dojo.byId("csToolBarRight").appendChild(typeToolbar.domNode);		        	
+		        }
+		        // make buttons draggable
+		        // Buttons must have a class="dojoDndItem"
+		        /*
+		        if(typeToolbar.getChildren()&&typeToolbar.getChildren()[0]){
+		        	var contentNode = typeToolbar.getChildren()[0].domNode.parentNode;
+		        	var source = new dojo.dnd.Source(contentNode);
+		        }*/
 			},this);
+			
+			var br = dojo.doc.createElement('br');
+			dojo.addClass(br,"clear")
+			if(this._libraryStyle == "top"){
+	        	dojo.byId("csToolBarTop").appendChild(br);
+	        } else {
+	        	dojo.byId("csToolBarRight").appendChild(br);		        	
+	        }
  		},
  		
  		/**
@@ -176,22 +231,45 @@
         		buttonLabel = "<img src='"+imagePath+"'/>";
         	}
         	
+        	var self = this;
+        	
         	// create new button
         	var button = new dijit.form.Button({
         		label:buttonLabel,
         		showLabel : true,
         		title: a_metaComponent.getName().replace(/^.*\./,""),
         		onClick : function(event){
-        			cs.modelController.addComponent(a_metaComponent.getName(),{x:200+Math.round(Math.random()*40),y:200+Math.round(Math.random()*40)},{x:0,y:0});
+        			
+        			cs.modelController.addComponent(a_metaComponent.getName(),{x:0+Math.round(Math.random()*40),y:0+Math.round(Math.random()*40)},{x:0,y:0});
+        			
         			/* HACK TO BLUR */
-        			//dijit.focus(dijit.findWidgets(dojo.byId("csToolBar"))[0].focusNode);
-        			//dijit.focus(dijit.findWidgets(dojo.byId("blur-widget"))[0].focusNode);
-        		dojo.byId("blur-widget").focus()
+	        		dojo.byId("blur-widget").focus()
+        		},
+        		onMouseEnter : function(event){
+        			/*show info*/
+        			//dojo.byId("csInfo").innerHTML = a_metaComponent.toHTML();
+        			self.showInfo(a_metaComponent.toHTML());
+        			//dojo.publish("controller/IdeController/showInfo",[a_metaComponent.toHTML()]);
+        		},
+        		onMouseLeave : function(event){
+        			//dojo.byId("csInfo").innerHTML="" ;
+        			self.hideInfo();
+        			//dojo.publish("controller/IdeController/hideInfo",[]);
         		}
         	});
         	
+        	//dojo.addClass(button.domNode,"dojoDndItem");
+        	dojo.addClass(button.domNode,"toolBarButton");
         	return button;
- 		} 		
+ 		}, 		
 
-			
+		hideInfo : function(){
+			dojo.style(dojo.byId("csInfo"),"display","none");
+			dojo.byId("csInfo").innerHTML="" ;
+		},
+		
+		showInfo : function(text){
+			dojo.byId("csInfo").innerHTML = text;
+			dojo.style(dojo.byId("csInfo"),"display","block");
+		}	
 	});

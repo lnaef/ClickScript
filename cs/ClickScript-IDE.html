@@ -2,6 +2,7 @@
     <head>
         <title>ClickScript - IDE</title>
 		
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
 
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" media="all" href="../dojo-release-1.6.1-src/dojo/resources/dojo.css" />
@@ -108,6 +109,7 @@
 				// Inizialize the IDE
 				cs.global.ide.init();
 		
+				
 				
 				// prepare node to add style
 				/**
@@ -307,18 +309,16 @@
 				
 				
 				
-				<div id="csToolBar" style="border: solid #bbb 1px;" class="csMenuBar">
+				<!-- TOOLBAR TOP -->
+				<div id="csToolBarRight" class="csMenuBar csToolBars">
 				 
 				</div>
-				
-				<!-- LIBRARY -->
-				<div id="csLib"></div>
 
 				
 				
+				<div id="csInfo"></div>
 				
-				
-				INFO <br/>
+				 <br/>
 				<!-- DO NOT REMOVE! IS USED TO SIMULATE BLUR-EVENT -->
 				<input id="blur-widget"  dojoType="dijit.form.CheckBox">
 				<!-- END DO NOT REMOVE!-->
@@ -337,8 +337,17 @@
 	           	<div    
 			    	class="leftColContainer"
 			        data-dojo-type="dijit.layout.BorderContainer"
-			        data-dojo-props="design: 'bottomline'">	        
+			        data-dojo-props="design: 'headline'">	        
+			        <div
+			            id="toolBarPane" 
+			            data-dojo-type="dijit.layout.ContentPane"
+			            data-dojo-props="region: 'top', splitter: false">
+			            <!-- TOOLBAR VARIANTE 2 -->
+			            <div id="csToolBarTop" class="csToolBars">
+						</div>
+					</div>
 		            <div
+		            	id="thePlayGroundPane"
 			            class="mainPanel shadow" 
 			            data-dojo-type="dijit.layout.ContentPane"
 			            data-dojo-props="region: 'center', splitter: true">

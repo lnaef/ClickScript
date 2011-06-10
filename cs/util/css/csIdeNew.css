@@ -51,12 +51,22 @@ html, body {
 #navMenu {
 	left: 0px;
 	top: 0px;
-	-moz-border-radius: 5px 0px 0px 5px;
+	-moz-border-radius: 8px 0px 0px 8px;
 	margin-left: 5px;
 }
 
 .cs.claro .dijitMenuBar {
-	background: transparent url('../images/ide/background-right-column.png') repeat center center;
+	background: none;/*transparent url('../images/ide/background-right-column.png') repeat center center;*/
+	background-color: #468;
+	padding-left: 15px;
+}
+
+.cs.claro .dijitMenuBar .dijitMenuItem {
+	color: white;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-top: 1px solid #468;
+	border-bottom: 1px solid #468;
 }
 
 .clickScriptTitle {
@@ -117,10 +127,10 @@ html, body {
 .cs .dijitSplitContainer-child, .cs .dijitBorderContainer-child {
 	border: none;	
 }
-
+/*
 .cs.claro .dijitMenuBar .dijitMenuItem {
 	border: 1px solid transparent;
-}
+}*/
 
 
 /* 
@@ -129,7 +139,7 @@ html, body {
 .left {float: left}
 .right {float: right}
 .clear {clear: both}
-.shadow { -moz-box-shadow: 5px 5px 5px #457; -webkit-box-shadow: 5px 5px 5px #457; box-shadow: 5px 5px 5px #457; }
+.shadow { -moz-box-shadow: 5px 5px 5px #457; -webkit-box-shadow: 5px 5px 5p468 box-shadow: 5px 5px 5px #457; }
 
 
 .dijitLayoutContainer .dijitLayoutContainer {border: none; padding: 0px}
@@ -151,6 +161,11 @@ html, body {
 	background: url('../images/ide/background-right-column.png') repeat;
 	-moz-border-radius: 5px;
 	padding: 20px;
+}
+
+#loadingBar img {
+	-moz-border-radius:8px;
+	border: 3px solid #468;
 }
 
 #loadingBar {
@@ -271,111 +286,32 @@ html, body {
 /**
  * 	TOOLBAR
  */
-#csToolBar .dijitTitlePaneContentInner {padding: 1px;}
-#csToolBar .dijitTitlePaneContentInner img { width: 32px; height: 32px; }
-#csToolBar .primitiveButton { display: block; width: 32px; height: 32px;}
+.csToolBars .dijitTitlePaneContentInner     { padding: 1px; }
+.csToolBars .dijitTitlePaneContentInner img { width: 32px; height: 32px; }
+.csToolBars .primitiveButton                { display: block; width: 32px; height: 32px; }
+.csToolBars .dijitButton .dijitButtonNode   { padding: 0px; }
 
-#csToolBar .dijitButton .dijitButtonNode {
-	padding: 0px;
-}
+#csToolBarTop                             { height: 80px }
+#csToolBarTop .categoryToolBar            { float:left; background-color: #468; -moz-border-radius: 5px; margin-bottom: 2px; margin-right: 5px; padding: 1px}
+#csToolBarTop .dijitTitlePaneContentOuter {	background-color: transparent; border: 0px; }
+#csToolBarTop .dijitTitlePaneTitle        { display:none; }
+#csToolBarTop .toolBarButton              { padding: 0px; margin: 0px;}
 
-.csLibButton {
-	overflow:hidden;
-	/*background-color: white;*/
-	margin: 0px 2px;
-    -moz-border-radius: 0pt 0pt 3pt 3pt;
-}
+/***
+ * INFO BLOCK ON THE RIGHT SIDE
+ */
 
+#csInfo                    { display: none; border: 3px solid #468; padding: 0px 5px 10px 5px; margin-top: 10px; -moz-border-radius: 5px; background: transparent url('../images/ide/background-right-column.png') repeat center center;}
+#csInfo .csInfoUid         { margin-top: 10px; margin-bottom: 5px}
+#csInfo .csInfoType        { }
+#csInfo .csInfoName        { font-weight: bold; text-transform: uppercase; padding-top: 10px; background: transparent url('../images/ide/background-right-column.png') repeat center center; }
+#csInfo .csInfoDescription { padding-top: 10px; background: transparent url('../images/ide/background-right-column.png') repeat center center;}
+#csInfo .csSocketLine      { margin-top: 5px; }
+#csInfo .csSocketLineTitle { }
+#csInfo .csInfoImage       { text-align: right; float: right; }
+#csInfo .csInfoTitle       { color: #468; }
+#csInfo .csInfoLine        { margin-top: 15px; margin-bottom: 5px;}
 
-
-.libStyle1 .csLibButton {width:32px;height:32px;}
-.libStyle2 .csLibButton {width:32px;height:32px;}
-.libStyle3 .csLibButton {width:60px;height:62px;}
-
-div.csLibButton:hover {
-	background-color: #aaa;
-}
-div.csLibButton:active {
-	background-color: #4ad;
-}
-
-.csLibButton, .csLibToolbar {
-	float:left;
-	font-size: 9pt;
-	
-}
-
-
-.csLibToolbarTitle {
- 	background-color: #444;
- 	color: #ddd;		 	
- 	-moz-border-radius: 3pt 3pt 0pt 0pt;		
- 	overflow: auto;	
- 	height: 13px;
-}
-
-.libStyle2 .csLibToolbarTitle {
-  padding:0px 3px;
-  font-size: 7pt;
-  font-weight: normal;
-}
-
-.libStyle3 .csLibToolbarTitle {
-  padding:1px 3px;
-  font-size: 8pt;
-  font-weight: bold;
-}
-
-
-.libStyle2 .csLibToolbarTitle, .libStyle3 .csLibToolbarTitle {
- 	display: block;
-}
-
-.libStyle1 .csLibToolbarTitle {
-    display: none;
-}
-
-.csLibToolbar {
-	border: 1px solid #999;
-	margin: 2px;
-	background-color: #eee;
-	-moz-border-radius: 3pt 3pt;
-}
-.csLibToolbarContent {
-	padding: 3px;
-	overflow: auto;
-	clear:both;
-}
-
-.csLibButtonLabel{
-  font-size: 7pt;
-  text-align: center;
-  background-color: #ddd;
-  -moz-border-radius: 0pt 0pt 3pt 3pt;
-}
-
-.libStyle1 .csLibButtonLabel {display: none}
-.libStyle2 .csLibButtonLabel, .libStyle3 .csLibButtonLabel {display: block}
-
-.csLibButtonImg{
-  text-align: center;
-  height: 48px;
-  margin-bottom:2px;
-}
-
-.libStyle1 .csLibButtonImg img, .libStyle2 .csLibButtonImg img{
-  width: 32px;
-  height: 32px;
-}			
-.csLibToolbar .minimize, .csLibToolbar .maximize, .csLibToolbar .close {
-  cursor: pointer;
-}
-.csLibToolbar .buttons{
-  float: right;
-}
-.csLibToolbar .text{
-  float:left;
-}
 
 /**
  * 	ACTIONS

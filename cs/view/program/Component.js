@@ -27,7 +27,7 @@
 		_moveableEvents : null,
 		
 		_image: null,
-		_infoIcon : null,
+		//_infoIcon : null,
 		_removeIcon: null,
 		
 		
@@ -173,7 +173,7 @@
 						dojo.publish("view/program/Component/Remove/Clicked", [this]);
 					}
 			);
-
+/*
 			// Tooltip Info icon
 			if (!this.getModel().isPrimitive()) {
 				
@@ -194,20 +194,35 @@
 				}
 				
 				// todo change cs.viewController 
+				
 				this._infoIcon.connect("onclick",this,
 						function(e){
+							//var text = "<div class='csInfoUid csInfoLine'><span class='csInfoTitle'>uuid: </span>"+this.getModel().getUid()+"</div>";
+							//dojo.publish("controller/IdeController/showInfo",[text+this.getModel().getDescriptionAsHTML()]);
+							
 							var tooltip = cs.viewController.getTooltip();
 							var text = this.getModel().getDescriptionAsHTML();
 							if(tooltip.isOn()&&tooltip.getText()==text){
 								tooltip.hide();
 							} else {
 								tooltip.show(e,text);
-							}});
+							}
+							});
 				
-			}
+				
+			}*/
 			this.hideIcons();
 			this.getShape().connect("onmouseenter",this,"showIcons");
 			this.getShape().connect("onmouseleave",this,"hideIcons");
+			/*
+			this.getShape().connect("onmouseenter",this,function(){
+				var text = "<div class='csInfoUid csInfoLine'><span class='csInfoTitle'>uuid: </span>"+this.getModel().getUid()+"</div>";
+				dojo.publish("controller/IdeController/showInfo",[text+this.getModel().getDescriptionAsHTML()]);				
+			});
+			this.getShape().connect("onmouseleave",this,function(){
+				dojo.publish("controller/IdeController/hideInfo",[]);
+			});			
+			*/
 		},
 				
 	
@@ -221,16 +236,18 @@
 			this._removeIcon.moveToFront();
 			
 			// info icon
+			/*
 			if (this._infoIcon){
 				this.getShape().add(this._infoIcon);
 				this._infoIcon.moveToFront();
-			}
+			}*/
 		},
 		
 		hideIcons : function(){
+			/*
 			if(this._infoIcon){
 				this._infoIcon.removeShape();
-			}
+			}*/
 			this._removeIcon.removeShape();
 			/*
 			if (this._infoIcon){

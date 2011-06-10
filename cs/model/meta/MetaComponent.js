@@ -191,10 +191,11 @@
 		 */
 		toHTML : function(){
 			var out = "";
-			out += "<div><span class='csInfoTitle'>name: </span>"+this.getName()+"</div>";
+			out += "<div class='csInfoType csInfoLine'><span class='csInfoTitle'>type: </span>"+this.getName()+"</div>";
+			out += "<div class='csInfoName'>"+this.getName().replace(/^.*\./,"")+"</div>";
 			out += "<div class='csInfoDescription'>" +this.getDescription()+ "</div>";
-			out += "<div class='csSockets'><img src='"+cs.config.rootPath+"lib/"+this.getImgPath()+"'/>" +
-					"<div><span class='csInfoTitle'>inputs: </span></div>";
+			out += "<div class='csSockets'><div class='csInfoImage'><img src='"+cs.config.rootPath+"lib/"+this.getImgPath()+"'/></div>" +
+					"<div class='csSocketLineTitle csInfoLine'><span class='csInfoTitle'>inputs: </span></div>";
 			
 			infoSocketLine = function(a_socket){
 				return "<div class='csSocketLine'>" +
@@ -212,7 +213,7 @@
 			} else {
 				out += "<div>&nbsp;&nbsp;-</div>";				
 			}
-			out += "<div><span class='csInfoTitle'>outputs: </span></div>";
+			out += "<div class='csSocketLineTitle csInfoLine'><span class='csInfoTitle'>outputs: </span></div>";
 			if(this.getOutputs().size()>0){
 			this.getOutputs().forEach(function(socket){
 				out += infoSocketLine(socket);
@@ -220,7 +221,7 @@
 			} else {
 				out += "<div>&nbsp;&nbsp;-</div>";				
 			}
-			out += "<div><span class='csInfoTitle'>fields: </span></div>";
+			out += "<div class='csSocketLineTitle csInfoLine'><span class='csInfoTitle'>fields: </span></div>";
 			if(this.getFields().size()>0){
 			this.getFields().forEach(function(socket){
 				out += infoSocketLine(socket);
