@@ -75,12 +75,16 @@
 		
 				// Dialogs like configuration
 				dojo.require("dijit.Dialog");
+				
+				// JSONP
+				dojo.require("dojo.io.script");
+
 
 				// Init ClickScript globals and settings
 				dojo.require("cs.system.ConfigController");
 				
 				// Load IDE-Class
-				dojo.require("cs.controller.NewIdeController");
+				dojo.require("cs.controller.NewIdeController")
 				
 				/**
 				 * Load libraries
@@ -233,10 +237,19 @@
 									exportDialog.show();
 									dojo.byId("exportValue").value = cs.modelController.serializeScript();
 				    			</script>
-				    			Export
+				    			Export...
 		                    </div>
 		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-import').show()" iconClass="csMenuImport">
-		                        Import
+		                        Import...
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.showLoadDialog();" iconClass="csMenuImport">
+		                        Load... 
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.saveScript();" iconClass="csMenuImport">
+		                        Save
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-save-as').show();" iconClass="csMenuImport">
+		                        Save As...
 		                    </div>
 		                </div>
 		            </div>
@@ -272,7 +285,7 @@
 
 	        <!-- RIGHT COLONE -->
 	        <div    
-	        	class="rightCol"
+	        	class="rightCol shadow"
 	            data-dojo-type="dijit.layout.ContentPane"
 	            data-dojo-props="region: 'right', splitter: true">
 				
@@ -451,6 +464,9 @@
 	    		</button>  				
   			</div>
     	</div>
+    	<!-- 
+    	  -- DIALOG: ABOUT 
+    	  -->
     	<div dojoType="dijit.Dialog" id="dialog-about" title="About ClickScript">
     		<div class="about">
     			<div class="about-picture">
@@ -464,6 +480,36 @@
     			</div>
     			<div class="about-txt">
     				ClickScript is a visual programming language in the browser. It is not allowed to reuse ClickScript on other pages without explicit permission of the owner. Non-commercial use only.<br/>&copy;2009-2011 powered by clickscript.ch
+    			</div>
+    		</div>			
+    	</div>
+    	<!-- 
+    	  -- DIALOG: LOAD 
+    	  -->
+    	<div dojoType="dijit.Dialog" id="dialog-load" title="Load ClickScript">
+    		<div class="load">
+				<div>Select Script to load...</div>
+				<div id="list-scripts"></div>
+    		</div>			
+    	</div>
+    	
+    	 <!-- 
+    	  -- DIALOG: SAVE AS 
+    	  -->
+    	<div dojoType="dijit.Dialog" id="dialog-save-as" title="Load ClickScript">
+    		<div class="load">
+				<div>Please enter a name to store the script</div>
+				<div>
+					<input type="text" name="saveAsName" value="" dojoType="dijit.form.TextBox"
+trim="true" id="input-text-save-as" />
+				</div>
+				<div>
+					<button dojoType="dijit.form.Button" type="button" id="button-save-as">Save
+		    		    <script type="dojo/method" event="onClick" args="evt">
+					        var name = dijit.byId("input-text-save-as").get('value');
+					        cs.global.ide.saveAsScript(name);
+					    </script>		
+		    		</button> 
     			</div>
     		</div>			
     	</div>

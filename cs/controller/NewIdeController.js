@@ -18,6 +18,7 @@
 	dojo.require("cs.view.util.EasyConsole");
 	dojo.require("cs.view.util.Toggler");
 	dojo.require("cs.system.ScriptPlayer");
+	dojo.require("cs.system.PersistanceManager");
 	
 	dojo.require("dojo.dnd.Source");
 		
@@ -271,5 +272,79 @@
 		showInfo : function(text){
 			dojo.byId("csInfo").innerHTML = text;
 			dojo.style(dojo.byId("csInfo"),"display","block");
-		}	
+		},
+		
+		/**
+		 * Show dialog to select a new script.
+		 */
+		showLoadDialog : function(){
+			
+			// show dialog
+			dijit.byId('dialog-load').show();
+			
+			// callback function after getting users scripts
+			var listScripts = function(scripts){
+				var result = "<table><tr><th>name</th><th>load</th><th>delete</th><th>last change</th></tr>";
+				dojo.forEach(scripts,function(script,index){
+			 		//loadedScripts[index] = script.code;
+			 		var date    = new Date(script.updated_at*1000);
+			 		var day     = ((date.getDate()<10)?"0":"")+date.getDate();
+			 		var month   = (((date.getMonth()+1)<10)?"0":"")+(date.getMonth()+1);
+			 		var hour    = ((date.getHours()<10)?"0":"")+date.getHours();
+			 		var minutes = ((date.getMinutes()<10)?"0":"")+date.getMinutes();
+			 		    date = day+"."+month+"."+date.getFullYear()+" "+hour+":"+minutes;
+			 		result += 	"<tr><td>"+script.name+".cs</td>"+
+			 					"<td><input type='button' value='run' onclick='cs.global.ide.runLoadedScript("+script.id+")'/></td>"+
+			 					"<td><input type='button' value='x'   onclick='cs.global.ide.deleteScript("+script.id+")'/></td>"+
+			 					"<td>"+date+"</td></tr>";
+			 	}); 	
+			 	result += "</table>";
+			 	dojo.byId("list-scripts").innerHTML = result;
+			}
+			
+			// get the scritps and sho list
+			cs.global.persistanceManager.getScripts(listScripts);
+		},
+		
+		/**
+		 * Run a script by the script id
+		 */
+		runLoadedScript : function(scriptid){
+			// loadScript
+			cs.global.persistanceManager.loadScript(scriptid);
+
+			dijit.byId('dialog-load').hide();
+		},
+		
+		/**
+		 * Save loaded script
+		 */
+		saveScript : function(){
+			cs.global.persistanceManager.saveScript(cs.modelController.serializeScript());
+		},
+		
+		/**
+		 * Save As Script
+		 */
+		saveAsScript : function(name){
+			cs.global.persistanceManager.saveAsScript(cs.modelController.serializeScript(),name);
+			dijit.byId('dialog-save-as').hide();
+		},
+		
+		/**
+		 * Delete Script
+		 */
+		deleteScript : function(id){
+			
+			if(confirm("Are you sure you want delete this script? "+cs.global.persistanceManager.getScript(id).name+".cs")){
+				cs.global.persistanceManager.deleteScript(id);
+			
+				// reload load dialog
+				this.showLoadDialog();				
+			}
+			
+		}
+		
+		
+			
 	});
