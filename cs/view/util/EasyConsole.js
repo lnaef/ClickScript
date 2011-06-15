@@ -38,8 +38,12 @@
 		 * Write a_text to console
 		 * @param {String} a_text
 		 */
-		write : function(a_text){
-			this._text += a_text.replace(/  /g, "&nbsp;&nbsp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")+"<br/>";
+		write : function(a_text,a_not_html_encode){
+			if(!a_not_html_encode){
+				this._text += a_text.replace(/  /g, "&nbsp;&nbsp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")+"<br/>";
+			} else {
+				this._text += a_text.replace(/  /g, "&nbsp;&nbsp;")+"<br/>";	
+			}
 			this._node.innerHTML = this._text;
 		},
 		
@@ -60,7 +64,7 @@
 		 */
 		writeError : function(a_text){
 			var text = "<font color='red' class='errormessage'><strong>/**<br/>&nbsp;* ERROR<br/>&nbsp;**/<br/></strong></font>";
-				this.write(text+a_text+"<br/>");
+				this.write(text+a_text.replace(/</g, "&lt;").replace(/>/g, "&gt;")+"<br/>",true);
 			
 		},
 		

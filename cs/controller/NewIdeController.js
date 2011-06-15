@@ -122,6 +122,36 @@
 				alert("drop external");
 			});
 			*/
+			
+			/**
+			 * Init userselect
+			 */
+		    var menu = new dijit.Menu({
+	            style: "display: none;"
+	        });
+	        
+	        var allAccounts = cs.global.persistanceManager.getAccounts();
+	        dojo.forEach(allAccounts, function(account,index){
+
+		        var menuItem = new dijit.MenuItem({
+		            label: account.name,
+		            onClick: function() {
+		            	dijit.byId("change-user-guid").set('value',account.guid);
+				        dijit.byId("change-user-token").set('value',account.token);
+		            }
+		        });
+	        	menu.addChild(menuItem);
+	        },this);
+	
+	        var button = new dijit.form.DropDownButton({
+	            label: "Choose predefined user",
+	            name: "change-user",
+	            dropDown: menu,
+	            id: "dropdown-change-user"
+	        });
+	        dojo.byId("select-user").appendChild(button.domNode);
+
+			
 			cs.console.write("ClickScript IDE loaded.");
  		},
  	
@@ -343,8 +373,15 @@
 				this.showLoadDialog();				
 			}
 			
-		}
+		},
 		
+		/**
+		 * change the current user
+		 */
+		changeUser : function(guid,token){
+			cs.global.persistanceManager.setUser(guid,token);
+			dijit.byId('dialog-configuration').hide();
+		}
 		
 			
 	});

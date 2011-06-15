@@ -44,6 +44,13 @@
  			}
  		},
  		
+ 		/**
+ 		 * Preset useraccounts
+ 		 */
+ 		accounts : [
+ 			{guid:"cee32852-0b7f-6ec4-79c7-7a626320834e",token:"3340f6ecf19382147132a6043b3381d3",name:"elcc"},
+ 			{guid:"b8e23e6d-efaf-5da4-e179-548617c6ebc9",token:"dfaafb798a725934ade3156a8466e2e9",name:"lukas"}
+ 		],
  		
  		/**
  		 * PLAYGROUND configuration

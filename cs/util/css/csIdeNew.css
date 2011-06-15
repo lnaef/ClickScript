@@ -57,7 +57,7 @@ html, body {
 
 .cs.claro .dijitMenuBar {
 	/*background: none;transparent url('../images/ide/background-right-column.png') repeat center center;*/
-	background-color: #468;
+	background-color: #444;
 	padding-left: 15px;
 	
 	background-image: url('../images/ide/menu/menuHighlight.png');
@@ -69,11 +69,12 @@ html, body {
 	padding-bottom: 15px;
 	border-top: 1px solid transparent;
 	border-bottom: 1px solid transparent;
+	font-size: 11pt;
 }
 
-.cs.claro .dijitMenuItemHover, .cs.claro .dijitMenuItemSelected {
-	background: #468 url('../images/ide/menu/menuHighlight.png') repeat center center;
-	color: white;
+.cs.claro .dijitMenuBar .dijitMenuItemHover, .cs.claro .dijitMenuBar .dijitMenuItemSelected {
+	background: white url('../images/ide/menu/menuHighlight.png') repeat center center;
+	color: black;
 	border-left: 1px solid transparent;
 	border-right: 1px solid transparent;
 }
@@ -358,6 +359,8 @@ html, body {
 /* FILE */
 .csMenuExport {background-image:url("../images/ide/menu/export.png"); width: 16px; height: 16px;}
 .csMenuImport {background-image:url("../images/ide/menu/import.png"); width: 16px; height: 16px;}
+.csMenuSave   {background-image:url("../images/ide/menu/save.png"); width: 16px; height: 16px;}
+.csMenuLoad   {background-image:url("../images/ide/menu/load.png"); width: 16px; height: 16px;}
 /* EXTRAS */
 .csMenuConfig   {background-image:url("../images/ide/menu/config.png"); width: 16px; height: 16px;}
 .csMenuTutorial {background-image:url("../images/ide/menu/tutorial.png"); width: 16px; height: 16px;}

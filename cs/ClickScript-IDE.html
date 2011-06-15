@@ -65,6 +65,7 @@
 	    		dojo.require("dijit.form.Button");
 	    		dojo.require("dijit.form.Textarea");
 				dojo.require("dijit.form.CheckBox");
+	    		dojo.require("dijit.form.DropDownButton");
 	    		
 	    		// Menu
 	    		dojo.require("dijit.MenuBar");
@@ -242,13 +243,13 @@
 		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-import').show()" iconClass="csMenuImport">
 		                        Import...
 		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.showLoadDialog();" iconClass="csMenuImport">
+		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.showLoadDialog();" iconClass="csMenuLoad">
 		                        Load... 
 		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.saveScript();" iconClass="csMenuImport">
+		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.saveScript();" iconClass="csMenuSave">
 		                        Save
 		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-save-as').show();" iconClass="csMenuImport">
+		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-save-as').show();" iconClass="csMenuSave">
 		                        Save As...
 		                    </div>
 		                </div>
@@ -421,6 +422,28 @@
 					</label>
 				</li>
 			</ul>
+			<h3>change user</h3>
+			<div>
+				<label>registered User</label><span id="select-user"></span>
+			</div>
+			<div>
+				<label>guid</label><input id="change-user-guid" name="change-user-guid" dojoType="dijit.form.TextBox" value"change-user-guid" trim="true"/>
+			</div>
+			<div>
+				<label>secret</label><input id="change-user-token" name="change-user-token" dojoType="dijit.form.TextBox" value"change-user-token" trim="true"/>
+			</div>
+			<div>
+				<button dojoType="dijit.form.Button" type="button" id="button-change-user">Set User
+	    		    <script type="dojo/method" event="onClick" args="evt">
+				        var guid  = dijit.byId("change-user-guid").get('value');
+				        var token = dijit.byId("change-user-token").get('value');
+				        cs.global.ide.changeUser(guid,token);
+				    </script>		
+	    		</button> 				
+			</div>
+			
+			
+
     	</div>
     	
     	

@@ -18,7 +18,7 @@
 		
 		/**
 		 * User Accounts
-		 * [{guid:xyz, token:zyx}]
+		 * [{guid:xyz, token:zyx, name:yyy}]
 		 */
 		_accounts  : [],
 		
@@ -27,6 +27,7 @@
 		 */
 		_token : "",
 		_guid  : "",
+		_name  : "",
 		
 		/**
 		 * loaded scripts the Script-ID is the key in the array
@@ -53,6 +54,10 @@
 		
 		getScript : function(id){
 			return this._scripts[id];
+		},
+		
+		getAccounts : function(){
+			return this._accounts;
 		},
 		
 		/**
@@ -202,7 +207,7 @@
 		
 	});
 	
-	cs.global.persistanceManager = new cs.system.PersistanceManager("http://localhost/clickscript_server/services",[{guid:"cee32852-0b7f-6ec4-79c7-7a626320834e",token:"3340f6ecf19382147132a6043b3381d3"}]);
+	cs.global.persistanceManager = new cs.system.PersistanceManager("http://localhost/clickscript_server/services",cs.config.accounts);
 
 	
 	/**
