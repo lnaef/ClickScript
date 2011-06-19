@@ -5,7 +5,7 @@
  * 
  * @description: This Class is needed to build a IDE to develop clickscripts.
  * 
-
+ 
 var dojo = {};
 var cs = {};
 var dojox = {};
@@ -14,7 +14,7 @@ var console = {};
 var dijit = {};
 var confirm = {};
 var alert = {};
- */	
+*/	
 	dojo.provide("cs.controller.NewIdeController");
 
 	dojo.require("dojox.gfx");
@@ -54,7 +54,7 @@ var alert = {};
 			dojo.style(nodePlayground,"width",width+"px");
 			dojo.style(nodePlayground,"height",height+"px");
 			
-			
+
 			/**
 			 * CONSOLE
 			 */
@@ -94,16 +94,17 @@ var alert = {};
 			// View of the Execution View
 			cs.executionViewController = new cs.controller.ExecutionViewController();
 			
+							
 			// Register observers to the model
 			cs.modelController.registerObserver(cs.viewController);
 			cs.modelController.registerObserver(cs.executionController);
-			
+
 			// init option / configuration dialog
 			this.initOptions();
 			
 			// init library
 			this.initLibrary();
-			
+						
 			// register events on mouseenter and mouseleave
 			// of component on programming view
 			dojo.subscribe("view/program/mouseenter",this,function(componentModel){
@@ -113,7 +114,6 @@ var alert = {};
 			dojo.subscribe("view/program/mouseleave",this,function(data){
 				this.hideInfo();
 			});			
-			
 			
 			// init playground dopper
 			//dojo.connect(nodePlayground, "onDndDrop", this, "onDropComponentItem");
@@ -210,7 +210,7 @@ var alert = {};
 			loadedComponents.forEach(function(category,categoryname){
 				var typeToolbar = new dijit.TitlePane({
 					title: categoryname,
-					content: "no module loaded",
+					content: "",
 					open: false
 				});
 				
@@ -220,12 +220,13 @@ var alert = {};
 				category.forEach(function(metaComponent,buttonname){
 					// generate a button and add to button-container
 					if(!metaComponent.isProgram()){
-						buttonNodeList = buttonNodeList.concat(this.getToolbarButton(metaComponent).domNode);
+						var node = this.getToolbarButton(metaComponent);
+						node.placeAt(typeToolbar.containerNode,"last");
 					}
-				},this);
-				typeToolbar.set('content',buttonNodeList);
+				},this);		
 				dojo.addClass(typeToolbar.domNode,"categoryToolBar");
 				
+	
 				if(this._libraryStyle == "top"){
 					typeToolbar.set('open',true);
 					dojo.byId("csToolBarTop").appendChild(typeToolbar.domNode);
@@ -241,7 +242,6 @@ var alert = {};
 					var source = new dojo.dnd.Source(contentNode);
 				}*/
 			},this);
-			
 			var br = dojo.doc.createElement('br');
 			dojo.addClass(br,"clear");
 			if(this._libraryStyle == "top"){

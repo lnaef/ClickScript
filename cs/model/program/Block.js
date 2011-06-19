@@ -171,7 +171,7 @@
 		getMetaData : function(){return this._metadata;},
 		getOwner : function(){return this._owner;},
 		getDimension : function(){return this._dimension;},
-		getUid : function(){return this._uid},
+		getUid : function(){return this._uid;},
 		
 		/**
 		 * Setters
@@ -182,5 +182,5 @@
 
 	cs.model.program.Block.dim ={
 		width: 100,
-		height: 100,
+		height: 100
 	};

@@ -21,55 +21,55 @@
 		
 		// Path for the ClickScript class folder
 		rootPath : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ),
- 		
- 		// Debug-Mode in ClickScript console?
- 		isDebug : true,
- 		
- 		// Debug-Mode for dojo overwrite (Loading of Dojo is set by the loading-options of Dojo)
- 		isDojoDebug : true,
- 		
- 		// Get the custom modules and classes to firebug!
- 		isDojoDebugAtAllCosts : true,
- 		
- 		/**
- 		 * IDE configuration
- 		 */
- 		ide : {
- 			// Are the following parts visible in the IDE?
- 			optionalParts : { 
- 				option: true,
- 				todo: true,
- 				tutorial: true,
- 				exercise: true
- 			}
- 		},
- 		
- 		/**
- 		 * Preset useraccounts
- 		 */
- 		accounts : [
- 			{username:"elcc",token:"3340f6ec"},
- 			{username:"lukas",token:"dfaafb79"}
- 		],
- 		
- 		/**
- 		 * PLAYGROUND configuration
- 		 */ 
- 		playground : {
- 			width : 1000, // Dimensions	
- 			height : 500
- 		},
- 		
- 		
- 		/**
- 		 * LIBRARY configuration
- 		 */
- 		library : {
- 			defaultStyle : 1 // 1 (small icons), 2, 3 (big icons, name)
- 		},
- 		
- 		util : {
- 			doPoint : function(a_x,a_y){
+		
+		// Debug-Mode in ClickScript console?
+		isDebug : true,
+		
+		// Debug-Mode for dojo overwrite (Loading of Dojo is set by the loading-options of Dojo)
+		isDojoDebug : true,
+		
+		// Get the custom modules and classes to firebug!
+		isDojoDebugAtAllCosts : true,
+		
+		/**
+		 * IDE configuration
+		 */
+		ide : {
+			// Are the following parts visible in the IDE?
+			optionalParts : { 
+				option: true,
+				todo: true,
+				tutorial: true,
+				exercise: true
+			}
+		},
+		
+		/**
+		 * Preset useraccounts
+		 */
+		accounts : [
+			{username:"elcc",token:"3340f6ec"},
+			{username:"lukas",token:"dfaafb79"}
+		],
+		
+		/**
+		 * PLAYGROUND configuration
+		 */ 
+		playground : {
+			width : 1000, // Dimensions	
+			height : 500
+		},
+		
+		
+		/**
+		 * LIBRARY configuration
+		 */
+		library : {
+			defaultStyle : 1 // 1 (small icons), 2, 3 (big icons, name)
+		},
+		
+		util : {
+			doPoint : function(a_x,a_y){
 				cs.viewController.getSurface().createRect({
 					x : a_x-2,
 					y : a_y-2,
@@ -78,8 +78,8 @@
 					r : 1
 				}).setFill(cs.view.program.Block.dim.fill).setStroke(cs.view.program.Block.dim.stroke);
 			}
- 		}
- 		
+		}
+		
 	};		
 	
 	cs.global = {
@@ -94,7 +94,7 @@
 			 * to setup an ClickScript IDE. At the beginning of a project.
 			 */
 			init : function(){
-	 			window.cs.global.ide = new cs.controller.NewIdeController();
+				window.cs.global.ide = new cs.controller.NewIdeController();
 			}
 			
 
@@ -112,10 +112,8 @@
 		 */		
 		scriptPlayer : null
 		
-	}
-	
+	};
 
-	
 	
 	/**
 	 * Initialize ComponentContainer. Every Component you add to this
@@ -138,6 +136,6 @@
 	
 
 	
- 	dojo.declare("cs.system.ConfigController", null, {
- 		
+	dojo.declare("cs.system.ConfigController", null, {
+
 	});
