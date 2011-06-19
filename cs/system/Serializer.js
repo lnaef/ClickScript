@@ -9,7 +9,7 @@
 	
 	dojo.provide("cs.system.Serializer");
 	
- 	dojo.declare("cs.system.Serializer", null, {
+	dojo.declare("cs.system.Serializer", null, {
 		
 		/**
 		 * Linebreak symbol
@@ -57,7 +57,7 @@
 			var forceSingleTag = a_forceSingleTag || false;
 			
 			// build attributes
-			for (key in a_attribute) {
+			for (var key in a_attribute) {
 				attributes += key + "=\"" + a_attribute[key] + "\" ";
 			}
 			attributes = dojo.trim(attributes);
@@ -68,7 +68,7 @@
 			if (a_childstring && a_childstring.length>0){
 				// -> open and close tag
 				out += this._space + opentag + ">" + this._linebreak; // starttag
-				out += this._space + this._addSpacesOnEachLine(a_childstring).replace(this._spaceRegex,"\n"+this._space+this._space) + this._linebreak
+				out += this._space + this._addSpacesOnEachLine(a_childstring).replace(this._spaceRegex,"\n"+this._space+this._space) + this._linebreak;
 				out += this._space + "</" + a_tagname + ">" + this._linebreak;
 				return out;
 			} else if(attributes.length > 0 || forceSingleTag){

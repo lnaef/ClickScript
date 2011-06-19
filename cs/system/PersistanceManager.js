@@ -9,7 +9,7 @@
 	
 	dojo.provide("cs.system.PersistanceManager");
 	
- 	dojo.declare("cs.system.PersistanceManager", null, {
+	dojo.declare("cs.system.PersistanceManager", null, {
 		
 		/*
 		 * DOMAIN of the persistance server
@@ -64,7 +64,7 @@
 		 */
 		getScripts : function(onCompleteCallback){
 			// todo: move parameters to config
-	    	var url = this._url + "/v1/script.php?action=get&username="+this._username+"&token="+this._token;
+			var url = this._url + "/v1/script.php?action=get&username="+this._username+"&token="+this._token;
 			this._scripts = [];
 			
 			var self = this;
@@ -76,10 +76,10 @@
 					if(data.status.code == 1){
 						dojo.forEach(data.response, function(script){
 							self._scripts[script.id] = script;
-						})
-	            		onCompleteCallback(data.response);
+						});
+						onCompleteCallback(data.response);
 					} else {
-		           		cs.console.writeError(data.status.message);
+						cs.console.writeError(data.status.message);
 					}
 	            },
 	            error: function(error) {
@@ -113,8 +113,8 @@
 		 */
 		saveScript : function(code){
 			
-			if(this._activeScriptId != 0){
-			
+			if(this._activeScriptId !== 0){
+
 				var url = this._url + "/v1/script.php?action=update&username="+this._username+"&token="+this._token+"&id="+this._activeScriptId;
 				
 				var self = this;
@@ -123,14 +123,14 @@
 		            url: url,
 		            callbackParamName: "callback",
 		            content : {
-		            	code : code
+						code : code
 		            },
 		            load: function(data) {
 						if(data.status.code == 1){
 							// script successfully saved
 						} else {
 							// some error occured
-			           		cs.console.writeError(data.status.message);
+							cs.console.writeError(data.status.message);
 						}
 		            },
 		            error: function(error) {
@@ -139,7 +139,7 @@
 		        };
 		        dojo.io.script.get(jsonpArgs);
 	        } else {
-	        	cs.console.writeError("No script loaded");
+				cs.console.writeError("No script loaded");
 	        }
 		},
 		
@@ -153,18 +153,18 @@
 	            url: url,
 	            callbackParamName: "callback",
 	            content : {
-	            	username    : this._username,
-	            	token       : this._token,
-	            	code        : code,
-	            	script_name : name,
-	            	action      : "insert"
+					username    : this._username,
+					token       : this._token,
+					code        : code,
+					script_name : name,
+					action      : "insert"
 	            },
 	            load: function(data) {
 					if(data.status.code == 1){
 						// script successfully saved
 					} else {
 						// some error occured
-		           		cs.console.writeError(data.status.message);
+						cs.console.writeError(data.status.message);
 					}
 	            },
 	            error: function(error) {
@@ -184,17 +184,17 @@
 	            url: url,
 	            callbackParamName: "callback",
 	            content : {
-	            	username : this._username,
-	            	token    : this._token,
-	            	id       : id,
-	            	action   : "delete"
+					username : this._username,
+					token    : this._token,
+					id       : id,
+					action   : "delete"
 	            },
 	            load: function(data) {
 					if(data.status.code == 1){
 						// script successfully saved
 					} else {
 						// some error occured
-		           		cs.console.writeError(data.status.message);
+						cs.console.writeError(data.status.message);
 					}
 	            },
 	            error: function(error) {
