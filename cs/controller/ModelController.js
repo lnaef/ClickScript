@@ -2,7 +2,7 @@
  * @author elcc
  * 
  */
-	
+
 	dojo.provide("cs.controller.ModelController");
 	
 	dojo.require("cs.model.program.Component");
@@ -10,7 +10,7 @@
 	dojo.require("cs.model.program.Block");
 	dojo.require("cs.model.program.Wire");
 	
- 	dojo.declare("cs.controller.ModelController", null, {
+	dojo.declare("cs.controller.ModelController", null, {
 		
 		/**
 		 * Root program statement
@@ -41,11 +41,11 @@
 			/*
 			 * TODO put module to the right subblock
 			 */
-
+			var component = null;
 			if(cs.library.hasStatement(a_component_type_name)){
-				var component = cs.library.getNewStatement(a_component_type_name);	
+				component = cs.library.getNewStatement(a_component_type_name);	
 			} else if(cs.library.hasModule(a_component_type_name)){
-				var component = cs.library.getNewModule(a_component_type_name);				
+				component = cs.library.getNewModule(a_component_type_name);				
 			} else {
 				throw Error("Unknown component: '" + a_component_type_name +"'");
 			}

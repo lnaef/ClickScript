@@ -18,16 +18,15 @@
 		
 		/**
 		 * User Accounts
-		 * [{guid:xyz, token:zyx, name:yyy}]
+		 * [{username:xyz, token:zyx}]
 		 */
 		_accounts  : [],
 		
 		/**
-		 * Current GUID and Security Token of the user
+		 * Current Name and Security Token of the user
 		 */
 		_token : "",
-		_guid  : "",
-		_name  : "",
+		_username  : "",
 		
 		/**
 		 * loaded scripts the Script-ID is the key in the array
@@ -47,7 +46,7 @@
 			this._url   = url;
 			this._accounts = accounts;
 			if(this._accounts.length>0){
-				this.setUser(this._accounts[0].guid, this._accounts[0].token);
+				this.setUser(this._accounts[0].username, this._accounts[0].token);
 			}
 			
 		},
@@ -65,7 +64,7 @@
 		 */
 		getScripts : function(onCompleteCallback){
 			// todo: move parameters to config
-	    	var url = this._url + "/v1/script.php?action=get&guid="+this._guid+"&token="+this._token;
+	    	var url = this._url + "/v1/script.php?action=get&username="+this._username+"&token="+this._token;
 			this._scripts = [];
 			
 			var self = this;
@@ -92,10 +91,10 @@
 		},
 		
 		/**
-		 * Set guid and token of the user
+		 * Set username and token of the user
 		 */
-		setUser : function(guid, token){
-			this._guid = guid;
+		setUser : function(username, token){
+			this._username = username;
 			this._token = token;
 		},
 		
@@ -116,7 +115,7 @@
 			
 			if(this._activeScriptId != 0){
 			
-				var url = this._url + "/v1/script.php?action=update&guid="+this._guid+"&token="+this._token+"&id="+this._activeScriptId;
+				var url = this._url + "/v1/script.php?action=update&username="+this._username+"&token="+this._token+"&id="+this._activeScriptId;
 				
 				var self = this;
 				
@@ -154,11 +153,11 @@
 	            url: url,
 	            callbackParamName: "callback",
 	            content : {
-	            	guid   : this._guid,
-	            	token  : this._token,
-	            	code   : code,
-	            	name   : name,
-	            	action : "insert"
+	            	username    : this._username,
+	            	token       : this._token,
+	            	code        : code,
+	            	script_name : name,
+	            	action      : "insert"
 	            },
 	            load: function(data) {
 					if(data.status.code == 1){
@@ -185,10 +184,10 @@
 	            url: url,
 	            callbackParamName: "callback",
 	            content : {
-	            	guid   : this._guid,
-	            	token  : this._token,
-	            	id     : id,
-	            	action : "delete"
+	            	username : this._username,
+	            	token    : this._token,
+	            	id       : id,
+	            	action   : "delete"
 	            },
 	            load: function(data) {
 					if(data.status.code == 1){

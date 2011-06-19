@@ -5,8 +5,16 @@
  * 
  * @description: This Class is needed to build a IDE to develop clickscripts.
  * 
- */
-	
+
+var dojo = {};
+var cs = {};
+var dojox = {};
+var window = {};
+var console = {};
+var dijit = {};
+var confirm = {};
+var alert = {};
+ */	
 	dojo.provide("cs.controller.NewIdeController");
 
 	dojo.require("dojox.gfx");
@@ -17,20 +25,20 @@
 	dojo.require("cs.controller.ExecutionViewController");
 	dojo.require("cs.view.util.EasyConsole");
 	dojo.require("cs.view.util.Toggler");
-	dojo.require("cs.system.ScriptPlayer");
+	dojo.require("cs.system.ScriptPlayer"); 
 	dojo.require("cs.system.PersistanceManager");
 	
 	dojo.require("dojo.dnd.Source");
 		
- 	dojo.declare("cs.controller.NewIdeController", null, {
+	dojo.declare("cs.controller.NewIdeController", null, {
 		
 
 
 
 		constructor : function(){
- 			
- 			// setup basic html for ClickSciript into the HTML-Tag with id="clickscript"
- 			
+			
+			// setup basic html for ClickSciript into the HTML-Tag with id="clickscript"
+			
 			/**
 			 * SURFACE: Prepare the surface with the ClickScript playground
 			 */
@@ -67,7 +75,7 @@
 			// DEPRICATED componentContainer (v0.5)
 			if(window.csComponentContainer && window.csComponentContainer.length > 0){
 				console.warn("DEPRICATED: csComponentContainer -- Use cs.componentContainer instead!");
-				cs.library.addMetaComponents(csComponentContainer);
+				cs.library.addMetaComponents(window.csComponentContainer);
 			}
 			
 			/**
@@ -126,40 +134,40 @@
 			/**
 			 * Init userselect
 			 */
-		    var menu = new dijit.Menu({
-	            style: "display: none;"
-	        });
-	        
-	        var allAccounts = cs.global.persistanceManager.getAccounts();
-	        dojo.forEach(allAccounts, function(account,index){
+			var menu = new dijit.Menu({
+				style: "display: none;"
+			});
+			
+			var allAccounts = cs.global.persistanceManager.getAccounts();
+			dojo.forEach(allAccounts, function(account,index){
 
-		        var menuItem = new dijit.MenuItem({
-		            label: account.name,
-		            onClick: function() {
-		            	dijit.byId("change-user-guid").set('value',account.guid);
-				        dijit.byId("change-user-token").set('value',account.token);
-		            }
-		        });
-	        	menu.addChild(menuItem);
-	        },this);
+				var menuItem = new dijit.MenuItem({
+					label: account.username,
+					onClick: function() {
+						dijit.byId("change-username").set('value',account.username);
+						dijit.byId("change-user-token").set('value',account.token);
+					}
+				});
+				menu.addChild(menuItem);
+			},this);
 	
-	        var button = new dijit.form.DropDownButton({
-	            label: "Choose predefined user",
-	            name: "change-user",
-	            dropDown: menu,
-	            id: "dropdown-change-user"
-	        });
-	        dojo.byId("select-user").appendChild(button.domNode);
+			var button = new dijit.form.DropDownButton({
+				label: "Choose predefined user",
+				name: "change-user",
+				dropDown: menu,
+				id: "dropdown-change-user"
+			});
+			dojo.byId("select-user").appendChild(button.domNode);
 
 			
 			cs.console.write("ClickScript IDE loaded.");
- 		},
- 	
- 		/**
- 		 * Init Option Dialog
- 		 */
- 		initOptions : function(){
- 			
+		},
+	
+		/**
+		 * Init Option Dialog
+		 */
+		initOptions : function(){
+			
 				// Init ClickScript Debug Mode
 				dijit.byId("checkbox-debug-mode").set({
 					onChange:function(checked){
@@ -186,113 +194,113 @@
 					},
 					value:cs.executionController.getWorklist().isDebug()
 				});
- 		},
- 		
- 		onDropComponentItem : function( source, nodes, copy, target ){
- 			alert('dropped');
- 		},
- 		
- 		_libraryStyle : "top",
- 		
- 		initLibrary : function(){
- 			// Get all loaded libraries
+		},
+		
+		onDropComponentItem : function( source, nodes, copy, target ){
+			alert('dropped');
+		},
+		
+		_libraryStyle : "top",
+		
+		initLibrary : function(){
+			// Get all loaded libraries
 			var loadedComponents = cs.library.getMetaComponentsByCategory();
 			
 			// Prepare visibility switches for option box
 			loadedComponents.forEach(function(category,categoryname){
 				var typeToolbar = new dijit.TitlePane({
-		            title: categoryname,
-		            content: "no module loaded",
-		            open: false
-		        });
-		        
-		        // container for buttons
-		        var buttonNodeList = new dojo.NodeList();
-		        
-		        category.forEach(function(metaComponent,buttonname){
-		        	// generate a button and add to button-container
-		        	if(!metaComponent.isProgram()){
-		        		buttonNodeList = buttonNodeList.concat(this.getToolbarButton(metaComponent).domNode);
-		        	}
-		        },this);
-		        typeToolbar.set('content',buttonNodeList);
-		        dojo.addClass(typeToolbar.domNode,"categoryToolBar");
-		        
-		        if(this._libraryStyle == "top"){
-		        	typeToolbar.set('open',true);
-		        	dojo.byId("csToolBarTop").appendChild(typeToolbar.domNode);
-		        } else {
-		        	typeToolbar.set('open',false);
-		        	dojo.byId("csToolBarRight").appendChild(typeToolbar.domNode);		        	
-		        }
-		        // make buttons draggable
-		        // Buttons must have a class="dojoDndItem"
-		        /*
-		        if(typeToolbar.getChildren()&&typeToolbar.getChildren()[0]){
-		        	var contentNode = typeToolbar.getChildren()[0].domNode.parentNode;
-		        	var source = new dojo.dnd.Source(contentNode);
-		        }*/
+					title: categoryname,
+					content: "no module loaded",
+					open: false
+				});
+				
+				// container for buttons
+				var buttonNodeList = new dojo.NodeList();
+				
+				category.forEach(function(metaComponent,buttonname){
+					// generate a button and add to button-container
+					if(!metaComponent.isProgram()){
+						buttonNodeList = buttonNodeList.concat(this.getToolbarButton(metaComponent).domNode);
+					}
+				},this);
+				typeToolbar.set('content',buttonNodeList);
+				dojo.addClass(typeToolbar.domNode,"categoryToolBar");
+				
+				if(this._libraryStyle == "top"){
+					typeToolbar.set('open',true);
+					dojo.byId("csToolBarTop").appendChild(typeToolbar.domNode);
+				} else {
+					typeToolbar.set('open',false);
+					dojo.byId("csToolBarRight").appendChild(typeToolbar.domNode);					
+				}
+				// make buttons draggable
+				// Buttons must have a class="dojoDndItem"
+				/*
+				if(typeToolbar.getChildren()&&typeToolbar.getChildren()[0]){
+					var contentNode = typeToolbar.getChildren()[0].domNode.parentNode;
+					var source = new dojo.dnd.Source(contentNode);
+				}*/
 			},this);
 			
 			var br = dojo.doc.createElement('br');
-			dojo.addClass(br,"clear")
+			dojo.addClass(br,"clear");
 			if(this._libraryStyle == "top"){
-	        	dojo.byId("csToolBarTop").appendChild(br);
-	        } else {
-	        	dojo.byId("csToolBarRight").appendChild(br);		        	
-	        }
- 		},
- 		
- 		/**
- 		 * Returns a dijit.form.Button for a given Meta-Component
- 		 * @param {cs.model.meta.MetaComponent} 
- 		 * 
- 		 * @return {dijit.form.Button} a Dijit Button
- 		 */
- 		getToolbarButton : function(a_metaComponent){
+				dojo.byId("csToolBarTop").appendChild(br);
+			} else {
+				dojo.byId("csToolBarRight").appendChild(br);					
+			}
+		},
+
+		/**
+		 * Returns a dijit.form.Button for a given Meta-Component
+		 * @param {cs.model.meta.MetaComponent} 
+		 * 
+		 * @return {dijit.form.Button} a Dijit Button
+		 */
+		getToolbarButton : function(a_metaComponent){
 			var imagePath = cs.config.rootPath + "lib/"+(a_metaComponent.getImgPath()?a_metaComponent.getImgPath():"default.gif");
-        	
-        	var buttonLabel = "";
-        	
-        	if(a_metaComponent.isPrimitive()){
-        		var c = new dojo.Color(); 
+			
+			var buttonLabel = "";
+			
+			if(a_metaComponent.isPrimitive()){
+				var c = new dojo.Color(); 
 				c.setColor(a_metaComponent.getFields().item(0).getType().getColor()); 
-        		buttonLabel = "<span class='primitiveButton' style='background-color:"+c.toHex()+"'></span>";
-        	} else {
-        		buttonLabel = "<img src='"+imagePath+"'/>";
-        	}
-        	
-        	var self = this;
-        	
-        	// create new button
-        	var button = new dijit.form.Button({
-        		label:buttonLabel,
-        		showLabel : true,
-        		title: a_metaComponent.getName().replace(/^.*\./,""),
-        		onClick : function(event){
-        			
-        			cs.modelController.addComponent(a_metaComponent.getName(),{x:0+Math.round(Math.random()*40),y:0+Math.round(Math.random()*40)},{x:0,y:0});
-        			
-        			/* HACK TO BLUR */
-	        		dojo.byId("blur-widget").focus()
-        		},
-        		onMouseEnter : function(event){
-        			/*show info*/
-        			//dojo.byId("csInfo").innerHTML = a_metaComponent.toHTML();
-        			self.showInfo(a_metaComponent.toHTML());
-        			//dojo.publish("controller/IdeController/showInfo",[a_metaComponent.toHTML()]);
-        		},
-        		onMouseLeave : function(event){
-        			//dojo.byId("csInfo").innerHTML="" ;
-        			self.hideInfo();
-        			//dojo.publish("controller/IdeController/hideInfo",[]);
-        		}
-        	});
-        	
-        	//dojo.addClass(button.domNode,"dojoDndItem");
-        	dojo.addClass(button.domNode,"toolBarButton");
-        	return button;
- 		}, 		
+				buttonLabel = "<span class='primitiveButton' style='background-color:"+c.toHex()+"'></span>";
+			} else {
+				buttonLabel = "<img src='"+imagePath+"'/>";
+			}
+			
+			var self = this;
+			
+			// create new button
+			var button = new dijit.form.Button({
+				label:buttonLabel,
+				showLabel : true,
+				title: a_metaComponent.getName().replace(/^.*\./,""),
+				onClick : function(event){
+					
+					cs.modelController.addComponent(a_metaComponent.getName(),{x:0+Math.round(Math.random()*40),y:0+Math.round(Math.random()*40)},{x:0+Math.round(Math.random()*100),y:0});
+					
+					/* HACK TO BLUR */
+					dojo.byId("blur-widget").focus();
+				},
+				onMouseEnter : function(event){
+					/*show info*/
+					//dojo.byId("csInfo").innerHTML = a_metaComponent.toHTML();
+					self.showInfo(a_metaComponent.toHTML());
+					//dojo.publish("controller/IdeController/showInfo",[a_metaComponent.toHTML()]);
+				},
+				onMouseLeave : function(event){
+					//dojo.byId("csInfo").innerHTML="" ;
+					self.hideInfo();
+					//dojo.publish("controller/IdeController/hideInfo",[]);
+				}
+			});
+			
+			//dojo.addClass(button.domNode,"dojoDndItem");
+			dojo.addClass(button.domNode,"toolBarButton");
+			return button;
+		},
 
 		hideInfo : function(){
 			dojo.style(dojo.byId("csInfo"),"display","none");
@@ -316,21 +324,21 @@
 			var listScripts = function(scripts){
 				var result = "<table><tr><th>name</th><th>load</th><th>delete</th><th>last change</th></tr>";
 				dojo.forEach(scripts,function(script,index){
-			 		//loadedScripts[index] = script.code;
-			 		var date    = new Date(script.updated_at*1000);
-			 		var day     = ((date.getDate()<10)?"0":"")+date.getDate();
-			 		var month   = (((date.getMonth()+1)<10)?"0":"")+(date.getMonth()+1);
-			 		var hour    = ((date.getHours()<10)?"0":"")+date.getHours();
-			 		var minutes = ((date.getMinutes()<10)?"0":"")+date.getMinutes();
-			 		    date = day+"."+month+"."+date.getFullYear()+" "+hour+":"+minutes;
-			 		result += 	"<tr><td>"+script.name+".cs</td>"+
-			 					"<td><input type='button' value='run' onclick='cs.global.ide.runLoadedScript("+script.id+")'/></td>"+
-			 					"<td><input type='button' value='x'   onclick='cs.global.ide.deleteScript("+script.id+")'/></td>"+
-			 					"<td>"+date+"</td></tr>";
-			 	}); 	
-			 	result += "</table>";
-			 	dojo.byId("list-scripts").innerHTML = result;
-			}
+					//loadedScripts[index] = script.code;
+					var date	= new Date(script.updated_at*1000);
+					var day	 = ((date.getDate()<10)?"0":"")+date.getDate();
+					var month   = (((date.getMonth()+1)<10)?"0":"")+(date.getMonth()+1);
+					var hour	= ((date.getHours()<10)?"0":"")+date.getHours();
+					var minutes = ((date.getMinutes()<10)?"0":"")+date.getMinutes();
+						date = day+"."+month+"."+date.getFullYear()+" "+hour+":"+minutes;
+					result +=   "<tr><td>"+script.name+".cs</td>"+
+								"<td><input type='button' value='run' onclick='cs.global.ide.runLoadedScript("+script.id+")'/></td>"+
+								"<td><input type='button' value='x'   onclick='cs.global.ide.deleteScript("+script.id+")'/></td>"+
+								"<td>"+date+"</td></tr>";
+				});
+				result += "</table>";
+				dojo.byId("list-scripts").innerHTML = result;
+			};
 			
 			// get the scritps and sho list
 			cs.global.persistanceManager.getScripts(listScripts);
@@ -378,10 +386,18 @@
 		/**
 		 * change the current user
 		 */
-		changeUser : function(guid,token){
-			cs.global.persistanceManager.setUser(guid,token);
+		changeUser : function(username,token){
+			cs.global.persistanceManager.setUser(username,token);
 			dijit.byId('dialog-configuration').hide();
-		}
+		},
 		
+		/**
+		 * Clean all -> reload page
+		 */
+		cleanAll : function(){
+			if(confirm('Are you sure you want to reload? All unsaved data will be lost.')){
+				window.location.reload();
+			}
+		}
 			
 	});

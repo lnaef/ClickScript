@@ -218,20 +218,32 @@
 	        data-dojo-props="design: 'headline'">
 	        
 
-	        <!-- HEADER 
+	        <!-- HEADER -->
 	        <div
 	            class="headerPanel"
 	            data-dojo-type="dijit.layout.ContentPane"
-	            data-dojo-props="region: 'top'">-->
-	            
+	            data-dojo-props="region: 'top'">
+
 	            
 	            <!-- START MENUBAR -->
-	            <div dojoType="dijit.MenuBar" id="navMenu" region="top">
+	            <div dojoType="dijit.MenuBar" id="navMenu" >
 		            <div dojoType="dijit.PopupMenuBarItem">
 		                <span>
 		                    File
 		                </span>
 		                <div dojoType="dijit.Menu" id="fileMenu">
+		              		<div dojoType="dijit.MenuItem" onClick="cs.global.ide.cleanAll();" iconClass="dijitEditorIcon dijitEditorIconNewPage">
+		                        New 
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.showLoadDialog();" iconClass="dijitFolderOpened">
+		                        Load... 
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.saveScript();" iconClass="dijitIconSave">
+		                        Save
+		                    </div>
+		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-save-as').show();" iconClass="dijitIconSave">
+		                        Save As...
+		                    </div>
 		                    <div dojoType="dijit.MenuItem" iconClass="csMenuExport">
 				    		    <script type="dojo/method" event="onClick" args="evt">
 									var exportDialog = dijit.byId('dialog-export');
@@ -242,15 +254,6 @@
 		                    </div>
 		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-import').show()" iconClass="csMenuImport">
 		                        Import...
-		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.showLoadDialog();" iconClass="csMenuLoad">
-		                        Load... 
-		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.saveScript();" iconClass="csMenuSave">
-		                        Save
-		                    </div>
-		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-save-as').show();" iconClass="csMenuSave">
-		                        Save As...
 		                    </div>
 		                </div>
 		            </div>
@@ -282,6 +285,9 @@
 		            </div>
 		        </div>
 			<!-- END MENUBAR -->
+			<div id="csToolBarTop" class="csToolBars">
+						</div>
+		</div>
 	        <!-- END HEADER -->
 
 	        <!-- RIGHT COLONE -->
@@ -306,8 +312,7 @@
 					    Loop
 					</label>
 		    		
-		    		<button dojoType="dijit.form.Button" type="button" id="button-reload" onClick="window.location.reload();" iconClass="csActionReloadPage" showLabel="false">clean all</button>				
-				</div><!-- END: ACTIONS; CONTROLERS-->
+		  			</div><!-- END: ACTIONS; CONTROLERS-->
 				
 				<!-- STATUS -->	
 				<div id="csStateBar" class="csMenuBar">
@@ -323,10 +328,10 @@
 				
 				
 				
-				<!-- TOOLBAR TOP -->
+				<!-- TOOLBAR RIGHT-->
 				<div id="csToolBarRight" class="csMenuBar csToolBars">
 				 
-				</div>
+				</div> 
 
 				
 				
@@ -334,7 +339,7 @@
 				
 				 <br/>
 				<!-- DO NOT REMOVE! IS USED TO SIMULATE BLUR-EVENT -->
-				<input id="blur-widget"  dojoType="dijit.form.CheckBox">
+				<input id="blur-widget"  dojoType="dijit.form.CheckBox" style="width:1px;height:1px">
 				<!-- END DO NOT REMOVE!-->
 				
 				<span class="clickScriptTitle"></span>
@@ -352,17 +357,17 @@
 			    	class="leftColContainer"
 			        data-dojo-type="dijit.layout.BorderContainer"
 			        data-dojo-props="design: 'headline'">	        
-			        <div
+			        <!--<div
 			            id="toolBarPane" 
 			            data-dojo-type="dijit.layout.ContentPane"
-			            data-dojo-props="region: 'top', splitter: false">
-			            <!-- TOOLBAR VARIANTE 2 -->
+			            data-dojo-props="region: 'top'">
+			            <!-- TOOLBAR VARIANTE 2 
 			            <div id="csToolBarTop" class="csToolBars">
 						</div>
-					</div>
+					</div>-->
 		            <div
 		            	id="thePlayGroundPane"
-			            class="mainPanel shadow" 
+			            class="mainPanel" 
 			            data-dojo-type="dijit.layout.ContentPane"
 			            data-dojo-props="region: 'center', splitter: true">
 			            <!-- PLAYGROUND -->
@@ -400,44 +405,46 @@
     	  -- DIALOG: CONFIGURATION / OPTION
     	  -->
     	<div dojoType="dijit.Dialog" id="dialog-configuration" title="Configuration">
+    		<h3>Change Debugsettings</h3>
 			<ul>
-				<li>
+				<li class="form-line">
 					<input id="checkbox-debug-mode" name="debug-mode" dojoType="dijit.form.CheckBox" value="debug-mode">
-					<label for="checkbox-debug-mode">
+					<label for="checkbox-debug-mode" class="longlabel">
 					    Debug-Mode ClickScript ON/OFF
 					</label>					
 				</li>
-				<li>
+				<li class="form-line">
 					<input id="checkbox-debug-dojo" name="debug-dojo" dojoType="dijit.form.CheckBox" value="debug-dojo">
 
-					<label for="checkbox-debug-dojo">
+					<label for="checkbox-debug-dojo" class="longlabel">
 					    Debug-Mode Dojo ON/OFF
 					</label>
 				</li>
-				<li>
+				<li class="form-line">
 					<input id="checkbox-debug-worklist" name="debug-worklist" dojoType="dijit.form.CheckBox" value="debug-worklist">
 
-					<label for="checkbox-debug-worklist">
+					<label for="checkbox-debug-worklist" class="longlabel">
 					    Show Worklist ON/OFF
 					</label>
 				</li>
 			</ul>
-			<h3>change user</h3>
-			<div>
-				<label>registered User</label><span id="select-user"></span>
+			<h3>Change User</h3>
+			<div class="form-line">
+				<label>Choose User</label><span id="select-user"></span>
 			</div>
-			<div>
-				<label>guid</label><input id="change-user-guid" name="change-user-guid" dojoType="dijit.form.TextBox" value"change-user-guid" trim="true"/>
+			<div class="form-line">
+				<label>Name</label><input id="change-username" name="change-username" dojoType="dijit.form.TextBox" value"change-username" trim="true"/>
 			</div>
-			<div>
+			<div class="form-line">
 				<label>secret</label><input id="change-user-token" name="change-user-token" dojoType="dijit.form.TextBox" value"change-user-token" trim="true"/>
 			</div>
-			<div>
+			<div class="form-line">
+				<label>&nbsp;</label>
 				<button dojoType="dijit.form.Button" type="button" id="button-change-user">Set User
 	    		    <script type="dojo/method" event="onClick" args="evt">
-				        var guid  = dijit.byId("change-user-guid").get('value');
-				        var token = dijit.byId("change-user-token").get('value');
-				        cs.global.ide.changeUser(guid,token);
+				        var username  = dijit.byId("change-username").get('value');
+				        var token     = dijit.byId("change-user-token").get('value');
+				        cs.global.ide.changeUser(username,token);
 				    </script>		
 	    		</button> 				
 			</div>
@@ -452,7 +459,7 @@
     	  -->
     	<div dojoType="dijit.Dialog" id="dialog-import" title="Import">
     		<textarea id="importValue" dojoType="dijit.form.Textarea"></textarea>
-    		<div>
+    		<div class="form-line">
 	    		<button dojoType="dijit.form.Button" type="button" id="button-import">Import
 	    		    <script type="dojo/method" event="onClick" args="evt">
 	    				// import Data
@@ -479,7 +486,7 @@
     	  -->
     	<div dojoType="dijit.Dialog" id="dialog-export" title="Export">
   			<textarea id="exportValue" dojoType="dijit.form.Textarea"></textarea>
-  			<div>
+  			<div class="form-line">
 	    		<button dojoType="dijit.form.Button" type="button" id="button-export-cancel">Cancel
 	    		    <script type="dojo/method" event="onClick" args="evt">
 				        dijit.byId('dialog-export').hide();
@@ -522,11 +529,13 @@
     	<div dojoType="dijit.Dialog" id="dialog-save-as" title="Load ClickScript">
     		<div class="load">
 				<div>Please enter a name to store the script</div>
-				<div>
+				<div class="form-line">
+					<label>Scriptname</label>
 					<input type="text" name="saveAsName" value="" dojoType="dijit.form.TextBox"
 trim="true" id="input-text-save-as" />
 				</div>
-				<div>
+				<div class="form-line">
+					<label>&nbsp;</label>
 					<button dojoType="dijit.form.Button" type="button" id="button-save-as">Save
 		    		    <script type="dojo/method" event="onClick" args="evt">
 					        var name = dijit.byId("input-text-save-as").get('value');
