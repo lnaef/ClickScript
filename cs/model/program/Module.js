@@ -7,7 +7,7 @@
 	
 	dojo.provide("cs.model.program.Module");
 	
- 	dojo.declare("cs.model.program.Module", cs.model.program.Component, {
+	dojo.declare("cs.model.program.Module", cs.model.program.Component, {
 		
 	
 		serialize : function(){

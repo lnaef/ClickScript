@@ -13,7 +13,7 @@
 	dojo.require("cs.model.exec.InputSocket");
 	dojo.require("cs.model.exec.FieldSocket");
 	
- 	dojo.declare("cs.model.exec.Component", null, {
+	dojo.declare("cs.model.exec.Component", null, {
 		
 		/**
 		 * All Sockets of a component
@@ -87,7 +87,7 @@
 			
 			// is component in a block which is activated?
 			// this.getParent() == null if this is root statement
-			if(this.getParent()!=null && !this.getParent().isActive()){
+			if(this.getParent()!==null && !this.getParent().isActive()){
 				ready = false;
 			}
 			console.log(this.getModel().getMetaData().getName(),"checked parent block: ready? ",ready);
@@ -123,7 +123,7 @@
 								// get all parent blocks of THIS
 								var parentBlocksOfThisComponent = new cs.util.Container();
 								var parentBlock = this.getParent();
-								while(parentBlock != null){
+								while(parentBlock !== null){
 									parentBlocksOfThisComponent.add(parentBlock);
 									parentBlock = parentBlock.getOwner().getParent();
 								}
@@ -266,7 +266,7 @@
 				
 				// in case of this was last finished component from the parent block
 				// this block has also to be set to 'finished'
-				if(this.getParent()!=null){
+				if(this.getParent()!==null){
 					this.getParent().updateState();
 				}
 			}
@@ -280,12 +280,11 @@
 			}
 			this._isActive = b;
 		},
-		isActive : function(){return this._isActive;},
+		isActive   : function(){return this._isActive;},
 		
-		getInputs : function(){return this._inputs;},
+		getInputs  : function(){return this._inputs;},
 		getOutputs : function(){return this._outputs;},
-		getFields : function(){return this._fields;},
-		getView : function(){return this._view;},
-		hasView : function(){return this._model.getMetaData().hasView();},
-		getModel : function() {return this._model;}
+		getFields  : function(){return this._fields;},
+		getView    : function(){return this._view;},
+		hasView    : function(){return this._model.getMetaData().hasView();}
 	});

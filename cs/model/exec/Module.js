@@ -8,7 +8,7 @@
 	
 	dojo.require("cs.model.exec.Component");
 	
- 	dojo.declare("cs.model.exec.Module", cs.model.exec.Component, {
+	dojo.declare("cs.model.exec.Module", cs.model.exec.Component, {
 		/**
 		 * Execute module with its current state
 		 * Execute the function on this!

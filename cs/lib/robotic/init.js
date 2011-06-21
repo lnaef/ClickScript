@@ -263,7 +263,7 @@ dojo.require("cs.lib.robotic.Util");
 	
 	cs.componentContainer.push({
 		name : "cs.robotic.temperatur",
-		description : "Dieses Temperaturmessger�t gibt die Raum - TEMPERATUR an",
+		description : "Dieses Temperaturmessgerät gibt die Raum - TEMPERATUR an",
 		inputs : 
 			[],
 		outputs:  
@@ -323,7 +323,7 @@ dojo.require("cs.lib.robotic.Util");
 	
 	cs.componentContainer.push({
 		name : "cs.robotic.auto",
-		description : "F�hrt wenn GESCHWINDIGKEIT eingestellt ist. Hat 4 Geschwindigkeitstufen 0, 1, 2 und 3",
+		description : "Fährt wenn GESCHWINDIGKEIT eingestellt ist. Hat 4 Geschwindigkeitstufen 0, 1, 2 und 3",
 		inputs : 
 			[{
 				name: "GESCHWINDIGKEIT",

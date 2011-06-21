@@ -139,7 +139,7 @@
 				if (!imgPath) {
 					imgPath = dim.pic.defaultPath;
 				}
-				var imgPath = dim.pic.root + imgPath;
+				imgPath = dim.pic.root + imgPath;
 				this._image = this.getShape().createImage({
 					src: imgPath,
 					width: dim.pic.width,
@@ -357,7 +357,7 @@
 	});
 	
 	cs.view.program.Component.dim ={ 
-				width: 80,   	 //of module
+				width: 80,       //of module
 				height : 90,	 //of module
 				paddingLeftRight : 10,	 //left and right for sockets
 				paddingTopBottom : 12,  // top and bottom for sockets
@@ -391,4 +391,4 @@
 				getCorrectX : function(a_componentModel){
 					return (a_componentModel.getInputSockets().size() > 0 ? Math.round(cs.view.program.Socket.dim.width/2) + cs.view.program.Socket.dim.stroke.width : 0);
 				}
-				};
+	};

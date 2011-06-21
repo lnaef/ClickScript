@@ -12,7 +12,7 @@
 		_map : null,
 		
 		constructor : function(){
-			this._map = new Object();
+			this._map = {};
 		},
 		
 		/**
@@ -23,7 +23,7 @@
 		 * @param {Object} a_value
 		 */
 		put : function(a_key, a_value){
-			if(dojo.isString(a_key) && a_key != ""){
+			if(dojo.isString(a_key) && a_key !== ""){
 				this._map[a_key] = a_value;
 			} else {
 				throw Error("cs.util.Map.add() : key has to be of type String and non-empty");
@@ -36,7 +36,7 @@
 		 * @param {String} a_key
 		 */
 		has : function(a_key){
-			if(dojo.isString(a_key) && a_key != ""){
+			if(dojo.isString(a_key) && a_key !== ""){
 				return (this._map[a_key] && true);
 			} else {
 				throw Error("cs.util.Map.has() : key has to be of type String and non-empty");
@@ -48,7 +48,7 @@
 		 * @param {String} a_key
 		 */
 		remove : function(a_key){
-			if(dojo.isString(a_key) && a_key != ""){
+			if(dojo.isString(a_key) && a_key !== ""){
 				if (this.has(a_key)) {
 					return delete this._map[a_key];
 				} else {
@@ -66,7 +66,7 @@
 			var i = 0;
 			for(var item in this._map){
 				i++;	
-			};
+			}
 			return i;
 		},
 		
@@ -82,7 +82,7 @@
 			var thisObject = (a_thisObject) ? a_thisObject : dojo.global;
 			for(var item in this._map){
 				a_callback.call(thisObject,this._map[item],item,this);
-			};
+			}
 		}
 	
 	});

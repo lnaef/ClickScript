@@ -1,396 +1,423 @@
-			* {font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;}
-			h1 { margin:20px;color:#666}
-			a img {border: none;}
-			td,th {font-size: 9pt; padding:0px}
-			ul,li{margin: 0px; padding: 0px;}
-			
-			body{
-				background-color: #ddd;
-				margin:0px; padding:0px;
-			}
-			
-			h1 * {
-			 vertical-align: middle;
-			}
-					
-		
-			/*
-				IE 8.0 VML requires doctype and html namespaces like this
-				<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-					<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-					      xmlns:svg="http://www.w3.org/2000/svg"
-					      xmlns:v="urn:schemas-microsoft-com:vml"
-					      xmlns:xlink="http://www.w3.org/1999/xlink">			
-			
-			    and the following css definitions:
-			 */	
-			v\:imagedata, v\:rect, v\:roundrect, v\:line, v\:polyline, v\:curve, v\:arc, v\:oval, v\:image, v\:shape, v\:group, v\:skew, v\:stroke, v\:fill { behavior:url(#default#VML); display:inline-block }
-					
-			
-			#csMenu{
-				background-color: #eee;
-			 	font-size: 8pt;
-			 	color: #444;
-			 	padding-top:10px;
-			 	/*border: 2px solid #666;*/
-			}
-			
-			#csViewSwitches{
-			  padding : 15px 10px 5px 10px;
-			}
-			
-			#csLib, #csOptions, #csTodo {
-				border: 1px solid #777;
-			    -moz-border-radius: 8pt 8pt;
-			}
-			
-			#csLib, #csOptions, #csTodo, #csExecutionView {
-			 	background-color: #bbb;
-			 	padding: 10px;
-			 	font-size: 8pt;
-			 	margin: 8px 10px;
-			}
-			
-			#csActionMenu{
-				padding: 10px;
-			}
-			
-			#csExecutionView {
-				background-color: #eee;
-				padding-top: 20px;
-			}
-			#csExecutionViewContainer {
-				padding: 5px;
-				background-color: #aaccdd;
-				-moz-border-radius: 8pt 8pt;
-				border: 3px solid #1c72ba;
-				margin: 0px 20px;
-			}
-			
-			#csPlayground {
-				border: 2px solid #aaa;
-				-moz-border-radius: 8pt 8pt;
-				margin: 20px;
-				background-color: white;
-			}
-			
-			#csEasyConsole{
-				width: 1010px;
-				height: 200px;
-				overflow: scroll;
-				background-color: black;
-				color: white;
-				padding: 5px;
-				font-family : Courier;
-				margin-left: 20px;
-				margin-top: 20px;
-				-moz-border-radius: 8pt;
-				white-space: pre;
-			}
-			
-			#csTutorial, #csExercise, #csConsole{
-				background-color: #999;
-				/*border: 2px solid white;*/
-				-moz-border-radius: 8pt 8pt;
-				margin: 20px;
-				padding: 15px;
-				padding-top: 5px;
-			}
-			
-			#footer {
-			  font-size: 9pt;
-			  margin: 20px;
-			}
-/* logo */
-#logo {float:right;margin:0px;font-size:9pt; width: 270px;}
-			
-/* IDE Toggle-Switches */
-#csViewSwitches 		{ min-width: 1101px }
-#csViewSwitches ul      { margin: 5px 0px; padding: 0px; float:left; width:830px; }
-#csViewSwitches li      { display: inline; list-style-type: none; margin:0px; background: url('../images/menu-background.png') no-repeat right center; padding: 10px 15px;}
-#csViewSwitches li.first { background: url('../images/menu-background-corner.png') no-repeat left center; padding: 10px 6px; }
-#csViewSwitches li.last { background: url('../images/menu-background-corner.png') no-repeat right center; padding: 10px 25px; }
-#csViewSwitches a       { color: #eee; padding: 0px 20px 0px 0px; font-size: 9pt;
-						  font-weight: bold; text-decoration: none; 
-						  background: url('../images/menuClose.png') no-repeat right center; }
-#csViewSwitches a:hover { color: #444; background: url('../images/menuCloseHover.png') no-repeat right center; text-decoration: underline}
+/*
+	IE 8.0 VML requires doctype and html namespaces like this
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+		      xmlns:svg="http://www.w3.org/2000/svg"
+		      xmlns:v="urn:schemas-microsoft-com:vml"
+		      xmlns:xlink="http://www.w3.org/1999/xlink">			
 
-#csViewSwitches a.active 		{ color: #1c72ba; background: url('../images/menuOpen.png') no-repeat right center;}
-#csViewSwitches a.active:hover	{ color: #444; background: url('../images/menuOpenHover.png') no-repeat right center; }
-			
-#csActionMenu *, #csViewSwitches *{	vertical-align: middle; }
-#csActionMenu input {
-					  border: 1px solid #444;
-					  -moz-border-radius: 3pt 3pt;
-					  background-color: #ccc;
-					  margin-left: 3px;
-					  color: #444;
-					  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-					  font-size: 8pt;
-					  font-weight: bold;
-}		
-#csActionMenu .actionLabel 		{ font-weight: bold; padding-left: 5px; }
-#csActionMenu #csStateRUN		{background: url('../images/run.png') no-repeat right center;}
-#csActionMenu #csStateWAIT		{background: url('../images/wait.png') no-repeat right center;}
-#csActionMenu #csStateSTOP		{background: url('../images/stop.png') no-repeat right center;}
-#csActionMenu #csStateFINISH	{background: url('../images/finish.png') no-repeat right center;}
-#csActionMenu .csStateIcon		{padding: 0px 10px 0px 14px;}
+    and the following css definitions:
+ */	
+v\:imagedata, v\:rect, v\:roundrect, v\:line, v\:polyline, v\:curve, v\:arc, v\:oval, v\:image, v\:shape, v\:group, v\:skew, v\:stroke, v\:fill { behavior:url(#default#VML); display:inline-block }
 
-			/**
-			 * EXECUTION VIEW
-			 **/
-			 
+* {
+    font-family:  Lucida Sans,Lucida Grande,Verdana,Geneva,Arial,Helvetica,sans-serif;
+}
 
-			#csExecutionViewTitle {
-			    font-size: 8pt;
-			    color: #1c72ba;
-			    font-weight: bold;
-			}
-			#csExecutionViewPlayground{
-				min-height: 200px;
-			}
-			
-			.csEVItem{
-			  border: 1px solid #777;
-			  min-width: 50px;
-			  min-height: 50px;
-			  text-align: center;
-			  cursor : pointer;
-			  position: absolute;
-			  padding: 3px;
-			  background-color: #ddd;
-              -moz-border-radius: 5pt 5pt;
-              z-index : 1;
-			}
-			
-			.csEVItemNode {
-			  min-height: 40px;
-			}
-			
-			.csEVItemLabel {
-			  min-height: 12px;
-			  font-size : 10px;
-			  color: #666;
-			}
-			
-			/** exec component view on move **/
-			.csEVItemActive {
-			  background-color: #cde !important;
-			  border: 1px solid #567 !important;
-			}
-			
-			/** exec component view if referenced component in programming view is hovered **/
-			.csEVItemHighlight {
-			  border: 2px solid red ! important;
-			}
-			
-			
-			/**
-			 * VIEW CONTROLLER
-			 */
-			.csTooltip {
-				border: solid #ccc 1px;
-				background: #eee;
-				color: #444;
-				position: absolute;
-				font-size: 10px;
-				line-height: 1.4em;
-				padding: 5px;
-				z-index: 10;
-				display: block;
-				 -moz-border-radius: 5pt 5pt;
-				max-width: 200px;
-			}
-			
-			.csTooltip img {
-			 float:right;
-			 padding-top:10px;
-			}
-			
-			.csInfoTitle {
-			 font-weight: bold;
-			}
-			
-			.csInfoDescription{
-			 padding: 5px;
-			}
-			
-			.csInfoSocket{
-			  -moz-border-radius: 3pt 3pt;
-			  display: block;
-			  width: 20px;
-			  float: left;
-			  text-align: center;
-			  font-weight: bold;
-			  color: white;
-			  margin: 1px 5px;
-			}
-			
-			.csSocketLine{
-			  overflow: auto;
-			}
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    background: url('../images/ide/background.png') repeat-x left bottom;
+}
+ 
+#ide {
+    height: 100%;
+}
+
+.cs .rightCol {
+	/* default width of right column */
+    width: 250px;
+    overflow-y:auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
 
 
 
-			/**
-			 *  LIBRARY
-			 */
-			 
+.cs .mainPanel {
+	-moz-border-radius: 5px;
+	/*margin-right: 10px;*/
+	margin-bottom: 10px;
+}
 
-			.csLibButton {
-				overflow:hidden;
-				/*background-color: white;*/
-				margin: 0px 2px;
-			    -moz-border-radius: 0pt 0pt 3pt 3pt;
-			}
-			
-			.libStyle1 .csLibButton {width:32px;height:32px;}
-			.libStyle2 .csLibButton {width:32px;height:32px;}
-			.libStyle3 .csLibButton {width:60px;height:62px;}
-			
-			div.csLibButton:hover {
-				background-color: #aaa;
-			}
-			div.csLibButton:active {
-				background-color: #4ad;
-			}
-			
-			.csLibButton, .csLibToolbar {
-				float:left;
-				font-size: 9pt;
-				
-			}
-			
-			
-			.csLibToolbarTitle {
-			 	background-color: #444;
-			 	color: #ddd;		 	
-			 	-moz-border-radius: 3pt 3pt 0pt 0pt;		
-			 	overflow: auto;	
-			 	height: 13px;
-			}
-			
-			.libStyle2 .csLibToolbarTitle {
-			  padding:0px 3px;
-			  font-size: 7pt;
-			  font-weight: normal;
-			}
-			
-			.libStyle3 .csLibToolbarTitle {
-			  padding:1px 3px;
-			  font-size: 8pt;
-			  font-weight: bold;
-			}
-			
-			
-			.libStyle2 .csLibToolbarTitle, .libStyle3 .csLibToolbarTitle {
-			 	display: block;
-			}
-			
-			.libStyle1 .csLibToolbarTitle {
-			    display: none;
-			}
-			
-			.csLibToolbar {
-				border: 1px solid #999;
-				margin: 2px;
-				background-color: #eee;
-				-moz-border-radius: 3pt 3pt;
-			}
-			.csLibToolbarContent {
-				padding: 3px;
-				overflow: auto;
-				clear:both;
-			}
-			
-			.csLibButtonLabel{
-			  font-size: 7pt;
-			  text-align: center;
-			  background-color: #ddd;
-			  -moz-border-radius: 0pt 0pt 3pt 3pt;
-			}
-			
-			.libStyle1 .csLibButtonLabel {display: none}
-			.libStyle2 .csLibButtonLabel, .libStyle3 .csLibButtonLabel {display: block}
-			
-			.csLibButtonImg{
-			  text-align: center;
-			  height: 48px;
-			  margin-bottom:2px;
-			}
-			
-			.libStyle1 .csLibButtonImg img, .libStyle2 .csLibButtonImg img{
-              width: 32px;
-              height: 32px;
-			}			
-			.csLibToolbar .minimize, .csLibToolbar .maximize, .csLibToolbar .close {
-			  cursor: pointer;
-			}
-			.csLibToolbar .buttons{
-			  float: right;
-			}
-			.csLibToolbar .text{
-			  float:left;
-			}
+.cs .bottomLeftContainer {
+	height: 150px;
+	/*margin-right: 10px;*/
+}
 
-		
-			
-			/*
-			 * OPTIONS
-			 */
+.cs .headerPanel {
+	overflow: visible;
+}
 
-			
-			#csOptions fieldset{
-			 background-color: #eee;
-			 margin-top: 10px;
-			 margin-right: 10px;
-			 width: 220px;
-			 float:left;
-			 -moz-border-radius: 3pt;
-			}
-			
-			.clear {
-			  clear:both;
-			}
-			
-			#csOptions legend{
-			 font-weight: bold;
-			 color: #444;
-			 background-color: #ddd;
-			 padding: 2px 5px;
-			 border: 1px solid #999;
-			 -moz-border-radius: 3pt;
-			}
-			
-			#csOptionList li{
-			  list-style : none;
-			}
-			
-			#csSwitches a{
-				padding-right: 20px;
-			}
-			
-			#csSwitches img{
-				padding-left: 5px;
-			}
-			
-			#csSwitches {
-				margin: 10px 0px;
-			}
-			
-			#csTutorial iframe, #csExercise iframe  {
-				width: 900px;
-				margin: 0px auto;
-				display: block;
-				height: 400px;
-				border:none;
-				
+#navMenu {
+	left: 0px;
+	top: 0px;
+	/*-moz-border-radius: 8px 0px 0px 8px;*/
+	margin-top: -5px;
+	margin-right: -5px;
+	margin-left: -5px;
+}
 
-			}
-			
-			#csTutorialTitle, #csExerciseTitle, #csConsoleTitle {
-				font-size: 8pt;
-			    color: #eee;
-			    font-weight: bold;
-			    margin-bottom: 15px;
-			}
+.cs.claro .dijitMenuBar {
+	/*background: none;transparent url('../images/ide/background-right-column.png') repeat center center;*/
+	background-color: #468;
+	padding-left: 15px;
+	border: 1px solid transparent;
+	background-image: url('../images/ide/menu/menuHighlight.png');
+}
+
+.cs.claro .dijitMenuBar .dijitMenuItem {
+	color: white;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	font-size: 11pt;
+}
+
+.cs.claro .dijitMenuBar .dijitMenuItemHover, .cs.claro .dijitMenuBar .dijitMenuItemSelected {
+	/*background: white url('../images/ide/menu/menuHighlight.png') repeat center center;*/
+	background-color: #7ad;
+	color: black;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+.cs.claro td.dijitMenuItemLabel {
+	width: 120px;
+}
+
+/* set width to dialog content*/
+.cs.claro .dijitDialog .dijitDialogPaneContent > div {
+	width: 400px;
+}
+
+/**
+ *	FORMS in DIALOG
+ */
+.cs.claro .dijitDialog label {
+	display: block;
+	width: 120px;
+	float: left;
+	padding-top: 3px;
+}
+
+.cs.claro .dijitDialog label.longlabel {
+	width: 250px;
+}
+
+.cs.claro .dijitTextBox {
+	-moz-border-radius:4px;
+}
+.cs .dijitToggleButton,.cs .dijitButton,.cs .dijitDropDownButton,.cs .dijitComboButton {
+	margin:0px;
+}
+
+.form-line {
+	clear:both;
+	margin-top: 5px;
+}
+
+.clickScriptTitle {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	background: url('../images/ide/title.png') no-repeat;
+	padding: 20px 0px 25px 190px;
+}
+
+.cs .dijitSplitContainer-dijitContentPane.rightCol, .cs .dijitBorderContainer-dijitContentPane.rightCol {
+    background: url('../images/ide/background-right-column.png') repeat;
+    padding: 5px;
+    -moz-border-radius: 5px 0px 0px 5px;
+}
+.cs.claro .dijitTabPaneWrapper {
+	background: transparent;
+    -moz-border-radius: 0px 5px 5px 5px;
+}
+
+.cs.claro .dijitTabContainerTop-tabs {
+	border: none;
+}
+
+.cs.claro .dijitSplitterH {
+	background: url('../images/ide/splitterHorizontal.png') no-repeat center center;
+}
+.cs.claro .dijitSplitterV {
+	background: url('../images/ide/splitterVertical.png') no-repeat center center;
+}
+
+/**
+ *	TABS AT THE BOTTOM
+ */
+.cs.claro .dijitTabContainerTop-dijitContentPane, 
+.cs.claro .dijitTabContainerLeft-dijitContentPane,
+.cs.claro .dijitTabContainerBottom-dijitContentPane,
+.cs.claro .dijitTabContainerRight-dijitContentPane,
+.cs.claro .dijitAccordionContainer-dijitContentPane {
+	background: url('../images/ide/background-right-column.png') repeat;
+	/*TODO: background-image: none;
+	background-color: #444;*/
+}
+
+.cs.claro .dijitTabContainerTop-tabs .dijitTabContent {
+	background: transparent url('../images/ide/background-right-column.png') repeat center center;
+	/*TODO: background-image: none;
+	background-color: #444;*/
+}
+
+.cs.claro .dijitTabContainerTop-tabs .dijitTabChecked .dijitTabInnerDiv {
+	background: none;
+}
+
+.cs.claro .dijitTitlePaneTitle {
+	padding: 0px 3px;
+	line-height: 12px;
+}
+
+.cs.claro .dijitTitlePaneTextNode {
+	vertical-align: middle;
+}
+
+.cs .dijitSplitContainer-dijitContentPane, .cs .dijitBorderContainer-dijitContentPane {
+	padding: 0px;
+	background-color: transparent;
+}
+
+.cs .dijitSplitContainer-child, .cs .dijitBorderContainer-child {
+	border: none;	
+}
+
+
+/* 
+ * one-word-action
+ */
+.left {float: left}
+.right {float: right}
+.clear {clear: both}
+.shadow { -moz-box-shadow: 5px 5px 5px #457; -webkit-box-shadow: 5px 5px 5px #457; box-shadow: 5px 5px 5px #457; }
+
+
+.dijitLayoutContainer .dijitLayoutContainer {border: none; padding: 0px}
+
+/**
+ *	LOADING
+ */
+
+#loading {
+    background: url('../images/ide/background.png') repeat-x left bottom;
+}
+
+#innerLoading {
+	width: 300px;
+	margin: 200px auto;
+	vertical-align:middle;
+	text-align:center;
+	font-size: 8pt;
+	background: url('../images/ide/background-right-column.png') repeat;
+	-moz-border-radius: 5px;
+	padding: 20px;
+}
+
+#loadingBar img {
+	-moz-border-radius:8px;
+	/*border: 3px solid #444;*/
+}
+
+#loadingBar {
+	margin-top: 10px;
+}
+
+
+/**
+ *	CLICKSCRIPT ELEMENTS
+ */
+
+
+
+
+/**
+ *	PLAYGROUND
+ */
+#csPlayground {
+  -moz-border-radius: 5px;
+	background: url('../images/ide/background-right-column.png') repeat;
+  /*background-color:   white;*/
+}
+
+/* ALL ABOUT THE TOOLTIP */
+.csTooltip {
+  border:      solid #ccc 1px;
+  background:  #eee;
+  color:       #444;
+  position:    absolute;
+  font-size:   10px;
+  line-height: 1.4em;
+  padding:     5px;
+  z-index:     10;
+  display:     block;
+ -moz-border-radius: 5pt 5pt;
+  max-width:   200px;
+}
+
+.csTooltip img     { float:right; padding-top:10px; }
+.csInfoTitle       { font-weight: bold; }
+.csInfoDescription { padding: 5px; }
+
+.csInfoSocket{
+  -moz-border-radius: 3pt 3pt;
+  display: block;
+  width: 20px;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  margin: 1px 5px;
+}
+
+.csSocketLine{ overflow: auto; }
+
+
+
+/**
+ *	EXECUTION VIEW
+ */
+#csExecutionViewContainer {
+  padding:            5px;	
+  /*background: url('../images/ide/background-execution-view.png') repeat;*/
+}
+
+#csExecutionViewTitle {display: none;}
+#csExecutionView {}
+
+#csExecutionViewPlayground {
+  min-height: 400px;
+  position: relative;
+}
+
+.csEVItem{
+  border: 1px solid #777;
+  min-width: 50px;
+  min-height: 50px;
+  text-align: center;
+  cursor : pointer;
+  position: absolute;
+  padding: 3px;
+  background-color: #ddd;
+  -moz-border-radius: 5pt 5pt;
+  z-index : 1;
+  /*shadow*/
+  -moz-box-shadow: 5px 5px 5px #457; -webkit-box-shadow: 5px 5px 5px #457; box-shadow: 5px 5px 5px #457;
+}
+
+.csEVItemNode {
+  min-height: 40px;
+}
+
+.csEVItemLabel {
+  min-height: 12px;
+  font-size : 10px;
+  color: #666;
+}
+
+/** exec component view on move **/
+.csEVItemActive {
+  background-color: #cde !important;
+  border: 1px solid #567 !important;
+}
+
+/** exec component view if referenced component in programming view is hovered **/
+.csEVItemHighlight {
+  border: 2px solid #661 ! important;
+  background-color: yellow;
+  -moz-box-shadow: 5px 5px 5px #457; -webkit-box-shadow: 5px 5px 5px #457; box-shadow: 5px 5px 5px #457;
+}
+
+
+/**
+ *	CONSOLE
+ */
+
+#csConsole{background-color:black; padding: 5px;}
+#csConsoleTitle {display:none;}
+#csEasyConsole {height: 93%;}
+
+
+/**
+ *	TOOLBAR
+ */
+.csToolBars .dijitTitlePaneContentInner     { padding: 2px; }
+.csToolBars .dijitTitlePaneContentInner img { width: 32px; height: 32px; }
+.csToolBars .primitiveButton                { display: block; width: 32px; height: 32px; }
+.csToolBars .dijitButton .dijitButtonNode   { padding: 0px; }
+
+#csToolBarTop                             { height: 80px; padding: 3px; margin-left: 5px;}
+#csToolBarTop .categoryToolBar            { float:left; background-color: #468; -moz-border-radius: 5px; margin-bottom: 2px; margin-right: 5px;}
+#csToolBarTop .dijitTitlePaneContentOuter {	background-color: transparent; border: 0px; }
+#csToolBarTop .dijitTitlePaneTitle        { display:none; }
+#csToolBarTop .toolBarButton              { padding: 0px; margin: 0px;}
+
+/***
+ * INFO BLOCK ON THE RIGHT SIDE
+ */
+
+#csInfo                    { font-family: arial; display: none; border: 3px solid #468; padding: 0px 5px 10px 5px; margin-top: 10px; -moz-border-radius: 5px; background: transparent url('../images/ide/background-right-column.png') repeat center center;}
+#csInfo .csInfoUid         { margin-top: 10px; margin-bottom: 5px}
+#csInfo .csInfoType        { }
+#csInfo .csInfoName        { font-weight: bold; text-transform: uppercase; padding-top: 10px; background: transparent url('../images/ide/background-right-column.png') repeat center center; }
+#csInfo .csInfoDescription { padding-top: 10px; background: transparent url('../images/ide/background-right-column.png') repeat center center; line-height: 1.5em;}
+#csInfo .csSocketLine      { margin-top: 5px; }
+#csInfo .csSocketLineTitle { }
+#csInfo .csInfoImage       { text-align: right; float: right; }
+#csInfo .csInfoTitle       { color: #468; }
+#csInfo .csInfoLine        { margin-top: 15px; margin-bottom: 5px;}
+
+
+/**
+ *	ACTIONS
+ */
+.csMenuBar {margin-top: 10px;}
+
+#csStateRUN		{background: url('../images/run.png') no-repeat right center;}
+#csStateWAIT		{background: url('../images/wait.png') no-repeat right center;}
+#csStateSTOP		{background: url('../images/stop.png') no-repeat right center;}
+#csStateFINISH	{background: url('../images/finish.png') no-repeat right center;}
+.csStateIcon		{padding: 8px 10px 0px 14px; vertical-align: middle;}
+
+.csActionRun  {background-image:url("../images/ide/action/play.png"); width: 32px; height: 32px;}
+.csActionRunDisabled  {background-image:url("../images/ide/action/playDisabled.png"); width: 32px; height: 32px;}
+.csActionStopDisabled {background-image:url("../images/ide/action/stopDisabled.png"); width: 32px; height: 32px;}
+.csActionStop {background-image:url("../images/ide/action/stop.png"); width: 32px; height: 32px;}
+.csActionReloadPage {background-image:url("../images/ide/action/pageReload.png"); width: 32px; height: 32px;}
+
+
+
+/**
+ *	EXPORT DIALOG
+ */
+#dialog-export textarea, #dialog-import textarea { width: 900px; height: 400px}
+
+
+.about-picture { text-align:center}
+.about-version { margin-top: 15px;}
+.about-contact { margin-top: 5px;}
+.about-txt     { margin-top: 10px; color: #aaa; font-size: 7pt;}
+
+#dialog-configuration li {list-style: none;}
+#dialog-configuration ul {padding: 0px; margin: 0px;}
+
+/* FILE */
+.csMenuExport {background-image:url("../images/ide/menu/export.png"); width: 16px; height: 16px;}
+.csMenuImport {background-image:url("../images/ide/menu/import.png"); width: 16px; height: 16px;}
+/* EXTRAS */
+.csMenuConfig   {background-image:url("../images/ide/menu/config.png"); width: 16px; height: 16px;}
+.csMenuTutorial {background-image:url("../images/ide/menu/tutorial.png"); width: 16px; height: 16px;}
+.csMenuExercise {background-image:url("../images/ide/menu/exercise.png"); width: 16px; height: 16px;}
+/* HELP */
+.csMenuHelp {background-image:url("../images/ide/menu/help.png"); width: 16px; height: 16px;}
+.csMenuAbout {background-image:url("../images/ide/menu/infomation.png"); width: 16px; height: 16px;}
+
+

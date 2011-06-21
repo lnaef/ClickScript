@@ -5,7 +5,7 @@
 	
 	dojo.provide("cs.controller.ModelControllerObserver");
 	
- 	dojo.declare("cs.controller.ModelControllerObserver", null, {
+	dojo.declare("cs.controller.ModelControllerObserver", null, {
 		onAddComponent : function(){},
 		onConnectSockets : function(){},
 		onDeleteWire : function(){},

@@ -227,7 +227,7 @@ dojo.require("cs.lib.web.browse.Util");
 				console.log(dojo.query("input[type=submit]",iframe.contentDocument.documentElement)[number]);
 				console.log("length" , dojo.query("input[type=submit]",iframe.contentDocument.documentElement).length);
 				console.log(dojo.query("input[type=submit]",iframe.contentDocument.documentElement),number);
-				dojo.query("input[type=submit]",iframe.contentDocument.documentElement)[parseInt(number)].click();
+				dojo.query("input[type=submit]",iframe.contentDocument.documentElement)[parseInt(number,10)].click();
 				
 				// reload to trigger load event
 				//iframe.contentDocument.location.reload(true);

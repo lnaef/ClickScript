@@ -80,7 +80,7 @@
 		/**
 		 * ForEach on the container. 
 		 * example:
-		 * 	  var container = new cs.util.Container();
+		 *	  var container = new cs.util.Container();
 		 *    container.forEach(function(item,index,array){
 		 *       array[index] = item + 1;
 		 *    });

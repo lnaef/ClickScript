@@ -114,12 +114,12 @@
 			var factor = 30;
 			
 			// calculate first tangential point
-			cx1 = (!this._fromSocket.getModel().isInput()) ?  from.x+factor : from.x-factor;
-			cy1 = from.y;				
+			var cx1 = (!this._fromSocket.getModel().isInput()) ?  from.x+factor : from.x-factor;
+			var cy1 = from.y;				
 			
 			// calculate second tangetial point
-			cx2 = (!this._toSocket.getModel().isInput()) ?  to.x+factor : to.x-factor;
-			cy2 = to.y;			
+			var cx2 = (!this._toSocket.getModel().isInput()) ?  to.x+factor : to.x-factor;
+			var cy2 = to.y;			
 			// draw the bezzier curve 
 			this._wireShape = this._surface.createPath();
 			this._wireShape.moveTo(from.x,from.y);

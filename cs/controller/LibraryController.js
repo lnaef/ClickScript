@@ -9,7 +9,7 @@
 	dojo.require("cs.model.program.Component");
 	dojo.require("cs.model.program.Module");
 	dojo.require("cs.util.Map");
- 	dojo.declare("cs.controller.LibraryController", null, {
+	dojo.declare("cs.controller.LibraryController", null, {
 		
 		/**
 		 * All registered MetaComponents
@@ -245,13 +245,13 @@
 		
 	});
 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
+	
+	
+	
+	
+	
+	
+	
 	cs.library = new cs.controller.LibraryController();
 	
 

@@ -34,7 +34,7 @@ doh.register("cs.util.tests.util._base", [
 	},
 	
 	function test(){
-		 	dojo.declare("cs.a", null, {});
+			dojo.declare("cs.a", null, {});
 			dojo.declare("cs.b", null, {});
 			dojo.declare("cs.c", [cs.a,cs.b], {});
 			var a = cs.util.getClassDefinition("cs.c");

@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" media="all" href="../dojo-release-1.6.1-src/dijit/themes/claro/claro.css" />
 		
 		<!-- CSS ClickScript -->
-		<link rel="stylesheet" type="text/css" media="all" href="../cs/util/css/csIdeNew.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="../cs/util/css/csIde.css" />
 
 		<!-- FAVICON -->
 		<link href="../cs/util/images/logo32x32.gif" rel="icon" type="image/gif" />
@@ -57,23 +57,23 @@
 				
 				// Layout / Container
 				dojo.require("dijit.layout.BorderContainer");
-	    		dojo.require("dijit.layout.TabContainer");
-	    		dojo.require("dijit.layout.ContentPane");
-	    		dojo.require("dijit.TitlePane");
-	    		
-	    		// Forms
-	    		dojo.require("dijit.form.Button");
-	    		dojo.require("dijit.form.Textarea");
-				dojo.require("dijit.form.CheckBox");
-	    		dojo.require("dijit.form.DropDownButton");
-	    		
-	    		// Menu
-	    		dojo.require("dijit.MenuBar");
+				dojo.require("dijit.layout.TabContainer");
+				dojo.require("dijit.layout.ContentPane");
+				dojo.require("dijit.TitlePane");
+				
+				// Forms
+				dojo.require("dijit.form.Button");
+				dojo.require("dijit.form.Textarea");
+					dojo.require("dijit.form.CheckBox");
+				dojo.require("dijit.form.DropDownButton");
+				
+				// Menu
+				dojo.require("dijit.MenuBar");
 			    dojo.require("dijit.PopupMenuBarItem");
 			    dojo.require("dijit.Menu");
-			    dojo.require("dijit.MenuItem");
-			    dojo.require("dijit.PopupMenuItem");
-		
+				dojo.require("dijit.MenuItem");
+				dojo.require("dijit.PopupMenuItem");
+
 				// Dialogs like configuration
 				dojo.require("dijit.Dialog");
 				
@@ -85,7 +85,7 @@
 				dojo.require("cs.system.ConfigController");
 				
 				// Load IDE-Class
-				dojo.require("cs.controller.NewIdeController")
+				dojo.require("cs.controller.IdeController");
 				
 				/**
 				 * Load libraries
@@ -177,14 +177,8 @@
 							dijit.byId("button-run").set("disabled",false);
 							dijit.byId("button-run").set("iconClass","csActionRun");
 							break;
-					};
+					}
 				});
-				
-				
-				
-				
-				
-				
 				
 				
 				/**
@@ -203,17 +197,17 @@
     </head>
 	<body class="cs claro" >
 	    <div id="loading" style="position:absolute;left:0px;top:0px;width:100%;height:100%;background-color:white;z-index:999;">
-	    	<div id="innerLoading" class="shadow">
-	    		<img src="../cs/util/images/logo64x64.png" width="64" height="64" />
-	    		<h1>ClickScript is loading...</h1>
-	    		<div id="loadingbar"><img src="../cs/util/images/loadingbar.gif"/></div>
-	    	</div>
-	    	
+		<div id="innerLoading" class="shadow">
+			<img src="../cs/util/images/logo64x64.png" width="64" height="64" />
+			<h1>ClickScript is loading...</h1>
+			<div id="loadingbar"><img src="../cs/util/images/loadingbar.gif"/></div>
+		</div>
+		
 	    </div>
 	    
 	    
 	    <div    
-	    	id="ide"
+		id="ide"
 	        data-dojo-type="dijit.layout.BorderContainer"
 	        data-dojo-props="design: 'headline'">
 	        
@@ -232,7 +226,7 @@
 		                    File
 		                </span>
 		                <div dojoType="dijit.Menu" id="fileMenu">
-		              		<div dojoType="dijit.MenuItem" onClick="cs.global.ide.cleanAll();" iconClass="dijitEditorIcon dijitEditorIconNewPage">
+		        		<div dojoType="dijit.MenuItem" onClick="cs.global.ide.cleanAll();" iconClass="dijitEditorIcon dijitEditorIconNewPage">
 		                        New 
 		                    </div>
 		                    <div dojoType="dijit.MenuItem" onClick="cs.global.ide.showLoadDialog();" iconClass="dijitFolderOpened">
@@ -245,12 +239,12 @@
 		                        Save As...
 		                    </div>
 		                    <div dojoType="dijit.MenuItem" iconClass="csMenuExport">
-				    		    <script type="dojo/method" event="onClick" args="evt">
+						    <script type="dojo/method" event="onClick" args="evt">
 									var exportDialog = dijit.byId('dialog-export');
 									exportDialog.show();
 									dojo.byId("exportValue").value = cs.modelController.serializeScript();
-				    			</script>
-				    			Export...
+							</script>
+							Export...
 		                    </div>
 		                    <div dojoType="dijit.MenuItem" onClick="dijit.byId('dialog-import').show()" iconClass="csMenuImport">
 		                        Import...
@@ -292,27 +286,27 @@
 
 	        <!-- RIGHT COLONE -->
 	        <div    
-	        	class="rightCol shadow"
+	  	class="rightCol shadow"
 	            data-dojo-type="dijit.layout.ContentPane"
 	            data-dojo-props="region: 'right', splitter: true">
 				
-				<!-- ACTIONS; CONTROLERS -->	    		
-	    		<div id="csActionBar" class="csMenuBar">
-		    		<button dojoType="dijit.form.Button" type="button" id="button-run" onClick="cs.executionController.run();" iconClass="csActionRun" showLabel="false">run</button>				
+				<!-- ACTIONS; CONTROLERS -->			
+			<div id="csActionBar" class="csMenuBar">
+				<button dojoType="dijit.form.Button" type="button" id="button-run" onClick="cs.executionController.run();" iconClass="csActionRun" showLabel="false">run</button>				
 					
 					<button dojoType="dijit.form.Button" type="button" id="button-stop" iconClass="csActionStopDisabled" showLabel="false">stop
-		    		    <script type="dojo/method" event="onClick" args="evt">
-		    		    	cs.executionController.stop();						
+				    <script type="dojo/method" event="onClick" args="evt">
+					cs.executionController.stop();						
 						</script>
-		    		</button>	
-		    		
-		    		
-		    		<input id="checkbox-repeated-mode" name="loop" dojoType="dijit.form.CheckBox" value="loop" onChange="validateCheckboxRepeatedMode()">
+				</button>	
+				
+				
+				<input id="checkbox-repeated-mode" name="loop" dojoType="dijit.form.CheckBox" value="loop" onChange="validateCheckboxRepeatedMode()">
 					<label for="checkbox-repeated-mode">
 					    Loop
 					</label>
-		    		
-		  			</div><!-- END: ACTIONS; CONTROLERS-->
+				
+					</div><!-- END: ACTIONS; CONTROLERS-->
 				
 				<!-- STATUS -->	
 				<div id="csStateBar" class="csMenuBar">
@@ -353,8 +347,8 @@
 	            class="leftCol" 
 	            data-dojo-type="dijit.layout.ContentPane"
 	            data-dojo-props="region: 'center'">
-	           	<div    
-			    	class="leftColContainer"
+	     	<div    
+				class="leftColContainer"
 			        data-dojo-type="dijit.layout.BorderContainer"
 			        data-dojo-props="design: 'headline'">	        
 			        <!--<div
@@ -366,7 +360,7 @@
 						</div>
 					</div>-->
 		            <div
-		            	id="thePlayGroundPane"
+		      	id="thePlayGroundPane"
 			            class="mainPanel" 
 			            data-dojo-type="dijit.layout.ContentPane"
 			            data-dojo-props="region: 'center', splitter: true">
@@ -378,34 +372,34 @@
 			            data-dojo-type="dijit.layout.ContentPane"
 			            data-dojo-props="region: 'bottom', splitter: true">
 					    <div 
-			            	class="tabContainerRight"
-			            	dojoType="dijit.layout.TabContainer"
-			            	data-dojo-props="tabPosition: 'bottom'">
+			      	class="tabContainerRight"
+			      	dojoType="dijit.layout.TabContainer"
+			      	data-dojo-props="tabPosition: 'bottom'">
 			                <div 
-			                	class="execViewPanel"
-			                	dojoType="dijit.layout.ContentPane" title="Exec View" selected="true">
+			          	class="execViewPanel"
+			          	dojoType="dijit.layout.ContentPane" title="Exec View" selected="true">
 			                    <!-- EXECUTION VIEW -->
 			                    <div id="csExecutionView"></div>
 			                </div>
 			                <div 
-			                	class="consolePanel"
-			                	dojoType="dijit.layout.ContentPane" title="Console">
-			                	<!-- CONSOLE -->
+			          	class="consolePanel"
+			          	dojoType="dijit.layout.ContentPane" title="Console">
+			          	<!-- CONSOLE -->
 			                    <div id="csConsole"></div>
 			                </div>
 				        </div>
 					</div>
 				</div>
 			</div>   
-	    	<!-- END LEFT-COL -->
+		<!-- END LEFT-COL -->
        </div>
     
     
-    	<!-- 
-    	  -- DIALOG: CONFIGURATION / OPTION
-    	  -->
-    	<div dojoType="dijit.Dialog" id="dialog-configuration" title="Configuration">
-    		<h3>Change Debugsettings</h3>
+	<!-- 
+	  -- DIALOG: CONFIGURATION / OPTION
+	  -->
+	<div dojoType="dijit.Dialog" id="dialog-configuration" title="Configuration">
+		<h3>Change Debugsettings</h3>
 			<ul>
 				<li class="form-line">
 					<input id="checkbox-debug-mode" name="debug-mode" dojoType="dijit.form.CheckBox" value="debug-mode">
@@ -441,93 +435,93 @@
 			<div class="form-line">
 				<label>&nbsp;</label>
 				<button dojoType="dijit.form.Button" type="button" id="button-change-user">Set User
-	    		    <script type="dojo/method" event="onClick" args="evt">
+			    <script type="dojo/method" event="onClick" args="evt">
 				        var username  = dijit.byId("change-username").get('value');
 				        var token     = dijit.byId("change-user-token").get('value');
 				        cs.global.ide.changeUser(username,token);
 				    </script>		
-	    		</button> 				
+			</button>				
 			</div>
 			
 			
 
-    	</div>
-    	
-    	
-    	<!-- 
-    	  -- DIALOG: IMPORT 
-    	  -->
-    	<div dojoType="dijit.Dialog" id="dialog-import" title="Import">
-    		<textarea id="importValue" dojoType="dijit.form.Textarea"></textarea>
-    		<div class="form-line">
-	    		<button dojoType="dijit.form.Button" type="button" id="button-import">Import
-	    		    <script type="dojo/method" event="onClick" args="evt">
-	    				// import Data
-	    				cs.global.scriptPlayer.run(dojo.byId("importValue").value);
-	    				
-	    				// reset value
-	    				dojo.byId("importValue").value = "";
-	    				
-	    				// close import dialog
-	    				dijit.byId('dialog-import').hide();
-	    			</script>
-	    		</button>
-	    		<button dojoType="dijit.form.Button" type="button" id="button-import-cancel">Cancel
-	    		    <script type="dojo/method" event="onClick" args="evt">
+	</div>
+	
+	
+	<!-- 
+	  -- DIALOG: IMPORT 
+	  -->
+	<div dojoType="dijit.Dialog" id="dialog-import" title="Import">
+		<textarea id="importValue" dojoType="dijit.form.Textarea"></textarea>
+		<div class="form-line">
+			<button dojoType="dijit.form.Button" type="button" id="button-import">Import
+			    <script type="dojo/method" event="onClick" args="evt">
+					// import Data
+					cs.global.scriptPlayer.run(dojo.byId("importValue").value);
+					
+					// reset value
+					dojo.byId("importValue").value = "";
+					
+					// close import dialog
+					dijit.byId('dialog-import').hide();
+				</script>
+			</button>
+			<button dojoType="dijit.form.Button" type="button" id="button-import-cancel">Cancel
+			    <script type="dojo/method" event="onClick" args="evt">
 				        dijit.byId('dialog-import').hide();
 				    </script>		
-	    		</button>
-    		</div>
-    	</div>
-    	
-    	
-    	<!-- 
-    	  -- DIALOG: EXPORT 
-    	  -->
-    	<div dojoType="dijit.Dialog" id="dialog-export" title="Export">
-  			<textarea id="exportValue" dojoType="dijit.form.Textarea"></textarea>
-  			<div class="form-line">
-	    		<button dojoType="dijit.form.Button" type="button" id="button-export-cancel">Cancel
-	    		    <script type="dojo/method" event="onClick" args="evt">
+			</button>
+		</div>
+	</div>
+	
+	
+	<!-- 
+	  -- DIALOG: EXPORT 
+	  -->
+	<div dojoType="dijit.Dialog" id="dialog-export" title="Export">
+			<textarea id="exportValue" dojoType="dijit.form.Textarea"></textarea>
+			<div class="form-line">
+			<button dojoType="dijit.form.Button" type="button" id="button-export-cancel">Cancel
+			    <script type="dojo/method" event="onClick" args="evt">
 				        dijit.byId('dialog-export').hide();
 				    </script>		
-	    		</button>  				
-  			</div>
-    	</div>
-    	<!-- 
-    	  -- DIALOG: ABOUT 
-    	  -->
-    	<div dojoType="dijit.Dialog" id="dialog-about" title="About ClickScript">
-    		<div class="about">
-    			<div class="about-picture">
-    				<img src="../cs/util/images/logo64x64.png" width="64" height="64" />
-     			</div>
-     			<div class="about-version">
-    				ClickScript <span class="version-number"></span>
-    			</div>
-    			<div class="about-contact">
-    				contact'at'clickscript.ch 
-    			</div>
-    			<div class="about-txt">
-    				ClickScript is a visual programming language in the browser. It is not allowed to reuse ClickScript on other pages without explicit permission of the owner. Non-commercial use only.<br/>&copy;2009-2011 powered by clickscript.ch
-    			</div>
-    		</div>			
-    	</div>
-    	<!-- 
-    	  -- DIALOG: LOAD 
-    	  -->
-    	<div dojoType="dijit.Dialog" id="dialog-load" title="Load ClickScript">
-    		<div class="load">
+			</button>				
+			</div>
+	</div>
+	<!-- 
+	  -- DIALOG: ABOUT 
+	  -->
+	<div dojoType="dijit.Dialog" id="dialog-about" title="About ClickScript">
+		<div class="about">
+			<div class="about-picture">
+				<img src="../cs/util/images/logo64x64.png" width="64" height="64" />
+			</div>
+			<div class="about-version">
+				ClickScript <span class="version-number"></span>
+			</div>
+			<div class="about-contact">
+				contact'at'clickscript.ch 
+			</div>
+			<div class="about-txt">
+				ClickScript is a visual programming language in the browser. It is not allowed to reuse ClickScript on other pages without explicit permission of the owner. Non-commercial use only.<br/>&copy;2009-2011 powered by clickscript.ch
+			</div>
+		</div>			
+	</div>
+	<!-- 
+	  -- DIALOG: LOAD 
+	  -->
+	<div dojoType="dijit.Dialog" id="dialog-load" title="Load ClickScript">
+		<div class="load">
 				<div>Select Script to load...</div>
 				<div id="list-scripts"></div>
-    		</div>			
-    	</div>
-    	
-    	 <!-- 
-    	  -- DIALOG: SAVE AS 
-    	  -->
-    	<div dojoType="dijit.Dialog" id="dialog-save-as" title="Load ClickScript">
-    		<div class="load">
+		</div>			
+	</div>
+	
+	 <!-- 
+	  -- DIALOG: SAVE AS 
+	  -->
+	<div dojoType="dijit.Dialog" id="dialog-save-as" title="Load ClickScript">
+		<div class="load">
 				<div>Please enter a name to store the script</div>
 				<div class="form-line">
 					<label>Scriptname</label>
@@ -537,13 +531,13 @@ trim="true" id="input-text-save-as" />
 				<div class="form-line">
 					<label>&nbsp;</label>
 					<button dojoType="dijit.form.Button" type="button" id="button-save-as">Save
-		    		    <script type="dojo/method" event="onClick" args="evt">
+				    <script type="dojo/method" event="onClick" args="evt">
 					        var name = dijit.byId("input-text-save-as").get('value');
 					        cs.global.ide.saveAsScript(name);
 					    </script>		
-		    		</button> 
-    			</div>
-    		</div>			
-    	</div>
+				</button> 
+			</div>
+		</div>			
+	</div>
 	</body>
 </html>

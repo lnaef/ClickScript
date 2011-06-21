@@ -196,12 +196,12 @@ dojo.provide("cs.lib.math.init");
 			    var out = "";
 			    var max = 0;
 			    a_container.forEach(function(value){
-			      if(max < value){
-			    	  max = value;
-			      }
+					if(max < value){
+						max = value;
+					}
 			    });
-			    a_container.forEach(function(value){    	
-			    	out += "<div style='width:"+Math.floor(width/a_container.size())+"px;height:"+height+"px;float:left;background-image:url(\""+cs.config.rootPath+"lib/math/bar.png\");background-repeat:no-repeat;background-position: 0px "+Math.floor((height-(height/max)*value))+"px'></div>";
+				a_container.forEach(function(value){
+					out += "<div style='width:"+Math.floor(width/a_container.size())+"px;height:"+height+"px;float:left;background-image:url(\""+cs.config.rootPath+"lib/math/bar.png\");background-repeat:no-repeat;background-position: 0px "+Math.floor((height-(height/max)*value))+"px'></div>";
 			    });
 			    out += "<div style='font-size:7pt;color:black'>100% : "+max+"</div>"; 
 			    

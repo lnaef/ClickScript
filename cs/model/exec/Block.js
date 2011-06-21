@@ -8,7 +8,7 @@
 	
 	dojo.require("cs.util.Container");
 	
- 	dojo.declare("cs.model.exec.Block", null, {
+	dojo.declare("cs.model.exec.Block", null, {
 		
 		_model : null,
 		

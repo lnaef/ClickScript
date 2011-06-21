@@ -15,7 +15,7 @@
 	dojo.require("cs.controller.ModelControllerObserver");
 	dojo.require("cs.controller.Worklist");
 	
- 	dojo.declare("cs.controller.ExecutionController", cs.controller.ModelControllerObserver, {
+	dojo.declare("cs.controller.ExecutionController", cs.controller.ModelControllerObserver, {
 		
 		_modelController : null,
 		
@@ -120,10 +120,11 @@
 		},
 		
 		onAddComponent : function(a_component){
+			var component = null;
 			if (a_component.isStatement()){
-				var component = new cs.model.exec.Statement(a_component,this._rootBlock);				
+				component = new cs.model.exec.Statement(a_component,this._rootBlock);				
 			} else {
-				var component = new cs.model.exec.Module(a_component,this._rootBlock);				
+				component = new cs.model.exec.Module(a_component,this._rootBlock);				
 			}
 
 			this._components.add(component);

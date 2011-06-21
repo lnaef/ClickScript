@@ -39,13 +39,13 @@ dojo.provide("cs.lib.web.things.init");
 			
 			//console.log ("IP:" + ip +" URL:"+ aurl +" STATE:"+ onoff);
 			
- 			$.ajax({
+			$.ajax({
 				  url: aurl,
 				  type: "POST",
 				  data: ({status : onoff}),
 				  success: function(html){
- 				 	//console.log("successful ajax call for switch");
- 				    alert("status of fan : " +onoff);
+					//console.log("successful ajax call for switch");
+				    alert("status of fan : " +onoff);
 				    component.finishAsync();  
 				  },
 				  error: function(msg){
@@ -82,7 +82,7 @@ dojo.provide("cs.lib.web.things.init");
 			var ip = state.inputs.item(0).getValue();
 			var component = this;
 			
- 			$.getJSON(
+			$.getJSON(
 				  "http://"+ip+":8080/AmbientMeter/sensors/temperature/",
 				  function(json){
 					var temp = json[0].resource.values.main[0];

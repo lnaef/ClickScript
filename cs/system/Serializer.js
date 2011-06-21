@@ -46,7 +46,7 @@
 		 * 
 		 * The exmple would look like:
 		 *    <component id="12">
-		 * 		 <Socket uid='234'><test/></Socket>
+		 *		 <Socket uid='234'><test/></Socket>
 		 *    </component>
 		 * 
 		 * To get a single tag, just set a_childstring to "" or null

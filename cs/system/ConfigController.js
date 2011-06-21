@@ -94,7 +94,7 @@
 			 * to setup an ClickScript IDE. At the beginning of a project.
 			 */
 			init : function(){
-				window.cs.global.ide = new cs.controller.NewIdeController();
+				window.cs.global.ide = new cs.controller.IdeController();
 			}
 			
 

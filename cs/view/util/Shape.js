@@ -61,7 +61,9 @@
 			}
 			
 		},
-		
+		/**
+		 * WARNING: DOUBLICATED FUNCTION: getBoundingBox
+		 */		
 		getBoundingBox : function(){
 			return this.bbox;
 		},
@@ -106,7 +108,9 @@
 		getShape : function(){
 			return this._group;
 		}, 
-		
+		/**
+		 * WARNING: DOUBLICATED FUNCTION: getBoundingBox
+		 */
 		getBoundingBox : function(){
 			return this._group.getBoundingBox();
 		},

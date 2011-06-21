@@ -19,11 +19,11 @@
 			}
 			/*
 			this._toggler = new dojo.fx.Toggler({
-	 		       node: this._rawNode,
-	 		       showFunc: dojo.fx.wipeIn,
-	 		       hideFunc: dojo.fx.wipeOut
-	 		});
-	 		*/
+			       node: this._rawNode,
+			       showFunc: dojo.fx.wipeIn,
+			       hideFunc: dojo.fx.wipeOut
+			});
+			*/
 			//init toggler
 			this._isActive = dojo.style(this._rawNode,"display") == "block";
 			/*

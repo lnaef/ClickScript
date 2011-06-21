@@ -57,7 +57,7 @@
 			var correctX = cs.view.program.Block.dim.getCorrectX(this.getModel());
 			
 			var posX = 0;
-			var poxY = 0;
+			var posY = 0;
 			this._blocks.forEach(function(blockView,index){
 				var dimension = blockView.getModel().getDimension();
 				posX = blockView.getModel().getOwner().getPositionProg().x + correctX;

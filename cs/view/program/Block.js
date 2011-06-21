@@ -124,7 +124,7 @@
 			 * TODO: Mover restrict to certain area
 			 */
 			this._resizeMoveable = new dojox.gfx.Moveable(this._resizeShape);
-			dojo.connect(this._resizeMoveable,"onMove",this,"onResize"); 		//TODO: this._moveableEvents.push(dojo.connect(moveable,"onMoveStop",this,function(mover){ to destroy?!?!
+			dojo.connect(this._resizeMoveable,"onMove",this,"onResize");		//TODO: this._moveableEvents.push(dojo.connect(moveable,"onMoveStop",this,function(mover){ to destroy?!?!
 			
 			dojo.connect(this._resizeMoveable,"onMoveStop",this,function(mover){
 				var dimension = this.onResize(this._resizeMoveable);

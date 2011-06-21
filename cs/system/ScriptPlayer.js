@@ -68,11 +68,12 @@
 					component = cs.modelController.getRootStatement();
 				}
 				
+				var inputSockets = null;
 				// Input sockets
 				if(!dojo.isIE){
-					var inputSockets = dojo.query("inputs > socket",componentNode);
+					inputSockets = dojo.query("inputs > socket",componentNode);
 				} else {
-					var inputSockets = new cs.util.Container();
+					inputSockets = new cs.util.Container();
 					dojo.forEach(dojo.query("inputs",componentNode),function(inputs){
 						dojo.forEach(dojo.query("socket",inputs),function(socket){
 							inputSockets.add(socket);
@@ -86,10 +87,11 @@
 				}
 				
 				// Output sockets
+				var outputSockets = null;
 				if(!dojo.isIE){
-					var outputSockets = dojo.query("outputs > socket",componentNode);
+					outputSockets = dojo.query("outputs > socket",componentNode);
 				} else {
-					var outputSockets = new cs.util.Container();
+					outputSockets = new cs.util.Container();
 					dojo.forEach(dojo.query("outputs",componentNode),function(outputs){
 						dojo.forEach(dojo.query("socket",outputs),function(socket){
 							outputSockets.add(socket);
@@ -103,11 +105,11 @@
 				}
 				
 				// Field sockets
-				var fieldSockets = dojo.query("fields > field",componentNode);
+				var fieldSockets = null;
 				if(!dojo.isIE){
-					var fieldSockets = dojo.query("fields > field",componentNode);
+					fieldSockets = dojo.query("fields > field",componentNode);
 				} else {
-					var fieldSockets = new cs.util.Container();
+					fieldSockets = new cs.util.Container();
 					dojo.forEach(dojo.query("fields",componentNode),function(fields){
 						dojo.forEach(dojo.query("field",fields),function(socket){
 							fieldSockets.add(socket);

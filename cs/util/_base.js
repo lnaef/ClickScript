@@ -29,10 +29,11 @@
 		 */
 		cs.util.isTypeOf = function(a_dojoObject,a_classname){
 			var classname = a_classname;
+			var objectClassname = null;
 			if (dojo.isString(a_dojoObject)) {
-				var objectClassname = a_dojoObject;
+				objectClassname = a_dojoObject;
 			} else {
-				var objectClassname = cs.util.getClassname(a_dojoObject);
+				objectClassname = cs.util.getClassname(a_dojoObject);
 			}
 			if(objectClassname == a_classname){
 				return true;
@@ -91,8 +92,8 @@
 		
 		cs.util.makeParameters = function(defaults, update){
 		//	summary:
-		// 		copies the original object, and all copied properties from the
-		// 		"update" object
+		//		copies the original object, and all copied properties from the
+		//		"update" object
 		//	defaults: Object
 		//		the object to be cloned before updating
 		//	update:   Object

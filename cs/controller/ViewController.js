@@ -16,7 +16,7 @@
 	//for tooltips:
 	dojo.require("cs.view.util.Tooltip");
 	
- 	dojo.declare("cs.controller.ViewController", cs.controller.ModelControllerObserver, {
+	dojo.declare("cs.controller.ViewController", cs.controller.ModelControllerObserver, {
 		
 		_components : null,
 		_wires : null,
@@ -170,7 +170,7 @@
 			},this);
 			
 			// only if hole component covers the shape
-			if (moveToBlock != null){
+			if (moveToBlock !== null){
 				// only move if it is an other block then before
 				if(moveToBlock.getModel()!=a_component.getModel().getParentBlock()){
 					console.log("Let's move a module to an other block");
@@ -289,10 +289,11 @@
 		/*   FUNCTIONS INTERFACE FOR MODELCONTROLLER
 		 */
 		onAddComponent : function(a_component){
+			var component = null;
 			if (a_component.isStatement()){
-				var component = new cs.view.program.Statement(this._surface,a_component.getPositionProg(),a_component);				
+				component = new cs.view.program.Statement(this._surface,a_component.getPositionProg(),a_component);				
 			} else {
-				var component = new cs.view.program.Component(this._surface,a_component.getPositionProg(),a_component);				
+				component = new cs.view.program.Component(this._surface,a_component.getPositionProg(),a_component);				
 			}
 
 			this._components.add(component);

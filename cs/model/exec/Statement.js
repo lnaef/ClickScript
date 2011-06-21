@@ -9,7 +9,7 @@
 	dojo.require("cs.model.exec.Component");
 	dojo.require("cs.model.exec.Block");
 	
- 	dojo.declare("cs.model.exec.Statement", cs.model.exec.Component, {
+	dojo.declare("cs.model.exec.Statement", cs.model.exec.Component, {
 		
 		_blocks : null,
 		
@@ -125,13 +125,13 @@
 		 * including the components of this.components component ;-)
 		 */
 		getChildComponents : function(){
-			result = new cs.util.Container();
+			var result = new cs.util.Container();
 			this.getBlocks().forEach(function(block){
 				block.getComponents().forEach(function(component){
 					result.add(component);
 					if (component.getModel().isStatement()) {
 						component.getChildComponents().forEach(function(childComponent){
-							result.add(child);
+							result.add(childComponent);
 						}, this);
 					}
 				},this);

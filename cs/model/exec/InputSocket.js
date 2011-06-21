@@ -17,7 +17,7 @@
 			if(this._model.isInput()){
 				if(this._connectedSockets.size() == 1){
 					return this._connectedSockets.item(0).getValue();
-				} else if(this._connectedSockets.size() == 0){
+				} else if(this._connectedSockets.size() === 0){
 					return null;
 				} else {
 					/**

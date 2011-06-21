@@ -51,7 +51,7 @@
 			var output = this._name + ((this._attributes.length>0)?"{":"");
 			for(var item in this._attributes){
 				output = output +" " +item + ":" + this._attributes[item]+",";
-			};
+			}
 			return output + ((this._attributes.length>0)?"}":"");
 		},
 		

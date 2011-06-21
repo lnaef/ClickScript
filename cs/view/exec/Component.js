@@ -49,39 +49,39 @@
 		 * add all eventlisteners and make it moveable
 		 */
 		loadItem : function(){
- 			
+			
 			// place component to the view and save reference to the node
- 			this._item = dojo.place("<div class='csEVItem' style='left:"+(this._programModel.getPositionExec().x)+"px;top:"+(this._programModel.getPositionExec().y)+"px'>" +
- 									"  <div class='csEVItemNode'></div>" +
- 									"  <div class='csEVItemLabel'></div>" +
- 									"</div>",this._playground,"last");
- 			this._node = dojo.place(this.getSource(),dojo.query(".csEVItemNode",this._item)[0]);			
+			this._item = dojo.place("<div class='csEVItem' style='left:"+(this._programModel.getPositionExec().x)+"px;top:"+(this._programModel.getPositionExec().y)+"px'>" +
+									"  <div class='csEVItemNode'></div>" +
+									"  <div class='csEVItemLabel'></div>" +
+									"</div>",this._playground,"last");
+			this._node = dojo.place(this.getSource(),dojo.query(".csEVItemNode",this._item)[0]);			
 
- 			// make node moveable with constraints of playground
- 			var playground = this._playground;
- 			var mydnd = new dojo.dnd.move.constrainedMoveable(this._item,{skip: true, within : true, constraints:function(){return dojo.marginBox(playground);}});
- 			
- 			// move to front during move
- 			dojo.connect(mydnd,"onMoveStart",function(mover){
- 				dojo.style(mover.host.node,"zIndex",10);
- 				dojo.addClass(mover.host.node,"csEVItemActive");
- 			});
- 			dojo.connect(mydnd,"onMoveStop",this,function(mover){
- 				dojo.style(mover.host.node,"zIndex",1);
- 				dojo.removeClass(mover.host.node,"csEVItemActive");
- 				// TODO: by event
- 				var moverPosition = dojo.position(mover.node,true);
- 				var playgroundPosition = dojo.position(this._playground,true);
- 				
- 				// update the position in the model
- 				cs.modelController.updatePositionExec(this._programModel,moverPosition.x-playgroundPosition.x,moverPosition.y-playgroundPosition.y);
- 				
- 			});
- 			
- 			// on double click set the label
- 			dojo.connect(this._item,"ondblclick",this,function(e){
- 				this.setLabel(prompt("enter label text:",this.getLabel()));
- 			},true);
+			// make node moveable with constraints of playground
+			var playground = this._playground;
+			var mydnd = new dojo.dnd.move.constrainedMoveable(this._item,{skip: true, within : true, constraints:function(){return dojo.marginBox(playground);}});
+			
+			// move to front during move
+			dojo.connect(mydnd,"onMoveStart",function(mover){
+				dojo.style(mover.host.node,"zIndex",10);
+				dojo.addClass(mover.host.node,"csEVItemActive");
+			});
+			dojo.connect(mydnd,"onMoveStop",this,function(mover){
+				dojo.style(mover.host.node,"zIndex",1);
+				dojo.removeClass(mover.host.node,"csEVItemActive");
+				// TODO: by event
+				var moverPosition = dojo.position(mover.node,true);
+				var playgroundPosition = dojo.position(this._playground,true);
+				
+				// update the position in the model
+				cs.modelController.updatePositionExec(this._programModel,moverPosition.x-playgroundPosition.x,moverPosition.y-playgroundPosition.y);
+				
+			});
+			
+			// on double click set the label
+			dojo.connect(this._item,"ondblclick",this,function(e){
+				this.setLabel(prompt("enter label text:",this.getLabel()));
+			},true);
 		},
 		
 		getNode : function(){

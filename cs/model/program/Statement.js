@@ -10,7 +10,7 @@
 	dojo.require("cs.model.program.Component");
 	dojo.require("cs.util.Container");
 	
- 	dojo.declare("cs.model.program.Statement", cs.model.program.Component, {
+	dojo.declare("cs.model.program.Statement", cs.model.program.Component, {
 		
 		_blockContainer : null,
 		_blockHeight : 0,

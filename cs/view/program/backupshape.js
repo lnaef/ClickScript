@@ -56,7 +56,7 @@
 				//update the bounding Box of this shape
 				this.updateBoundingBox();
 			} else {
-				throw Errror("Shape has to be of type cs.view.util.Shape instead of '"+cs.util.getClassname(a_shape)+"' ");
+				throw Error("Shape has to be of type cs.view.util.Shape instead of '"+cs.util.getClassname(a_shape)+"' ");
 			}
 			
 		},

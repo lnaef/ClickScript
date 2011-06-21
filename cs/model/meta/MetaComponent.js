@@ -127,7 +127,7 @@
 				// set type
 				if(this._blocks.size()>0){
 					this._type = cs.model.meta.MetaComponent.TYPE_STATEMENT;
-				} else if (this._input.size() == 0 && this._field.size() == 1){
+				} else if (this._input.size() === 0 && this._field.size() == 1){
 					this._type = cs.model.meta.MetaComponent.TYPE_PRIMITIVE;
 				} else {
 					this._type = cs.model.meta.MetaComponent.TYPE_MODULE;
@@ -184,7 +184,7 @@
 		/**
 		 * has
 		 */
-		hasView : function(){return this._view != null;},
+		hasView : function(){return this._view !== null;},
 
 		/**
 		 * 
@@ -197,7 +197,7 @@
 			out += "<div class='csSockets'><div class='csInfoImage'><img src='"+cs.config.rootPath+"lib/"+this.getImgPath()+"'/></div>" +
 					"<div class='csSocketLineTitle csInfoLine'><span class='csInfoTitle'>inputs: </span></div>";
 			
-			infoSocketLine = function(a_socket){
+			var infoSocketLine = function(a_socket){
 				return "<div class='csSocketLine'>" +
 							"<span class='csInfoSocket' style='background-color:"+a_socket.getType().getColor()+"'>i</span>" +
 									a_socket.getName()+

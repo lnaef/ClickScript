@@ -13,7 +13,7 @@
 	dojo.require("cs.model.program.Field");
 	dojo.require("cs.system.Serializer");
 	
- 	dojo.declare("cs.model.program.Component", null, {
+	dojo.declare("cs.model.program.Component", null, {
 		
 		/**
 		 * All Sockets of a component
@@ -53,8 +53,8 @@
 		constructor : function(a_metadata){
 			this._metadata = a_metadata;
 			this.setId(cs.global.serializer.getUid());
-			this._positionProg = {x:0,y:0},
-			this._positionExec = {x:0,y:0},
+			this._positionProg = {x:0,y:0};
+			this._positionExec = {x:0,y:0};
 			
 			// @todo: create new sockets of type x and add them instead of x.getName()
 			
@@ -108,7 +108,7 @@
 		},
 		
 		hasParentBlock : function(){
-			return this._parentBlock != null;
+			return this._parentBlock !== null;
 		},
 		
 		setId : function(a_int){
@@ -163,12 +163,12 @@
 				'type':this.getMetaData().getName(),
 				'coord-prog-x':this.getPositionProg().x,
 				'coord-prog-y':this.getPositionProg().y		
-			}
+			};
 			
 			// Exec-View Coords
 			if (this.getMetaData().hasView()){
-				attributes['coord-exec-x'] = this.getPositionExec().x,
-				attributes['coord-exec-y'] = this.getPositionExec().y		
+				attributes['coord-exec-x'] = this.getPositionExec().x;
+				attributes['coord-exec-y'] = this.getPositionExec().y;		
 			}
 			
 			// if there is a parent Block, set parent uid
