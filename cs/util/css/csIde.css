@@ -19,7 +19,7 @@ html, body {
     margin: 0;
     overflow: hidden;
     padding: 0;
-    background: url('../images/ide/background.png') repeat-x left bottom;
+    background: url('../images/ide/background.png');
 }
  
 #ide {
@@ -59,11 +59,13 @@ html, body {
 	margin-top: -5px;
 	margin-right: -5px;
 	margin-left: -5px;
+	margin-bottom: 10px;
+	-moz-box-shadow: 0px 3px 5px #444; -webkit-box-shadow: 0px 3px 5px #444; box-shadow:  0px 3px 5px #444; 
 }
 
 .cs.claro .dijitMenuBar {
 	/*background: none;transparent url('../images/ide/background-right-column.png') repeat center center;*/
-	background-color: #468;
+	background-color: #0055bb;
 	padding-left: 15px;
 	border: 1px solid transparent;
 	background-image: url('../images/ide/menu/menuHighlight.png');
@@ -71,8 +73,8 @@ html, body {
 
 .cs.claro .dijitMenuBar .dijitMenuItem {
 	color: white;
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-top: 7px;
+	padding-bottom: 7px;
 	border-top: 1px solid transparent;
 	border-bottom: 1px solid transparent;
 	font-size: 11pt;
@@ -80,10 +82,15 @@ html, body {
 
 .cs.claro .dijitMenuBar .dijitMenuItemHover, .cs.claro .dijitMenuBar .dijitMenuItemSelected {
 	/*background: white url('../images/ide/menu/menuHighlight.png') repeat center center;*/
-	background-color: #7ad;
+	background-color: #8a0;
 	color: black;
 	border-left: 1px solid transparent;
 	border-right: 1px solid transparent;
+}
+
+.cs.claro .dijitMenuActive .dijitMenuItemHover,
+.cs.claro .dijitMenuActive .dijitMenuItemSelected {
+	background-color: #bbb;
 }
 
 .cs.claro td.dijitMenuItemLabel {
@@ -208,7 +215,7 @@ html, body {
  */
 
 #loading {
-    background: url('../images/ide/background.png') repeat-x left bottom;
+    background: url('../images/ide/background.png');
 }
 
 #innerLoading {
@@ -349,13 +356,13 @@ html, body {
 /**
  *	TOOLBAR
  */
-.csToolBars .dijitTitlePaneContentInner     { padding: 2px; }
+.csToolBars .dijitTitlePaneContentInner     { padding: 1px; }
 .csToolBars .dijitTitlePaneContentInner img { width: 32px; height: 32px; }
 .csToolBars .primitiveButton                { display: block; width: 32px; height: 32px; }
 .csToolBars .dijitButton .dijitButtonNode   { padding: 0px; }
 
 #csToolBarTop                             { height: 80px; padding: 3px; margin-left: 5px;}
-#csToolBarTop .categoryToolBar            { float:left; background-color: #468; -moz-border-radius: 5px; margin-bottom: 2px; margin-right: 5px;}
+#csToolBarTop .categoryToolBar            { float:left; background-color: #888; -moz-border-radius: 5px; margin-bottom: 2px; margin-right: 5px;}
 #csToolBarTop .dijitTitlePaneContentOuter {	background-color: transparent; border: 0px; }
 #csToolBarTop .dijitTitlePaneTitle        { display:none; }
 #csToolBarTop .toolBarButton              { padding: 0px; margin: 0px;}
@@ -364,7 +371,7 @@ html, body {
  * INFO BLOCK ON THE RIGHT SIDE
  */
 
-#csInfo                    { font-family: arial; display: none; border: 3px solid #468; padding: 0px 5px 10px 5px; margin-top: 10px; -moz-border-radius: 5px; background: transparent url('../images/ide/background-right-column.png') repeat center center;}
+#csInfo                    { font-family: arial; display: none; border: 3px solid #444; padding: 0px 5px 10px 5px; margin-top: 10px; -moz-border-radius: 5px; background: transparent url('../images/ide/background-right-column.png') repeat center center;}
 #csInfo .csInfoUid         { margin-top: 10px; margin-bottom: 5px}
 #csInfo .csInfoType        { }
 #csInfo .csInfoName        { font-weight: bold; text-transform: uppercase; padding-top: 10px; background: transparent url('../images/ide/background-right-column.png') repeat center center; }
@@ -372,7 +379,7 @@ html, body {
 #csInfo .csSocketLine      { margin-top: 5px; }
 #csInfo .csSocketLineTitle { }
 #csInfo .csInfoImage       { text-align: right; float: right; }
-#csInfo .csInfoTitle       { color: #468; }
+#csInfo .csInfoTitle       { color: #444; }
 #csInfo .csInfoLine        { margin-top: 15px; margin-bottom: 5px;}
 
 

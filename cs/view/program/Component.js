@@ -7,6 +7,13 @@
 	dojo.require("cs.view.util.Shape");
 	dojo.require("cs.view.program.Socket");
 	dojo.require("cs.view.program.Field");
+/**
+ * MOBILE
+ */
+dojo.require("cs.system.touch.gfxMoveable");
+dojo.require("cs.system.touch.gfxMover");
+dojo.require("cs.system.touch.detectMobile")
+	
 	
 	dojo.declare("cs.view.program.Component", cs.view.util.Shape, {
 
@@ -287,8 +294,15 @@
 			// make sure we don't register a mover twice
 			this.disconnectMover();
 			
-			var moveable = new dojox.gfx.Moveable(this.getShape());
-			
+			/**
+			 * MOBILE
+			 */
+			var moveable = null;
+			if(!jQuery.browser.mobile){
+				moveable = new dojox.gfx.Moveable(this.getShape());
+			} else {
+				moveable = new cs.system.touch.gfxMoveable(this.getShape());
+			}
 			this._moveable = moveable;
 			
 			this._moveableEvents.push(dojo.connect(moveable,"onMove",this,"onMove"));

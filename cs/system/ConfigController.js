@@ -9,6 +9,11 @@
     window.cs.modelController = null;
 	window.cs.viewController = null;	
 	window.cs.config = null;
+	
+	/* 
+	 * @depricated: use cs.componentContainer instead
+	 * todo: delete
+	 */
 	window.cs.componentContainer = [];
 	
 	/**
@@ -22,6 +27,11 @@
 		// Path for the ClickScript class folder
 		rootPath : ((dojo.config && dojo.config.modulePaths && dojo.config.modulePaths.cs && dojo.config.baseUrl) ? dojo.config.baseUrl + dojo.config.modulePaths.cs : "./lib/dojo/cs/" ),
 		
+		// Online-Services root-path
+		//rootServices : "http://clickscript.ch/services",
+		rootServices : "http://localhost/clickscript_server/services",
+
+		
 		// Debug-Mode in ClickScript console?
 		isDebug : true,
 		
@@ -32,24 +42,12 @@
 		isDojoDebugAtAllCosts : true,
 		
 		/**
-		 * IDE configuration
-		 */
-		ide : {
-			// Are the following parts visible in the IDE?
-			optionalParts : { 
-				option: true,
-				todo: true,
-				tutorial: true,
-				exercise: true
-			}
-		},
-		
-		/**
 		 * Preset useraccounts
 		 */
 		accounts : [
 			{username:"elcc",token:"3340f6ec"},
-			{username:"lukas",token:"dfaafb79"}
+			{username:"lukas",token:"dfaafb79"},
+			{username:"online",token:"10425501"}
 		],
 		
 		/**
@@ -59,7 +57,6 @@
 			width : 1000, // Dimensions	
 			height : 500
 		},
-		
 		
 		/**
 		 * LIBRARY configuration
