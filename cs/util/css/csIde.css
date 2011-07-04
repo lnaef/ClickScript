@@ -40,7 +40,7 @@ html, body {
 .cs .mainPanel {
 	-moz-border-radius: 5px;
 	/*margin-right: 10px;*/
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .cs .bottomLeftContainer {
@@ -65,10 +65,16 @@ html, body {
 
 .cs.claro .dijitMenuBar {
 	/*background: none;transparent url('../images/ide/background-right-column.png') repeat center center;*/
-	background-color: #0055bb;
+	background-color: #90c000;
 	padding-left: 15px;
 	border: 1px solid transparent;
-	background-image: url('../images/ide/menu/menuHighlight.png');
+	background-image: none;
+	/*background-image: url('../images/ide/menu/menuHighlight.png');*/
+}
+
+.cs.claro .dijitMenu {
+	border: 1px solid #ccc;
+	background-image: none;
 }
 
 .cs.claro .dijitMenuBar .dijitMenuItem {
@@ -82,15 +88,17 @@ html, body {
 
 .cs.claro .dijitMenuBar .dijitMenuItemHover, .cs.claro .dijitMenuBar .dijitMenuItemSelected {
 	/*background: white url('../images/ide/menu/menuHighlight.png') repeat center center;*/
-	background-color: #8a0;
+	background-color: #ccc;
 	color: black;
 	border-left: 1px solid transparent;
 	border-right: 1px solid transparent;
+	background-image:none;
 }
 
 .cs.claro .dijitMenuActive .dijitMenuItemHover,
 .cs.claro .dijitMenuActive .dijitMenuItemSelected {
-	background-color: #bbb;
+	background-color: #ccc;
+	background-image: none;
 }
 
 .cs.claro td.dijitMenuItemLabel {
@@ -139,7 +147,8 @@ html, body {
 .cs .dijitSplitContainer-dijitContentPane.rightCol, .cs .dijitBorderContainer-dijitContentPane.rightCol {
     background: url('../images/ide/background-right-column.png') repeat;
     padding: 5px;
-    -moz-border-radius: 5px 0px 0px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    border: 1px solid #B5BCC7;
 }
 .cs.claro .dijitTabPaneWrapper {
 	background: transparent;
@@ -205,7 +214,7 @@ html, body {
 .left {float: left}
 .right {float: right}
 .clear {clear: both}
-.shadow { -moz-box-shadow: 5px 5px 5px #457; -webkit-box-shadow: 5px 5px 5px #457; box-shadow: 5px 5px 5px #457; }
+.shadow { -moz-box-shadow: 5px 5px 5px #454; -webkit-box-shadow: 5px 5px 5px #454; box-shadow: 5px 5px 5px #454; }
 
 
 .dijitLayoutContainer .dijitLayoutContainer {border: none; padding: 0px}
@@ -249,6 +258,10 @@ html, body {
 /**
  *	PLAYGROUND
  */
+#thePlaygroundPane {
+	border: 1px solid #B5BCC7;
+}
+
 #csPlayground {
   -moz-border-radius: 5px;
 	background: url('../images/ide/background-right-column.png') repeat;
@@ -371,11 +384,11 @@ html, body {
  * INFO BLOCK ON THE RIGHT SIDE
  */
 
-#csInfo                    { font-family: arial; display: none; border: 3px solid #444; padding: 0px 5px 10px 5px; margin-top: 10px; -moz-border-radius: 5px; background: transparent url('../images/ide/background-right-column.png') repeat center center;}
+#csInfo                    { font-family: arial; display: none; border: 3px solid #888; padding: 0px 5px 10px 5px; margin-top: 10px; -moz-border-radius: 5px; background: transparent url('../images/ide/background-right-column.png') repeat center center}
 #csInfo .csInfoUid         { margin-top: 10px; margin-bottom: 5px}
 #csInfo .csInfoType        { }
 #csInfo .csInfoName        { font-weight: bold; text-transform: uppercase; padding-top: 10px; background: transparent url('../images/ide/background-right-column.png') repeat center center; }
-#csInfo .csInfoDescription { padding-top: 10px; background: transparent url('../images/ide/background-right-column.png') repeat center center; line-height: 1.5em;}
+#csInfo .csInfoDescription { padding-top: 10px; background: transparent url('../images/ide/background-right-column.png') repeat center center; line-height: 1.5em; background-color: #e5f6dd}
 #csInfo .csSocketLine      { margin-top: 5px; }
 #csInfo .csSocketLineTitle { }
 #csInfo .csInfoImage       { text-align: right; float: right; }
@@ -392,7 +405,7 @@ html, body {
 #csStateWAIT		{background: url('../images/wait.png') no-repeat right center;}
 #csStateSTOP		{background: url('../images/stop.png') no-repeat right center;}
 #csStateFINISH	{background: url('../images/finish.png') no-repeat right center;}
-.csStateIcon		{padding: 8px 10px 0px 14px; vertical-align: middle;}
+.csStateIcon		{padding: 8px 14px 0px 14px; vertical-align: middle;}
 
 .csActionRun  {background-image:url("../images/ide/action/play.png"); width: 32px; height: 32px;}
 .csActionRunDisabled  {background-image:url("../images/ide/action/playDisabled.png"); width: 32px; height: 32px;}
