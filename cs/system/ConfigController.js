@@ -45,9 +45,8 @@
 		 * Preset useraccounts
 		 */
 		accounts : [
-			{username:"elcc",token:"3340f6ec"},
-			{username:"lukas",token:"dfaafb79"},
-			{username:"online",token:"10425501"}
+			{ username:"online", token:"10425501" },
+			{ username:"test", token:"d10a2825" }
 		],
 		
 		/**
