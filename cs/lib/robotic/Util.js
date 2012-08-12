@@ -1,5 +1,5 @@
 /**
- * @author elcc
+ * @author lnaef
  */
 	dojo.provide("cs.lib.robotic.Util");
 	dojo.require("dojox.uuid.generateRandomUuid");

@@ -1,5 +1,5 @@
 /**
- * @author elcc
+ * @author lnaef
  */
 	dojo.provide("cs.util.tests.util.testReader");
 	

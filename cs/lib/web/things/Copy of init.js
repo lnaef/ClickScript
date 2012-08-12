@@ -1,5 +1,5 @@
 /**
- * @author elcc
+ * @author lnaef
  */
 
 dojo.provide("cs.lib.web.things.init");
